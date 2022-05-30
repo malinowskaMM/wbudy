@@ -3,19 +3,19 @@
  * Copyright:
  *    Grupa G09
  *      Magdalena Malinowska
- *      MichaĹ‚ Andrzejczak
- *      MichaĹ‚ Banasiak
+ *      MichaÄąâ€š Andrzejczak
+ *      MichaÄąâ€š Banasiak
  *
  * Description:
- *    GĹ‚Ăłwny plik zawierajÄ…cy zaĹ‚Ä… logikÄ™ dziaĹ‚ania gry Refleks.
- *    PozostaĹ‚e pliki aktywnie uĹĽywane w projekcie to testRGB, testMotor, testLedMatrix, testLcd.
+ *    GÄąâ€šÄ‚Ĺ‚wny plik zawierajĂ„â€¦cy zaÄąâ€šĂ„â€¦ logikĂ„â„˘ dziaÄąâ€šania gry Refleks.
+ *    PozostaÄąâ€še pliki aktywnie uÄąÄ˝ywane w projekcie to testRGB, testMotor, testLedMatrix, testLcd.
  *
  *****************************************************************************/
 
 //===========================
 //SEKCJA DYREKYW PREPROCESORA
 
-//Sekcja skĹ‚adajÄ…ca siÄ™ z includowanych plikĂłw
+//Sekcja skÄąâ€šadajĂ„â€¦ca siĂ„â„˘ z includowanych plikÄ‚Ĺ‚w
 #include "pre_emptive_os/api/osapi.h"
 #include "pre_emptive_os/api/general.h"
 #include <printf_P.h>
@@ -35,22 +35,22 @@ static tU8 mainStack[MAIN_STACK_SIZE];
 static tU8 initStack[INIT_STACK_SIZE];
 static tU8 pid1;
 
-//Funkcje poczÄ…tkowe - inicjalizujÄ…ce
+//Funkcje poczĂ„â€¦tkowe - inicjalizujĂ„â€¦ce
 static void mainFunction(void);
 static void initProc(void);
 
-//ObsĹ‚uga macierz LED 8x8 i SPI
+//ObsÄąâ€šuga macierz LED 8x8 i SPI
 void testLedMatrix(void);
 void testArrow(tU8 direction);
 
-//ObsĹ‚uga LCD
+//ObsÄąâ€šuga LCD
 void testLcd(void);
 void clearLCD(void);
 void writeStr(tU8 *s);
 void newLineLCD();
 void writeInfo(char *console_message, char* lcd_1line, char *lcd_2line);
 void clearLCD();
-//ObsĹ‚uga Motoru i PWM(dioda LED RGB)
+//ObsÄąâ€šuga Motoru i PWM(dioda LED RGB)
 void testMotor(void);
 void testRGB(tU8 red, tU8 green, tU8 blue);
 
@@ -68,9 +68,9 @@ static void livesAmount(void);
 char* insertdNumber(char* message, int position, int number);
 
 //===========================
-//SEKCJA ZMIENNYCH GLOBALNYCH I TYPĂ“W UĹ»YTKOWNIKA
+//SEKCJA ZMIENNYCH GLOBALNYCH I TYPÄ‚â€śW UÄąÂ»YTKOWNIKA
 
-//WybĂłr menu
+//WybÄ‚Ĺ‚r menu
 enum MENU_STATE
 {
     MAIN_MENU,
@@ -89,18 +89,18 @@ static tU8 menu_state = MAIN_MENU;
 #define J_CENTER	(1 << 16)			/** Doojstik - nacisniety */
 
 
-//Zmienna odpowiedzialna za upĹ‚yw czasu.
+//Zmienna odpowiedzialna za upÄąâ€šyw czasu.
 extern volatile long int time_ticks;
 
 //Parametry rozgrywki
 static tU8 lives = 2;
 static tU32 round_time = 5000;
-static tU8 round_amount = 4;			/**< Iloďż˝ďż˝ rund */
+static tU8 round_amount = 4;			/**< IloÄŹĹĽËťÄŹĹĽËť rund */
 
 //Inne zmienne rozgrywki
-static tU32 max_answer_time = 0;		/**< Najdďż˝uďż˝szy czas rekacji gracza */
-static tU32 min_answer_time = 32767;	/**< Najkrďż˝tszy czas rekacji gracza */
-static long int entire_answer_time = 0;	/**< ďż˝redni czas rekacji gracza */
+static tU32 max_answer_time = 0;		/**< NajdÄŹĹĽËťuÄŹĹĽËťszy czas rekacji gracza */
+static tU32 min_answer_time = 32767;	/**< NajkrÄŹĹĽËťtszy czas rekacji gracza */
+static long int entire_answer_time = 0;	/**< ÄŹĹĽËťredni czas rekacji gracza */
 
 static tU32 j_position = 0;             /**< Losowanie pozycji joysticka */
 /*!
@@ -115,11 +115,11 @@ int main(void)
     tU8 error;
     tU8 pid;
 
-    //WyĹ‚Ä…cza brzÄ™czyk (jeĹ›li jest podĹ‚Ä…czony)
+    //WyÄąâ€šĂ„â€¦cza brzĂ„â„˘czyk (jeÄąâ€şli jest podÄąâ€šĂ„â€¦czony)
     IODIR0 |= 0x00000080;
     IOSET0  = 0x00000080;
 
-    osInit();     //Ta funkcja musi byÄ‡ uruchomiona przed jakimkolwiek innym odwoĹ‚aniem siÄ™ do systemu operacyjnego
+    osInit();     //Ta funkcja musi byĂ„â€ˇ uruchomiona przed jakimkolwiek innym odwoÄąâ€šaniem siĂ„â„˘ do systemu operacyjnego
     //Tworzenie i start procesu.
     osCreateProcess(initProc, initStack, INIT_STACK_SIZE, &pid, 1, NULL, &error);
     osStartProcess(pid, &error);
@@ -128,9 +128,9 @@ int main(void)
 }
 
 /*!
-*  @brief    Pierwsza funkcja ktĂłrÄ… uruchamiamy przez system operacyjny
+*  @brief    Pierwsza funkcja ktÄ‚Ĺ‚rĂ„â€¦ uruchamiamy przez system operacyjny
 *  @param arg
-*             Ten parametr nie jest uĹĽywany w aplikacji
+*             Ten parametr nie jest uÄąÄ˝ywany w aplikacji
 *  @returns  brak
 *  @side effects:
 *            brak
@@ -140,19 +140,19 @@ static void initProc(void)
     tU8 error;
 
     eaInit();     //Inicjalizacja terminala
-    testLcd();    //Inicjalizacja wyĹ›wietlacza ???
+    testLcd();    //Inicjalizacja wyÄąâ€şwietlacza ???
     testLedMatrix();
 
-    //Tworznie i start procesu, a nastÄ™pnie jego usuniÄ™cie.
+    //Tworznie i start procesu, a nastĂ„â„˘pnie jego usuniĂ„â„˘cie.
     osCreateProcess(mainFunction, mainStack, MAIN_STACK_SIZE, &pid1, 3, NULL, &error);
     osStartProcess(pid1, &error);
     osDeleteProcess();
 }
 
 /*!
-*  @brief    GĹ‚Ăłwna funkcja gry. Zawiera teĹĽ pÄ™tlÄ™ odpowiadajÄ…cÄ… za menu.
+*  @brief    GÄąâ€šÄ‚Ĺ‚wna funkcja gry. Zawiera teÄąÄ˝ pĂ„â„˘tlĂ„â„˘ odpowiadajĂ„â€¦cĂ„â€¦ za menu.
 *  @param arg
-*             Ten parametr nie jest uĹĽywany w aplikacji
+*             Ten parametr nie jest uÄąÄ˝ywany w aplikacji
 *  @returns  brak
 *  @side effects:
 *            brak
@@ -165,27 +165,27 @@ static void mainFunction(void) {
     printf("LEGENDA ruchu joystickiem:\n1-ruch joystickiem w gore, 2-w lewo,3-w prawo, 4-w dol, 5-srodek\n");
     pause();
 
-    //PÄ™tla menu
+    //PĂ„â„˘tla menu
     while (1) {
-        menu_state = mainMenu();    //WybĂłr przycisku z menu za pomocÄ… joysticka
+        menu_state = mainMenu();    //WybÄ‚Ĺ‚r przycisku z menu za pomocĂ„â€¦ joysticka
 
-        if (menu_state == NEW_GAME) {
-            newGame();      //Rozpocznij grÄ™
-        } else if (menu_state == ROUNDS_AMOUNT) {
-            roundsAmount();     //Ustawienie iloĹ›ci rund
-        } else if (menu_state == ROUND_TIME) {
+        if (menu_state == (tU8) NEW_GAME) {
+            newGame();      //Rozpocznij grĂ„â„˘
+        } else if (menu_state == (tU8) ROUNDS_AMOUNT) {
+            roundsAmount();     //Ustawienie iloÄąâ€şci rund
+        } else if (menu_state == (tU8) ROUND_TIME) {
             roundsTime();       //Ustawienie czasu rundy
-        } else if (menu_state == LIVES_AMOUNT) {
-            livesAmount(); //Ustawienie liczby ĹĽyÄ‡
+        } else if (menu_state == (tU8) LIVES_AMOUNT) {
+            livesAmount(); //Ustawienie liczby ÄąÄ˝yĂ„â€ˇ
         } else
         {}
     }
 }
 
 /*!
-*  @brief    WybĂłr opcji z menu. Odczyt z joystick'a.
+*  @brief    WybÄ‚Ĺ‚r opcji z menu. Odczyt z joystick'a.
 *  @param brak
-*  @returns  Odczyt z joystick'a oznaczajÄ…cy wybĂłr opcji z menu.
+*  @returns  Odczyt z joystick'a oznaczajĂ„â€¦cy wybÄ‚Ĺ‚r opcji z menu.
 *  @side effects:
 *            brak
 */
@@ -196,7 +196,7 @@ static tU8 mainMenu(void)
     pause();
     writeInfo("1-Gra 2-Czas 3-Rundy 4-Zycia\n", "1-Graj 2-Czas", "3-Rundy 4-Zycia");
     testMotor();
-    //WybĂłr opcji za pomocÄ… joystick'a
+    //WybÄ‚Ĺ‚r opcji za pomocĂ„â€¦ joystick'a
     IODIR &= ~0x001f0000;   //Odczyt z joysticka
     while(1)
     {
@@ -222,7 +222,7 @@ static tU8 mainMenu(void)
 }
 
 /*!
-*  @brief    GĹ‚Ăłwna rozgrywka
+*  @brief    GÄąâ€šÄ‚Ĺ‚wna rozgrywka
 *  @param brak
 *  @returns  brak
 *  @side effects:
@@ -230,7 +230,7 @@ static tU8 mainMenu(void)
 */
 static void newGame(void)
 {
-    //RozpoczÄ™cie gry
+    //RozpoczĂ„â„˘cie gry
     writeInfo("Wybrano nowa gre.\n","Wybrano","Nowa Gra");
     osSleep(200);
     testMotor();
@@ -247,33 +247,33 @@ static void newGame(void)
     osSleep(200);
 
     //Wyczyszczenie zmiennych rundy
-    max_answer_time = 0;		/**< Najdďż˝uďż˝szy czas rekacji gracza */
-    min_answer_time = 30000;	/**< Najkrďż˝tszy czas rekacji gracza */
-    entire_answer_time = 0;		/**< ďż˝redni czas rekacji gracza */
+    max_answer_time = 0;		/**< NajdÄŹĹĽËťuÄŹĹĽËťszy czas rekacji gracza */
+    min_answer_time = 30000;	/**< NajkrÄŹĹĽËťtszy czas rekacji gracza */
+    entire_answer_time = 0;		/**< ÄŹĹĽËťredni czas rekacji gracza */
     tU8 tmpLives=lives;
 
-    tU32 start_time;    //Zmienna odpowiadajÄ…ca za czas rozpoczÄ™cia rundy
+    tU32 start_time;    //Zmienna odpowiadajĂ„â€¦ca za czas rozpoczĂ„â„˘cia rundy
 
     IODIR &= ~0x001f0000;   //Odczyt z joysticka
 
-    //Zgadywanie strzaĹ‚ki przez wybranÄ… iloĹ›Ä‡ rund.
-    int i;
+    //Zgadywanie strzaÄąâ€ški przez wybranĂ„â€¦ iloÄąâ€şĂ„â€ˇ rund.
+    tU8 i;
     for(i=0; i<round_amount; i++)
     {
-        j_position = time_ticks%4;    //Losowanie strzaĹ‚ki
-        if(j_position==0)
+        j_position = time_ticks%4;    //Losowanie strzaÄąâ€ški
+        if(j_position==(tU32)0)
         {
             testArrow('g');
         }
-        if(j_position==1)
+        if(j_position==(tU32)1)
         {
             testArrow('d');
         }
-        if(j_position==2)
+        if(j_position==(tU32)2)
         {
             testArrow('l');
         }
-        if(j_position==3)
+        if(j_position==(tU32)3)
         {
             testArrow('p');
         }
@@ -283,7 +283,7 @@ static void newGame(void)
         char message[] = "Runda:    ";
         writeInfo("Uzyj joystick w kierunku wskazanym przez strzalke.\n", "Wybor-joystick.", insertdNumber(message, 9, i+1));
 
-        //Czas rozpoczÄ™cia rundy - czas od ktĂłrego liczony jest czas na reakcjÄ™
+        //Czas rozpoczĂ„â„˘cia rundy - czas od ktÄ‚Ĺ‚rego liczony jest czas na reakcjĂ„â„˘
         start_time = time_ticks;
 
         tU32 result = 0;
@@ -291,16 +291,16 @@ static void newGame(void)
         tU32 prevIOPIN;
         tU32 answer;
 
-        //PÄ™tla reakcji na strzaĹ‚kÄ™
+        //PĂ„â„˘tla reakcji na strzaÄąâ€škĂ„â„˘
         while(1)
         {
             prevIOPIN = IOPIN;
             osSleep(5);
 
-            answer = (prevIOPIN & ~IOPIN) & 0x001f0000; //PorĂłwnanie, czy joystick siÄ™ zmieniĹ‚
+            answer = (prevIOPIN & ~IOPIN) & 0x001f0000; //PorÄ‚Ĺ‚wnanie, czy joystick siĂ„â„˘ zmieniÄąâ€š
 
             //Sprawdznie, czy wybrano dobry kierunek
-            if(answer != 0x00000000)
+            if(answer != (tU32) 0x00000000)
             {
                 if ((~IOPIN & J_UP) && (j_position == 0))
                 {
@@ -320,12 +320,12 @@ static void newGame(void)
                 } else
                 {}
 
-                result = time_ticks - start_time;   //Obliczenie czasu reakcji
+                result = (tU32)time_ticks - (tU32)start_time;   //Obliczenie czasu reakcji
                 break;
             }
 
-            //Ograniczenie reakcji do zadeklarowanego w menu czasu na odpowiedĹş w danej rundzie
-            if((time_ticks - start_time)>round_time)
+            //Ograniczenie reakcji do zadeklarowanego w menu czasu na odpowiedÄąĹź w danej rundzie
+            if(((tU32)time_ticks - (tU32)start_time)>(tU32)round_time)
             {
                 correct = -1;
                 break;
@@ -333,7 +333,7 @@ static void newGame(void)
         }
 
         //Zmiana zmiennych
-        if(correct == 1)
+        if(correct == (tU32) 1)
         {
             //Zmiana maksymalnego i minimalnego czasu na ruch.
             if(max_answer_time < result)
@@ -346,12 +346,12 @@ static void newGame(void)
             } else
             {}
 
-            entire_answer_time += result;   //Suma czasu odpowiedzi
+            entire_answer_time += (long) result;   //Suma czasu odpowiedzi
 
-            testRGB(0, 255, 0); //Poprawna odpowiedĹş
+            testRGB(0, 255, 0); //Poprawna odpowiedÄąĹź
             osSleep(50);
             testRGB(0, 0, 0);
-            //testMotor();    //Famfary za poprawnÄ… odpowiedĹş
+            //testMotor();    //Famfary za poprawnĂ„â€¦ odpowiedÄąĹź
 
 
             //Informacje dla gracza
@@ -360,9 +360,9 @@ static void newGame(void)
             writeInfo("", "Poprawnie", insertdNumber(message, 9, result));
             osSleep(300);
         }
-        else if(correct == -1)
+        else if(correct == (tU32) -1)
         {
-            //Dla za pĂłĹşnego ruchu
+            //Dla za pÄ‚Ĺ‚ÄąĹźnego ruchu
             testRGB(255, 255, 0);
             osSleep(50);
             testRGB(0, 0, 0);
@@ -383,17 +383,17 @@ static void newGame(void)
             osSleep(300);
         }
 
-        if(tmpLives<1)
+        if(tmpLives< (tU8) 1)
         {
-            //Gdy skoĹ„czyĹ‚a siÄ™ liczba ĹĽyÄ‡.
+            //Gdy skoÄąâ€žczyÄąâ€ša siĂ„â„˘ liczba ÄąÄ˝yĂ„â€ˇ.
             testRGB(255, 255, 255);
             writeInfo("Straciles wszystkie zycia. Przegrales.\n", "Koniec zyc.", "Koniec gry.");
             osSleep(300);
 
             //Wyczyszczenie zmiennych rozgrywki
-            max_answer_time = 0;		/**< Najdďż˝uďż˝szy czas rekacji gracza */
-            min_answer_time = 32767;	/**< Najkrďż˝tszy czas rekacji gracza */
-            entire_answer_time = 0;		/**< ďż˝redni czas rekacji gracza */
+            max_answer_time = 0;		/**< NajdÄŹĹĽËťuÄŹĹĽËťszy czas rekacji gracza */
+            min_answer_time = 32767;	/**< NajkrÄŹĹĽËťtszy czas rekacji gracza */
+            entire_answer_time = 0;		/**< ÄŹĹĽËťredni czas rekacji gracza */
 
             clearLCD();
             testArrow('c');
@@ -405,7 +405,7 @@ static void newGame(void)
     }
 
     //Podsumowanie rozgrywki
-    if(entire_answer_time == 0) //Nie ukoĹ„czono gry z powodu straty wszystkich ĹĽyÄ‡
+    if(entire_answer_time == 0) //Nie ukoÄąâ€žczono gry z powodu straty wszystkich ÄąÄ˝yĂ„â€ˇ
     {
         return;
     }
@@ -431,7 +431,7 @@ static void newGame(void)
 }
 
 /*!
-*  @brief    Ustawienie iloĹ›ci rund.
+*  @brief    Ustawienie iloÄąâ€şci rund.
 *  @param brak
 *  @returns  brak
 *  @side effects:
@@ -448,7 +448,7 @@ static void roundsAmount(void)
     tU8 change = 0;
 
     IODIR &= ~0x001f0000;   //Odczyt z joystick'a
-    //WybĂłr iloĹ›ci rund
+    //WybÄ‚Ĺ‚r iloÄąâ€şci rund
     while(!end)
     {
         if (~IOPIN & J_UP)
@@ -458,7 +458,7 @@ static void roundsAmount(void)
         }
         else if (~IOPIN & J_DOWN)
         {
-            if(round_amount<=1)
+            if(round_amount<=(tU8)1)
             {
                 round_amount=1;
             }
@@ -482,8 +482,8 @@ static void roundsAmount(void)
         } else
         {}
 
-        //WyĹ›wietlenie zmiany
-        if(change == 1)
+        //WyÄąâ€şwietlenie zmiany
+        if(change == (tU8) 1)
         {
             printf("Rundy: %d.\n", round_time);
             char message[] = "   ";
@@ -502,7 +502,7 @@ static void roundsAmount(void)
 }
 
 /*!
-*  @brief    Zmiana czasu na reakcjÄ™.
+*  @brief    Zmiana czasu na reakcjĂ„â„˘.
 *  @param brak
 *  @returns  brak
 *  @side effects:
@@ -519,23 +519,23 @@ static void roundsTime(void)
     tU8 change = 0;
 
     IODIR &= ~0x001f0000;   //Odczyt z joystick'a
-    //PÄ™tla zmiany czasu na reakcjÄ™
+    //PĂ„â„˘tla zmiany czasu na reakcjĂ„â„˘
     while(!end)
     {
         if(~IOPIN & J_UP)
         {
-            round_time+=1000;
+            round_time+=(tU32)1000;
             change = 1;
         }
         else if(~IOPIN & J_DOWN)
         {
-            if(round_time<=1000)
+            if(round_time<=(tU32)1000)
             {
-                round_time=1000;
+                round_time=(tU32)1000;
             }
             else
             {
-                round_time-=1000;
+                round_time-=(tU32)1000;
             }
             change = 1;
         }
@@ -553,8 +553,8 @@ static void roundsTime(void)
         } else
         {}
 
-        //WyĹ›wietlenie zmiany
-        if(change == 1)
+        //WyÄąâ€şwietlenie zmiany
+        if(change == (tU8) 1)
         {
             printf("Czas: %d.\n", round_time);
             char message[] = "     ";
@@ -572,7 +572,7 @@ static void roundsTime(void)
 }
 
 /*!
-*  @brief    Zmiana liczby ĹĽyÄ‡.
+*  @brief    Zmiana liczby ÄąÄ˝yĂ„â€ˇ.
 *  @param brak
 *  @returns  brak
 *  @side effects:
@@ -589,7 +589,7 @@ static void livesAmount(void)
     tU8 change = 0;
 
     IODIR &= ~0x001f0000;   //Odczyt z joystick'a
-    //WybĂłr iloĹ›ci rund
+    //WybÄ‚Ĺ‚r iloÄąâ€şci rund
     while(!end)
     {
         if (~IOPIN & J_UP)
@@ -599,13 +599,13 @@ static void livesAmount(void)
         }
         else if (~IOPIN & J_DOWN)
         {
-            if(lives<=1)
+            if(lives<=(tU8)1)
             {
                 lives=1;
             }
             else
             {
-                lives-=1;
+                lives-=(tU8)1;
             }
             change = 1;
         }
@@ -623,8 +623,8 @@ static void livesAmount(void)
         } else
         {}
 
-        //WyĹ›wietlenie zmiany
-        if(change == 1)
+        //WyÄąâ€şwietlenie zmiany
+        if(change == (tU8) 1)
         {
             printf("Zycia: %d.\n", lives);
             char message[] = "   ";
@@ -643,13 +643,13 @@ static void livesAmount(void)
 }
 
 /*!
-*  @brief    Wypisuje informacje na konsolÄ™ i na LCD.
+*  @brief    Wypisuje informacje na konsolĂ„â„˘ i na LCD.
 *  @param console_message
-*             WiadomoĹ›Ä‡ na konsolÄ™
+*             WiadomoÄąâ€şĂ„â€ˇ na konsolĂ„â„˘
 *  @param lcd_1line
-*             WiadomoĹ›Ä‡ do pierwszego wiersza LCD.
+*             WiadomoÄąâ€şĂ„â€ˇ do pierwszego wiersza LCD.
 *  @param lcd_2line
-*             WiadomoĹ›Ä‡ do drugiego wiersza LCD.
+*             WiadomoÄąâ€şĂ„â€ˇ do drugiego wiersza LCD.
 *  @returns  brak
 *  @side effects:
 *            brak
@@ -664,33 +664,35 @@ void writeInfo(char *console_message, char* lcd_1line, char *lcd_2line)
 }
 
 /*!
-*  @brief    Wstawiam do konkretnej wiadomoĹ›Ä‡ podany numer na podanÄ… pozycjÄ™.
+*  @brief    Wstawiam do konkretnej wiadomoÄąâ€şĂ„â€ˇ podany numer na podanĂ„â€¦ pozycjĂ„â„˘.
 *  @param message
-*             WiadomoĹ›Ä‡ do ktĂłrej wstawiamy numer
+*             WiadomoÄąâ€şĂ„â€ˇ do ktÄ‚Ĺ‚rej wstawiamy numer
 *  @param position
-*             Pozycja na ktĂłrej wstawiamy numer.
+*             Pozycja na ktÄ‚Ĺ‚rej wstawiamy numer.
 *  @param number
 *             Wstawiany numer
-*  @returns  Zmieniona wiadomoĹ›Ä‡
+*  @returns  Zmieniona wiadomoÄąâ€şĂ„â€ˇ
 *  @side effects:
 *            brak
 */
 char* insertdNumber(char* message, int position, int number)
 {
     //Zabezpiecz przypadek 0
-    message[position--] = '0' + (number % 10);
+    position = position - (int) 1;
+    message[position] = '0' + (number % 10);
     number /= 10;
 
     while(number)
     {
-        message[position--] = '0' + (number % 10);
+        position = position - (int) 1;
+        message[position] = '0' + (number % 10);
         number /= 10;
     }
     return message;
 }
 
 /*!
-*  @brief    Pauzuje grÄ™ do czasu naciĹ›niÄ™ci P0.14
+*  @brief    Pauzuje grĂ„â„˘ do czasu naciÄąâ€şniĂ„â„˘ci P0.14
 *  @param brak
 *  @returns  brak
 *  @side effects:
