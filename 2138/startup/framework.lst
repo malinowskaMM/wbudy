@@ -1,4 +1,4 @@
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 1
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s 			page 1
 
 
    1              		.file	"framework.c"
@@ -58,7 +58,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 1
   36:framework.c   **** 
   37:framework.c   **** /******************************************************************************
   38:framework.c   ****  * External functions
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 2
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s 			page 2
 
 
   39:framework.c   ****  *****************************************************************************/
@@ -118,7 +118,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 1
   93:framework.c   **** /*****************************************************************************
   94:framework.c   ****  *
   95:framework.c   ****  * Description:
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 3
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s 			page 3
 
 
   96:framework.c   ****  *    Default exception handler for invalid program fetch.
@@ -178,7 +178,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 1
  150:framework.c   ****     ;
  151:framework.c   **** }
  152:framework.c   **** 
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 4
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s 			page 4
 
 
  153:framework.c   **** #if (IRQ_HANDLER == 0)
@@ -238,7 +238,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 1
  198:framework.c   **** #endif
  199:framework.c   **** 
  200:framework.c   ****   //set heap limits
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 5
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s 			page 5
 
 
  201:framework.c   ****   pHeapStart = &end;
@@ -298,7 +298,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 1
  204:framework.c   **** 
  205:framework.c   **** /*****************************************************************************
  206:framework.c   ****  *
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 6
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s 			page 6
 
 
  207:framework.c   ****  * Description:
@@ -358,7 +358,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 1
  110 00b4 001080E5 		str	r1, [r0, #0]
  111              		.loc 1 226 0
  112 00b8 40E080E5 		str	lr, [r0, #64]
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 7
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s 			page 7
 
 
  227:framework.c   **** 
@@ -418,7 +418,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 1
  145              		.loc 1 248 0
  146 00fc CF3E02E5 		str	r3, [r2, #-3791]
  249:framework.c   ****   VICVectAddr13  = (unsigned int)0;      /* Set the vector address                             */
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 8
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s 			page 8
 
 
  147              		.loc 1 249 0
@@ -478,7 +478,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 1
  271:framework.c   ****   //initialize the consol
  272:framework.c   ****   consolInit();
  180              		.loc 1 272 0
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 9
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s 			page 9
 
 
  181 0130 FEFFFFEB 		bl	consolInit
@@ -538,7 +538,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 1
  218              		.align	2
  219              	.LC0:
  220 0000 49525120 		.ascii	"IRQ exception !!!\012Address: 0x\000"
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 10
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s 			page 10
 
 
  220      65786365 
@@ -598,7 +598,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 1
  267              		@ Function supports interworking.
  268              		@ args = 0, pretend = 0, frame = 0
  269              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 11
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s 			page 11
 
 
  270 01bc 04E02DE5 		str	lr, [sp, #-4]!
@@ -658,7 +658,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 1
  320 0200 1000A0E3 		mov	r0, #16
  321              	.LVL4:
  322 0204 08E04EE2 		sub	lr, lr, #8
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 12
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s 			page 12
 
 
  323              	.LVL5:
@@ -718,7 +718,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 1
  373              	.L35:
  374 0254 64000000 		.word	.LC3
  375              	.LFE4:
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 13
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s 			page 13
 
 
  376              		.size	exceptionHandlerPabort, .-exceptionHandlerPabort
@@ -778,7 +778,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 1
  422              		.align	2
  423              		.type	exceptionHandlerUndef, %function
  424              	exceptionHandlerUndef:
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 14
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s 			page 14
 
 
  425              	.LFB2:
@@ -838,7 +838,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 1
  479 001c 78000000 		.4byte	.LFE8-.LFB8
  480              		.align	2
  481              	.LEFDE0:
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 15
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s 			page 15
 
 
  482              	.LSFDE2:
@@ -898,7 +898,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 1
  536 0079 0E       		.byte	0xe
  537 007a 04       		.uleb128 0x4
  538 007b 48       		.byte	0x4
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 16
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s 			page 16
 
 
  539              		.4byte	.LCFI5-.LCFI4
@@ -958,7 +958,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 1
  593              		.4byte	.LCFI11-.LCFI10
  594 00c4 0E       		.byte	0xe
  595 00c5 08       		.uleb128 0x8
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 17
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s 			page 17
 
 
  596 00c6 8E       		.byte	0x8e
@@ -1018,7 +1018,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 1
  650 0048 5D       		.byte	0x5d
  651 0049 8C010000 		.4byte	.LCFI2-.Ltext0
  652 004d 94010000 		.4byte	.LCFI3-.Ltext0
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 18
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s 			page 18
 
 
  653 0051 0200     		.2byte	0x2
@@ -1078,7 +1078,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 1
  707 00db 7D       		.byte	0x7d
  708 00dc 08       		.sleb128 8
  709 00dd 00000000 		.4byte	0x0
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 19
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s 			page 19
 
 
  710 00e1 00000000 		.4byte	0x0
@@ -1138,7 +1138,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 1
  764 016c 00000000 		.4byte	0x0
  765 0170 00000000 		.4byte	0x0
  766              	.LLST13:
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 20
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s 			page 20
 
 
  767 0174 8C020000 		.4byte	.LFB2-.Ltext0
@@ -1198,7 +1198,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 1
  821 0049 00000000 		.4byte	.LLST1
  822 004d 04       		.uleb128 0x4
  823 004e 01       		.byte	0x1
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 21
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s 			page 21
 
 
  824 004f 88000000 		.4byte	.LASF2
@@ -1258,7 +1258,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 1
  878 00d1 03010000 		.4byte	0x103
  879 00d5 8F000000 		.4byte	.LASF7
  880 00d9 01       		.byte	0x1
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 22
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s 			page 22
 
 
  881 00da 7B       		.byte	0x7b
@@ -1318,7 +1318,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 1
  935 0161 01       		.byte	0x1
  936 0162 55       		.byte	0x55
  937 0163 96000000 		.4byte	0x96
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 23
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s 			page 23
 
 
  938 0167 00       		.byte	0x0
@@ -1378,7 +1378,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 1
  992 01dc 01       		.byte	0x1
  993 01dd 08       		.uleb128 0x8
  994 01de 00010000 		.4byte	.LASF15
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 24
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s 			page 24
 
 
  995 01e2 01       		.byte	0x1
@@ -1438,7 +1438,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 1
  1049 0032 0B       		.uleb128 0xb
  1050 0033 27       		.uleb128 0x27
  1051 0034 0C       		.uleb128 0xc
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 25
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s 			page 25
 
 
  1052 0035 11       		.uleb128 0x11
@@ -1498,7 +1498,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 1
  1106 006b 0E       		.uleb128 0xe
  1107 006c 3A       		.uleb128 0x3a
  1108 006d 0B       		.uleb128 0xb
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 26
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s 			page 26
 
 
  1109 006e 3B       		.uleb128 0x3b
@@ -1558,7 +1558,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 1
  1163 00a4 03       		.uleb128 0x3
  1164 00a5 0E       		.uleb128 0xe
  1165 00a6 3A       		.uleb128 0x3a
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 27
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s 			page 27
 
 
  1166 00a7 0B       		.uleb128 0xb
@@ -1618,7 +1618,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 1
  1214      496E6974 
  1214      00
  1215 0038 4D000000 		.4byte	0x4d
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 28
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s 			page 28
 
 
  1216 003c 6561496E 		.ascii	"eaInit\000"
@@ -1678,7 +1678,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 1
  1248 006e 2A656E64 		.ascii	"*end\000"
  1248      00
  1249              	.LASF0:
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 29
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s 			page 29
 
 
  1250 0073 65786365 		.ascii	"exceptionHandlerInit\000"
@@ -1738,7 +1738,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 1
  1272      6E48616E 
  1272      646C6572 
  1272      556E6465 
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 30
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s 			page 30
 
 
  1273              	.LASF9:
@@ -1748,40 +1748,40 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 1
  1274      646C6572 
  1274      53776900 
  1275              		.ident	"GCC: (GNU) 4.1.1"
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s 			page 31
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s 			page 31
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 framework.c
-/cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s:13     .text:00000000 exceptionHandlerInit
-/cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s:22     .text:00000000 $a
-/cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s:59     .text:00000050 $d
-/cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s:224    .text:00000188 exceptionHandlerIrq
+/cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s:13     .text:00000000 exceptionHandlerInit
+/cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s:22     .text:00000000 $a
+/cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s:59     .text:00000050 $d
+/cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s:224    .text:00000188 exceptionHandlerIrq
                             *COM*:00000004 pHeapStart
                             *COM*:00000004 pHeapEnd
-/cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s:424    .text:0000028c exceptionHandlerUndef
-/cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s:384    .text:00000258 exceptionHandlerSwi
-/cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s:344    .text:00000224 exceptionHandlerPabort
-/cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s:304    .text:000001f0 exceptionHandlerDabort
-/cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s:264    .text:000001bc exceptionHandlerFiq
-/cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s:74     .text:00000078 lowLevelInit
-/cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s:81     .text:00000078 $a
-/cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s:164    .text:00000120 $d
-/cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s:172    .text:0000012c eaInit
-/cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s:178    .text:0000012c $a
-/cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s:213    .text:00000180 $d
-/cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s:230    .text:00000188 $a
-/cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s:254    .text:000001b8 $d
-/cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s:270    .text:000001bc $a
-/cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s:294    .text:000001ec $d
-/cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s:310    .text:000001f0 $a
-/cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s:334    .text:00000220 $d
-/cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s:350    .text:00000224 $a
-/cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s:374    .text:00000254 $d
-/cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s:390    .text:00000258 $a
-/cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s:414    .text:00000288 $d
-/cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s:430    .text:0000028c $a
-/cygdrive/c/Users/embedded/AppData/Local/Temp/ccVGrkUF.s:454    .text:000002bc $d
+/cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s:424    .text:0000028c exceptionHandlerUndef
+/cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s:384    .text:00000258 exceptionHandlerSwi
+/cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s:344    .text:00000224 exceptionHandlerPabort
+/cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s:304    .text:000001f0 exceptionHandlerDabort
+/cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s:264    .text:000001bc exceptionHandlerFiq
+/cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s:74     .text:00000078 lowLevelInit
+/cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s:81     .text:00000078 $a
+/cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s:164    .text:00000120 $d
+/cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s:172    .text:0000012c eaInit
+/cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s:178    .text:0000012c $a
+/cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s:213    .text:00000180 $d
+/cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s:230    .text:00000188 $a
+/cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s:254    .text:000001b8 $d
+/cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s:270    .text:000001bc $a
+/cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s:294    .text:000001ec $d
+/cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s:310    .text:000001f0 $a
+/cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s:334    .text:00000220 $d
+/cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s:350    .text:00000224 $a
+/cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s:374    .text:00000254 $d
+/cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s:390    .text:00000258 $a
+/cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s:414    .text:00000288 $d
+/cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s:430    .text:0000028c $a
+/cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccVLd9vb.s:454    .text:000002bc $d
 
 UNDEFINED SYMBOLS
 end

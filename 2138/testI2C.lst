@@ -1,4 +1,4 @@
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s 			page 1
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/cccWgC7c.s 			page 1
 
 
    1              		.code	16
@@ -58,7 +58,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s 			page 1
   21:testI2C.c     ****  * Description:
   22:testI2C.c     ****  *    Test EEPROM
   23:testI2C.c     ****  *
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s 			page 2
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/cccWgC7c.s 			page 2
 
 
   24:testI2C.c     ****  ****************************************************************************/
@@ -118,7 +118,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s 			page 1
   59 0030 FFF7FEFF 		bl	eepromPoll
   60 0034 0006     		lsl	r0, r0, #24
   61 0036 0016     		asr	r0, r0, #24
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s 			page 3
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/cccWgC7c.s 			page 3
 
 
   62 0038 0128     		cmp	r0, #1
@@ -178,7 +178,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s 			page 1
   98 0072 00D0     		beq	.L8
   99 0074 0024     		mov	r4, #0
  100              	.L8:
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s 			page 4
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/cccWgC7c.s 			page 4
 
 
   64:testI2C.c     **** ;//    printf("\n        - program cycle completed");
@@ -238,7 +238,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s 			page 1
  125 009e 291C     		mov	r1, r5
  126 00a0 0E22     		mov	r2, #14
  127 00a2 FFF7FEFF 		bl	eepromPageRead
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s 			page 5
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/cccWgC7c.s 			page 5
 
 
   94:testI2C.c     ****   if (errorCode == I2C_CODE_OK)
@@ -298,7 +298,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s 			page 1
  123:testI2C.c     ****   if (eepromPoll() == I2C_CODE_OK)
  153              		.loc 1 123 0
  154 00ce FFF7FEFF 		bl	eepromPoll
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s 			page 6
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/cccWgC7c.s 			page 6
 
 
  155 00d2 0006     		lsl	r0, r0, #24
@@ -358,7 +358,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s 			page 1
  182 00fe 201C     		mov	r0, r4
  183 0100 09B0     		add	sp, sp, #36
  184              		@ sp needed for prologue
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s 			page 7
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/cccWgC7c.s 			page 7
 
 
  185              	.LVL4:
@@ -418,7 +418,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s 			page 1
  215      737400
  216 0113 00       		.align	2
  217              	.LC14:
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s 			page 8
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/cccWgC7c.s 			page 8
 
 
  218 0114 2E00     		.ascii	".\000"
@@ -478,7 +478,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s 			page 1
  168:testI2C.c     ****   osSleep(50);
  169:testI2C.c     ****   SEC  = 0;
  170:testI2C.c     ****   MINx  = 0;
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s 			page 9
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/cccWgC7c.s 			page 9
 
 
  171:testI2C.c     ****   HOUR = 0;
@@ -538,7 +538,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s 			page 1
  212:testI2C.c     ****   printf("*                                                     *\n");
  253              		.loc 1 212 0
  254 0126 201C     		mov	r0, r4
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s 			page 10
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/cccWgC7c.s 			page 10
 
 
  255 0128 FFF7FEFF 		bl	simplePrintf
@@ -598,7 +598,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s 			page 1
  305              		.loc 1 173 0
  306 0168 1123     		mov	r3, #17
  307 016a 2B60     		str	r3, [r5]
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s 			page 11
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/cccWgC7c.s 			page 11
 
 
  308              		.loc 1 175 0
@@ -658,7 +658,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s 			page 1
  362 01d6 032B     		cmp	r3, #3
  363 01d8 0AD1     		bne	.L27
  364 01da 3B68     		ldr	r3, [r7]
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s 			page 12
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/cccWgC7c.s 			page 12
 
 
  365 01dc 002B     		cmp	r3, #0
@@ -718,7 +718,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s 			page 1
  410 0220 18000000 		.word	.LC4
  411 0224 54000000 		.word	.LC6
  412 0228 90000000 		.word	.LC8
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s 			page 13
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/cccWgC7c.s 			page 13
 
 
  413 022c CC000000 		.word	.LC10
@@ -778,7 +778,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s 			page 1
  467 0030 1C000000 		.4byte	.LEFDE2-.LASFDE2
  468              	.LASFDE2:
  469 0034 00000000 		.4byte	.Lframe0
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s 			page 14
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/cccWgC7c.s 			page 14
 
 
  470 0038 10010000 		.4byte	.LFB4
@@ -838,7 +838,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s 			page 1
  524 0051 0100     		.2byte	0x1
  525 0053 54       		.byte	0x54
  526 0054 40000000 		.4byte	.LVL2-.Ltext0
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s 			page 15
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/cccWgC7c.s 			page 15
 
 
  527 0058 54000000 		.4byte	.LVL3-.Ltext0
@@ -898,7 +898,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s 			page 1
  581 0055 01       		.byte	0x1
  582 0056 06       		.byte	0x6
  583 0057 03       		.uleb128 0x3
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s 			page 16
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/cccWgC7c.s 			page 16
 
 
  584 0058 C3000000 		.4byte	.LASF4
@@ -958,7 +958,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s 			page 1
  638 00c7 91       		.byte	0x91
  639 00c8 66       		.sleb128 -26
  640 00c9 07       		.uleb128 0x7
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s 			page 17
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/cccWgC7c.s 			page 17
 
 
  641 00ca 8A000000 		.4byte	.LASF12
@@ -1018,7 +1018,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s 			page 1
  695 0136 01       		.byte	0x1
  696 0137 10010000 		.4byte	.LFB4
  697 013b 5C020000 		.4byte	.LFE4
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s 			page 18
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/cccWgC7c.s 			page 18
 
 
  698 013f 67000000 		.4byte	.LLST3
@@ -1078,7 +1078,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s 			page 1
  752 002d 00       		.byte	0x0
  753 002e 03       		.uleb128 0x3
  754 002f 08       		.uleb128 0x8
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s 			page 19
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/cccWgC7c.s 			page 19
 
 
  755 0030 0B       		.uleb128 0xb
@@ -1138,7 +1138,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s 			page 1
  809 0066 0B       		.uleb128 0xb
  810 0067 49       		.uleb128 0x49
  811 0068 13       		.uleb128 0x13
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s 			page 20
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/cccWgC7c.s 			page 20
 
 
  812 0069 02       		.uleb128 0x2
@@ -1198,7 +1198,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s 			page 1
  866 009f 40       		.uleb128 0x40
  867 00a0 06       		.uleb128 0x6
  868 00a1 00       		.byte	0x0
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s 			page 21
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/cccWgC7c.s 			page 21
 
 
  869 00a2 00       		.byte	0x0
@@ -1258,7 +1258,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s 			page 1
  918 000a 7369676E 		.ascii	"signed char\000"
  918      65642063 
  918      68617200 
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s 			page 22
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/cccWgC7c.s 			page 22
 
 
  919              	.LASF9:
@@ -1318,7 +1318,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s 			page 1
  942      49324300 
  943              	.LASF15:
  944 00b7 474E5520 		.ascii	"GNU C 4.1.1\000"
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s 			page 23
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/cccWgC7c.s 			page 23
 
 
  944      4320342E 
@@ -1350,17 +1350,17 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s 			page 1
  956      73756C74 
  956      4F4B00
  957              		.ident	"GCC: (GNU) 4.1.1"
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s 			page 24
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/cccWgC7c.s 			page 24
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 testI2C.c
-/cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s:1      .text:00000000 $t
-/cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s:24     .text:00000000 testEEPROM
-/cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s:192    .text:00000108 $d
-/cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s:238    .text:00000110 testI2C
-/cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s:235    .text:00000110 $t
-/cygdrive/c/Users/embedded/AppData/Local/Temp/ccsstGzo.s:410    .text:00000220 $d
+/cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/cccWgC7c.s:1      .text:00000000 $t
+/cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/cccWgC7c.s:24     .text:00000000 testEEPROM
+/cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/cccWgC7c.s:192    .text:00000108 $d
+/cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/cccWgC7c.s:238    .text:00000110 testI2C
+/cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/cccWgC7c.s:235    .text:00000110 $t
+/cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/cccWgC7c.s:410    .text:00000220 $d
 
 UNDEFINED SYMBOLS
 memcpy

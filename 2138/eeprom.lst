@@ -1,4 +1,4 @@
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 1
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccziBdW0.s 			page 1
 
 
    1              		.code	16
@@ -58,7 +58,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 1
   33:eeprom.c      ****  *    I2C_CODE_OK or I2C_CODE_ERROR
   34:eeprom.c      ****  *
   35:eeprom.c      ****  *****************************************************************************/
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 2
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccziBdW0.s 			page 2
 
 
   36:eeprom.c      **** tS8 
@@ -118,7 +118,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 1
   90:eeprom.c      ****   return retCode;
   91:eeprom.c      **** 
   92:eeprom.c      **** }
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 3
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccziBdW0.s 			page 3
 
 
   93:eeprom.c      **** 
@@ -178,7 +178,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 1
  147:eeprom.c      ****         }
  148:eeprom.c      ****         break;
  149:eeprom.c      ****       }
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 4
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccziBdW0.s 			page 4
 
 
  150:eeprom.c      ****       else if(status != 0xf8)
@@ -238,7 +238,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 1
  204:eeprom.c      ****       /* error */
  205:eeprom.c      ****       retCode = I2C_CODE_ERROR;
  206:eeprom.c      ****       break;
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 5
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccziBdW0.s 			page 5
 
 
  207:eeprom.c      ****     }
@@ -298,7 +298,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 1
  261:eeprom.c      **** //
  262:eeprom.c      **** //  Returns:
  263:eeprom.c      **** //      MA_OK or I2C status code
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 6
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccziBdW0.s 			page 6
 
 
  264:eeprom.c      **** //
@@ -358,7 +358,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 1
  318:eeprom.c      ****           retCode = I2C_CODE_ERROR;
  319:eeprom.c      ****           break;
  320:eeprom.c      ****         }
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 7
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccziBdW0.s 			page 7
 
 
  321:eeprom.c      ****       }
@@ -418,7 +418,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 1
  351:eeprom.c      ****     /* write EEPROM I2C address */
  352:eeprom.c      ****     retCode = i2cWriteWithWait(I2C_EEPROM_ADDR);
   43              		.loc 1 352 0
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 8
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccziBdW0.s 			page 8
 
 
   44 001a A020     		mov	r0, #160
@@ -478,7 +478,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 1
   77 004e 01D0     		beq	.L6
   78 0050 040E     		lsr	r4, r0, #24
   79 0052 03E0     		b	.L2
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 9
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccziBdW0.s 			page 9
 
 
   80              	.L6:
@@ -538,7 +538,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 1
  121 0078 12D1     		bne	.L14
  122              	.L17:
  123              		.loc 1 55 0
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 10
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccziBdW0.s 			page 10
 
 
  124 007a A020     		mov	r0, #160
@@ -598,7 +598,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 1
  178              		.loc 1 110 0
  179 00ba 0006     		lsl	r0, r0, #24
  180              	.LVL16:
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 11
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccziBdW0.s 			page 11
 
 
  181 00bc 0904     		lsl	r1, r1, #16
@@ -658,7 +658,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 1
  235 00fe FC28     		cmp	r0, #252
  236 0100 F8D0     		beq	.L36
  237 0102 01E0     		b	.L48
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 12
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccziBdW0.s 			page 12
 
 
  238              	.LVL28:
@@ -718,7 +718,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 1
  292              		.loc 1 246 0
  293              		@ sp needed for prologue
  294              	.LVL34:
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 13
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccziBdW0.s 			page 13
 
 
  295              	.LVL35:
@@ -778,7 +778,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 1
  349 017c 01D0     		beq	.L59
  350 017e 5028     		cmp	r0, #80
  351 0180 11D1     		bne	.L62
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 14
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccziBdW0.s 			page 14
 
 
  352              	.L59:
@@ -838,7 +838,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 1
  406              	.LVL54:
  407              	.LVL55:
  408 01c0 F0BC     		pop	{r4, r5, r6, r7}
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 15
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccziBdW0.s 			page 15
 
 
  409 01c2 02BC     		pop	{r1}
@@ -898,7 +898,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 1
  463 0046 01       		.uleb128 0x1
  464 0047 00       		.align	2
  465              	.LEFDE2:
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 16
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccziBdW0.s 			page 16
 
 
  466              	.LSFDE4:
@@ -958,7 +958,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 1
  520 0016 14       		.sleb128 20
  521 0017 00000000 		.4byte	0x0
  522 001b 00000000 		.4byte	0x0
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 17
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccziBdW0.s 			page 17
 
 
  523              	.LLST1:
@@ -1018,7 +1018,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 1
  577 00ae 00000000 		.4byte	0x0
  578 00b2 00000000 		.4byte	0x0
  579              	.LLST6:
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 18
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccziBdW0.s 			page 18
 
 
  580 00b6 6E000000 		.4byte	.LVL13-.Ltext0
@@ -1078,7 +1078,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 1
  634 0149 04010000 		.4byte	.LVL28-.Ltext0
  635 014d 0100     		.2byte	0x1
  636 014f 50       		.byte	0x50
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 19
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccziBdW0.s 			page 19
 
 
  637 0150 08010000 		.4byte	.LVL29-.Ltext0
@@ -1138,7 +1138,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 1
  691 01e3 C0010000 		.4byte	.LVL53-.Ltext0
  692 01e7 0100     		.2byte	0x1
  693 01e9 55       		.byte	0x55
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 20
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccziBdW0.s 			page 20
 
 
  694 01ea 00000000 		.4byte	0x0
@@ -1198,7 +1198,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 1
  748 0014 00000000 		.4byte	.Ltext0
  749 0018 69000000 		.4byte	.LASF18
  750 001c 01       		.byte	0x1
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 21
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccziBdW0.s 			page 21
 
 
  751 001d 60000000 		.4byte	.LASF19
@@ -1258,7 +1258,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 1
  805 008d 00000000 		.4byte	.LFB5
  806 0091 6A000000 		.4byte	.LFE5
  807 0095 00000000 		.4byte	.LLST0
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 22
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccziBdW0.s 			page 22
 
 
  808 0099 07       		.uleb128 0x7
@@ -1318,7 +1318,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 1
  862 011e B6000000 		.4byte	.LLST6
  863 0122 0F       		.uleb128 0xf
  864 0123 21000000 		.4byte	.LASF10
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 23
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccziBdW0.s 			page 23
 
 
  865 0127 01       		.byte	0x1
@@ -1378,7 +1378,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 1
  919 01a9 97010000 		.4byte	.LLST12
  920 01ad 07       		.uleb128 0x7
  921 01ae 28000000 		.4byte	.LASF16
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 24
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccziBdW0.s 			page 24
 
 
  922 01b2 01       		.byte	0x1
@@ -1438,7 +1438,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 1
  976 0011 00       		.byte	0x0
  977 0012 00       		.byte	0x0
  978 0013 02       		.uleb128 0x2
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 25
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccziBdW0.s 			page 25
 
 
  979 0014 16       		.uleb128 0x16
@@ -1498,7 +1498,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 1
  1033 004a 03       		.uleb128 0x3
  1034 004b 0E       		.uleb128 0xe
  1035 004c 3A       		.uleb128 0x3a
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 26
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccziBdW0.s 			page 26
 
 
  1036 004d 0B       		.uleb128 0xb
@@ -1558,7 +1558,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 1
  1090 0083 49       		.uleb128 0x49
  1091 0084 13       		.uleb128 0x13
  1092 0085 02       		.uleb128 0x2
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 27
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccziBdW0.s 			page 27
 
 
  1093 0086 06       		.uleb128 0x6
@@ -1618,7 +1618,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 1
  1147 00bc 13       		.uleb128 0x13
  1148 00bd 11       		.uleb128 0x11
  1149 00be 01       		.uleb128 0x1
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 28
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccziBdW0.s 			page 28
 
 
  1150 00bf 12       		.uleb128 0x12
@@ -1678,7 +1678,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 1
  1204 00f5 03       		.uleb128 0x3
  1205 00f6 0E       		.uleb128 0xe
  1206 00f7 3A       		.uleb128 0x3a
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 29
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccziBdW0.s 			page 29
 
 
  1207 00f8 0B       		.uleb128 0xb
@@ -1738,7 +1738,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 1
  1251 0054 00000000 		.4byte	0x0
  1252              		.section	.debug_aranges,"",%progbits
  1253 0000 1C000000 		.4byte	0x1c
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 30
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccziBdW0.s 			page 30
 
 
  1254 0004 0200     		.2byte	0x2
@@ -1798,7 +1798,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 1
  1288      4320342E 
  1288      312E3100 
  1289              	.LASF21:
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 31
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccziBdW0.s 			page 31
 
 
  1290 0075 65657072 		.ascii	"eepromPageRead\000"
@@ -1842,16 +1842,16 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 1
  1308 00f2 70446174 		.ascii	"pData\000"
  1308      6100
  1309              		.ident	"GCC: (GNU) 4.1.1"
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 32
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccziBdW0.s 			page 32
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 eeprom.c
-/cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s:1      .text:00000000 $t
-/cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s:16     .text:00000000 eepromWrite
-/cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s:108    .text:0000006c eepromPoll
-/cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s:172    .text:000000b8 eepromStartRead
-/cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s:306    .text:00000150 eepromPageRead
+/cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccziBdW0.s:1      .text:00000000 $t
+/cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccziBdW0.s:16     .text:00000000 eepromWrite
+/cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccziBdW0.s:108    .text:0000006c eepromPoll
+/cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccziBdW0.s:172    .text:000000b8 eepromStartRead
+/cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccziBdW0.s:306    .text:00000150 eepromPageRead
 
 UNDEFINED SYMBOLS
 i2cStart

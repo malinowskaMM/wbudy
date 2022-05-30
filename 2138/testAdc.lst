@@ -1,4 +1,4 @@
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/cc2KPkrH.s 			page 1
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccuB6VEi.s 			page 1
 
 
    1              		.code	16
@@ -58,7 +58,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/cc2KPkrH.s 			page 1
   34:testAdc.c     **** 
   35:testAdc.c     **** 
   36:testAdc.c     **** /*****************************************************************************
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/cc2KPkrH.s 			page 2
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccuB6VEi.s 			page 2
 
 
   37:testAdc.c     ****  *
@@ -118,7 +118,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/cc2KPkrH.s 			page 1
   40 0018 1143     		orr	r1, r1, r2
   41 001a 2160     		str	r1, [r4]
   42              	.L2:
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/cc2KPkrH.s 			page 3
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccuB6VEi.s 			page 3
 
 
   69:testAdc.c     **** 	
@@ -178,7 +178,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/cc2KPkrH.s 			page 1
   76      65204144 
   76      43207769 
   76      6C6C2072 
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/cc2KPkrH.s 			page 4
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccuB6VEi.s 			page 4
 
 
   76      65616420 
@@ -238,7 +238,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/cc2KPkrH.s 			page 1
   86:testAdc.c     **** testAdc(void)
   87:testAdc.c     **** {
  108              		.loc 1 87 0
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/cc2KPkrH.s 			page 5
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccuB6VEi.s 			page 5
 
 
  109 0038 F0B5     		push	{r4, r5, r6, r7, lr}
@@ -298,7 +298,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/cc2KPkrH.s 			page 1
  107:testAdc.c     ****            PLL_FACTOR /
  108:testAdc.c     ****            VPBDIV_FACTOR) / 4500000 - 1) << 8 |  //set clock division factor, so ADC clock is 4.5MH
  109:testAdc.c     ****          (0 << 16)                            |  //BURST = 0, conversions are SW controlled
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/cc2KPkrH.s 			page 6
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccuB6VEi.s 			page 6
 
 
  110:testAdc.c     ****          (0 << 17)                            |  //CLKS  = 0, 11 clocks = 10-bit result
@@ -358,7 +358,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/cc2KPkrH.s 			page 1
  177 009a FFF7FEFF 		bl	simplePrintf
  131:testAdc.c     ****     consolSendNumber(10,4,FALSE,' ', integerResult);    
  178              		.loc 1 131 0
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/cc2KPkrH.s 			page 7
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccuB6VEi.s 			page 7
 
 
  179 009e 0421     		mov	r1, #4
@@ -418,7 +418,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/cc2KPkrH.s 			page 1
  219 00e6 0421     		mov	r1, #4
  220 00e8 0022     		mov	r2, #0
  221 00ea 2023     		mov	r3, #32
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/cc2KPkrH.s 			page 8
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccuB6VEi.s 			page 8
 
 
  222 00ec 0A20     		mov	r0, #10
@@ -478,7 +478,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/cc2KPkrH.s 			page 1
  264 012e 019B     		ldr	r3, [sp, #4]
  265 0130 0421     		mov	r1, #4
  266 0132 0022     		mov	r2, #0
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/cc2KPkrH.s 			page 9
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccuB6VEi.s 			page 9
 
 
  267 0134 0093     		str	r3, [sp]
@@ -538,7 +538,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/cc2KPkrH.s 			page 1
  312 016c 0320     		mov	r0, #3
  313 016e FFF747FF 		bl	getAnalogueInput
  167:testAdc.c     ****     PINSEL1 &= ~0x30000000; //set P0.30 back to GPIO
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/cc2KPkrH.s 			page 10
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccuB6VEi.s 			page 10
 
 
  314              		.loc 1 167 0
@@ -598,7 +598,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/cc2KPkrH.s 			page 1
  180:testAdc.c     ****     //wait 250 ms
  181:testAdc.c     ****     osSleep(100);
  356              		.loc 1 181 0
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/cc2KPkrH.s 			page 11
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccuB6VEi.s 			page 11
 
 
  357 01ba 6420     		mov	r0, #100
@@ -658,7 +658,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/cc2KPkrH.s 			page 1
  411 0025 8E       		.byte	0x8e
  412 0026 01       		.uleb128 0x1
  413 0027 00       		.align	2
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/cc2KPkrH.s 			page 12
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccuB6VEi.s 			page 12
 
 
  414              	.LEFDE0:
@@ -718,7 +718,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/cc2KPkrH.s 			page 1
  468 0039 00000000 		.4byte	0x0
  469              	.LLST2:
  470 003d 38000000 		.4byte	.LFB4-.Ltext0
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/cc2KPkrH.s 			page 13
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccuB6VEi.s 			page 13
 
 
  471 0041 3A000000 		.4byte	.LCFI1-.Ltext0
@@ -778,7 +778,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/cc2KPkrH.s 			page 1
  525 0035 01       		.byte	0x1
  526 0036 08       		.byte	0x8
  527 0037 04       		.uleb128 0x4
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/cc2KPkrH.s 			page 14
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccuB6VEi.s 			page 14
 
 
  528 0038 87000000 		.4byte	.LASF0
@@ -838,7 +838,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/cc2KPkrH.s 			page 1
  582 00ad 2C       		.byte	0x2c
  583 00ae 01       		.byte	0x1
  584 00af 01       		.byte	0x1
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/cc2KPkrH.s 			page 15
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccuB6VEi.s 			page 15
 
 
  585 00b0 09       		.uleb128 0x9
@@ -898,7 +898,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/cc2KPkrH.s 			page 1
  639 0003 10       		.uleb128 0x10
  640 0004 06       		.uleb128 0x6
  641 0005 12       		.uleb128 0x12
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/cc2KPkrH.s 			page 16
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccuB6VEi.s 			page 16
 
 
  642 0006 01       		.uleb128 0x1
@@ -958,7 +958,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/cc2KPkrH.s 			page 1
  696 003c 08       		.uleb128 0x8
  697 003d 0B       		.uleb128 0xb
  698 003e 0B       		.uleb128 0xb
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/cc2KPkrH.s 			page 17
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccuB6VEi.s 			page 17
 
 
  699 003f 3E       		.uleb128 0x3e
@@ -1018,7 +1018,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/cc2KPkrH.s 			page 1
  753 0075 0C       		.uleb128 0xc
  754 0076 20       		.uleb128 0x20
  755 0077 0B       		.uleb128 0xb
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/cc2KPkrH.s 			page 18
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccuB6VEi.s 			page 18
 
 
  756 0078 00       		.byte	0x0
@@ -1078,7 +1078,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/cc2KPkrH.s 			page 1
  810 00ae 02       		.uleb128 0x2
  811 00af 06       		.uleb128 0x6
  812 00b0 00       		.byte	0x0
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/cc2KPkrH.s 			page 19
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccuB6VEi.s 			page 19
 
 
  813 00b1 00       		.byte	0x0
@@ -1138,7 +1138,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/cc2KPkrH.s 			page 1
  866 0000 1C000000 		.4byte	0x1c
  867 0004 0200     		.2byte	0x2
  868 0006 00000000 		.4byte	.Ldebug_info0
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/cc2KPkrH.s 			page 20
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccuB6VEi.s 			page 20
 
 
  869 000a 04       		.byte	0x4
@@ -1198,7 +1198,7 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/cc2KPkrH.s 			page 1
  905      65642069 
  905      6E7400
  906              	.LASF17:
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/cc2KPkrH.s 			page 21
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccuB6VEi.s 			page 21
 
 
  907 005c 74657374 		.ascii	"testAdc\000"
@@ -1247,17 +1247,17 @@ ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/cc2KPkrH.s 			page 1
  927      6E707574 
  927      00
  928              		.ident	"GCC: (GNU) 4.1.1"
-ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/cc2KPkrH.s 			page 22
+ARM GAS  /cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccuB6VEi.s 			page 22
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 testAdc.c
-/cygdrive/c/Users/embedded/AppData/Local/Temp/cc2KPkrH.s:1      .text:00000000 $t
-/cygdrive/c/Users/embedded/AppData/Local/Temp/cc2KPkrH.s:15     .text:00000000 getAnalogueInput
-/cygdrive/c/Users/embedded/AppData/Local/Temp/cc2KPkrH.s:61     .text:00000030 $d
-/cygdrive/c/Users/embedded/AppData/Local/Temp/cc2KPkrH.s:106    .text:00000038 testAdc
-/cygdrive/c/Users/embedded/AppData/Local/Temp/cc2KPkrH.s:103    .text:00000038 $t
-/cygdrive/c/Users/embedded/AppData/Local/Temp/cc2KPkrH.s:363    .text:000001c4 $d
+/cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccuB6VEi.s:1      .text:00000000 $t
+/cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccuB6VEi.s:15     .text:00000000 getAnalogueInput
+/cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccuB6VEi.s:61     .text:00000030 $d
+/cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccuB6VEi.s:106    .text:00000038 testAdc
+/cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccuB6VEi.s:103    .text:00000038 $t
+/cygdrive/c/DOCUME~1/mkwapisz/LOCALS~1/Temp/ccuB6VEi.s:363    .text:000001c4 $d
 
 UNDEFINED SYMBOLS
 simplePrintf
