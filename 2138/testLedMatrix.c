@@ -21,6 +21,7 @@
 #define VPBDIV_FACTOR     PBSD
 
 #define  SPI_CS   0x00008000  //<= new board, old board = 0x00800000
+tU8 pattern[8] = {0,0,0,0,0,0,0,0};
 
 void ledMatrix(void);
 
@@ -77,7 +78,7 @@ testArrow(tU8 direction)
     SPI_SPCR  = 0x60;
     IODIR0 |= SPI_CS;
 
-    tU8 pattern[8] = {0,0,0,0,0,0,0,0};
+
 
     const tU8 directionText[] = {
             0x18,0x24,0x42,0x81,0xE7,0x24,0x24,0x3C,
