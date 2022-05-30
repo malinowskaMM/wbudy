@@ -58,7 +58,7 @@ void testRGB(tU8 red, tU8 green, tU8 blue);
 void pause(void);
 
 //Logika rozgrywki
-tU8 mainMenu(void);
+static tU8 mainMenu(void);
 static void newGame(void);
 static void roundsAmount(void);
 static void roundsTime(void);
@@ -189,7 +189,7 @@ static void mainFunction(void) {
 *  @side effects:
 *            brak
 */
-tU8 mainMenu(void)
+static tU8 mainMenu(void)
 {
     //Wypisanie infromacji
     writeInfo("Glowne menu\n", "Glowne menu", "Wybor-joystick");
