@@ -1,0 +1,1863 @@
+ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 1
+
+
+   1              		.code	16
+   2              		.file	"eeprom.c"
+   3              		.section	.debug_abbrev,"",%progbits
+   4              	.Ldebug_abbrev0:
+   5              		.section	.debug_info,"",%progbits
+   6              	.Ldebug_info0:
+   7              		.section	.debug_line,"",%progbits
+   8              	.Ldebug_line0:
+   9 0000 CF000000 		.text
+   9      02004C00 
+   9      00000201 
+   9      FB0E0D00 
+   9      01010101 
+  10              	.Ltext0:
+  11              		.align	2
+  12              		.global	eepromWrite
+  13              		.code 16
+  14              		.thumb_func
+  15              		.type	eepromWrite, %function
+  16              	eepromWrite:
+  17              	.LFB5:
+  18              		.file 1 "eeprom.c"
+   1:eeprom.c      **** /******************************************************************************
+   2:eeprom.c      ****  * Includes
+   3:eeprom.c      ****  *****************************************************************************/
+   4:eeprom.c      **** #include "../pre_emptive_os/api/general.h"
+   5:eeprom.c      **** #include "i2c.h"
+   6:eeprom.c      **** 
+   7:eeprom.c      **** /******************************************************************************
+   8:eeprom.c      ****  * Defines and typedefs
+   9:eeprom.c      ****  *****************************************************************************/
+  10:eeprom.c      **** 
+  11:eeprom.c      **** #define EEPROM_SIZE       0x0100
+  12:eeprom.c      **** #define LOCAL_EEPROM_ADDR 0x0
+  13:eeprom.c      **** #define EEPROM_ADDR       0xA0
+  14:eeprom.c      **** 
+  15:eeprom.c      **** #define I2C_EEPROM_ADDR   (EEPROM_ADDR + (LOCAL_EEPROM_ADDR << 1))
+  16:eeprom.c      **** #define I2C_EEPROM_RCV    (EEPROM_ADDR + (LOCAL_EEPROM_ADDR << 1) + 0x01)
+  17:eeprom.c      **** #define I2C_EEPROM_SND    (EEPROM_ADDR + (LOCAL_EEPROM_ADDR << 1) + 0x00)
+  18:eeprom.c      **** 
+  19:eeprom.c      **** 
+  20:eeprom.c      **** /******************************************************************************
+  21:eeprom.c      ****  * Implementation of public functions
+  22:eeprom.c      ****  *****************************************************************************/
+  23:eeprom.c      **** 
+  24:eeprom.c      **** /******************************************************************************
+  25:eeprom.c      ****  *
+  26:eeprom.c      ****  * Description:
+  27:eeprom.c      ****  *    Waits till I2C returns ACK (after BURN cycle)
+  28:eeprom.c      ****  *
+  29:eeprom.c      ****  *    Note: After a stop condition, you may need a bus free time before you 
+  30:eeprom.c      ****  *          can generate a new start condition.
+  31:eeprom.c      ****  *
+  32:eeprom.c      ****  * Returns:
+  33:eeprom.c      ****  *    I2C_CODE_OK or I2C_CODE_ERROR
+  34:eeprom.c      ****  *
+  35:eeprom.c      ****  *****************************************************************************/
+ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 2
+
+
+  36:eeprom.c      **** tS8 
+  37:eeprom.c      **** eepromPoll(void)
+  38:eeprom.c      **** {
+  39:eeprom.c      ****   tS8 retCode  = I2C_CODE_OK;
+  40:eeprom.c      ****   tU8 status   = 0;
+  41:eeprom.c      ****   tBool burnEnd = FALSE;
+  42:eeprom.c      **** 
+  43:eeprom.c      ****   while(burnEnd == FALSE)
+  44:eeprom.c      ****   {
+  45:eeprom.c      ****     /* Generate Start condition */
+  46:eeprom.c      ****     retCode = i2cStart();
+  47:eeprom.c      **** 
+  48:eeprom.c      ****     /* Transmit SLA+W */
+  49:eeprom.c      ****     if(retCode == I2C_CODE_OK)
+  50:eeprom.c      ****     {
+  51:eeprom.c      ****       /* Write SLA+W */
+  52:eeprom.c      ****       retCode = i2cPutChar(I2C_EEPROM_SND);
+  53:eeprom.c      ****       while(retCode == I2C_CODE_BUSY)
+  54:eeprom.c      ****       {
+  55:eeprom.c      ****         retCode = i2cPutChar(I2C_EEPROM_SND);
+  56:eeprom.c      ****       }
+  57:eeprom.c      ****     }
+  58:eeprom.c      **** 
+  59:eeprom.c      ****     if(retCode == I2C_CODE_OK)
+  60:eeprom.c      ****     {
+  61:eeprom.c      ****       /* Wait until SLA+W transmitted */
+  62:eeprom.c      ****       /* Get new status */
+  63:eeprom.c      ****       status = i2cCheckStatus();
+  64:eeprom.c      **** 
+  65:eeprom.c      ****       if(status == 0x18)
+  66:eeprom.c      ****       {
+  67:eeprom.c      ****         /* data transmitted and ACK received */
+  68:eeprom.c      ****         burnEnd = TRUE;
+  69:eeprom.c      ****       }
+  70:eeprom.c      ****       else if(status == 0x20)
+  71:eeprom.c      ****       {
+  72:eeprom.c      ****         /* data transmitted and ACK not received */
+  73:eeprom.c      ****         // send start bit, start again
+  74:eeprom.c      ****         burnEnd = FALSE;
+  75:eeprom.c      ****       }
+  76:eeprom.c      ****       else if( status != 0xf8 )
+  77:eeprom.c      ****       {
+  78:eeprom.c      ****         /* error ---*/
+  79:eeprom.c      ****         retCode = I2C_CODE_ERROR;
+  80:eeprom.c      ****         burnEnd = TRUE;
+  81:eeprom.c      ****       }
+  82:eeprom.c      ****     }
+  83:eeprom.c      **** 
+  84:eeprom.c      ****     /* Generate Stop condition */
+  85:eeprom.c      ****     i2cStop();
+  86:eeprom.c      **** 
+  87:eeprom.c      ****   } // end of while 
+  88:eeprom.c      **** 
+  89:eeprom.c      **** 
+  90:eeprom.c      ****   return retCode;
+  91:eeprom.c      **** 
+  92:eeprom.c      **** }
+ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 3
+
+
+  93:eeprom.c      **** 
+  94:eeprom.c      **** /******************************************************************************
+  95:eeprom.c      ****  *
+  96:eeprom.c      ****  * Description:
+  97:eeprom.c      ****  *    Start a read
+  98:eeprom.c      ****  *
+  99:eeprom.c      ****  * Params:
+ 100:eeprom.c      ****  *    [in] devAddr - device address
+ 101:eeprom.c      ****  *    [in] address - eeprom address
+ 102:eeprom.c      ****  *
+ 103:eeprom.c      ****  * Returns:
+ 104:eeprom.c      ****  *    I2C_CODE_OK or I2C_CODE_ERROR
+ 105:eeprom.c      ****  *
+ 106:eeprom.c      ****  *****************************************************************************/
+ 107:eeprom.c      **** tS8 
+ 108:eeprom.c      **** eepromStartRead(tU8  devAddr, 
+ 109:eeprom.c      ****                 tU16 address)
+ 110:eeprom.c      **** {
+ 111:eeprom.c      ****   tS8 retCode = 0;
+ 112:eeprom.c      ****   tU8 status  = 0;
+ 113:eeprom.c      **** 
+ 114:eeprom.c      ****   /* Generate Start condition */
+ 115:eeprom.c      ****   retCode = i2cStart();
+ 116:eeprom.c      **** 
+ 117:eeprom.c      ****   /* Transmit address */
+ 118:eeprom.c      ****   if(retCode == I2C_CODE_OK )
+ 119:eeprom.c      ****   {
+ 120:eeprom.c      ****     /* Write SLA+W */
+ 121:eeprom.c      ****     retCode = i2cPutChar(devAddr);
+ 122:eeprom.c      ****     while( retCode == I2C_CODE_BUSY )
+ 123:eeprom.c      ****     {
+ 124:eeprom.c      ****       retCode = i2cPutChar( devAddr );
+ 125:eeprom.c      ****     }
+ 126:eeprom.c      ****   }
+ 127:eeprom.c      **** 
+ 128:eeprom.c      ****   if( retCode == I2C_CODE_OK )
+ 129:eeprom.c      ****   {
+ 130:eeprom.c      **** #if 0
+ 131:eeprom.c      ****     /* Wait until data transmitted */
+ 132:eeprom.c      ****     while(1)
+ 133:eeprom.c      ****     {
+ 134:eeprom.c      ****       /* Get new status */
+ 135:eeprom.c      ****       status = i2cCheckStatus();
+ 136:eeprom.c      **** 
+ 137:eeprom.c      ****       if( (status == 0x18) || (status == 0x28) )
+ 138:eeprom.c      ****       {
+ 139:eeprom.c      ****         /* Data transmitted and ACK received */
+ 140:eeprom.c      **** 
+ 141:eeprom.c      **** 
+ 142:eeprom.c      ****         /* Write data */
+ 143:eeprom.c      ****         retCode = i2cPutChar( (tU8)(address >> 8) );
+ 144:eeprom.c      ****         while(retCode == I2C_CODE_BUSY)
+ 145:eeprom.c      ****         {
+ 146:eeprom.c      ****           retCode = i2cPutChar( (tU8)(address >> 8) );
+ 147:eeprom.c      ****         }
+ 148:eeprom.c      ****         break;
+ 149:eeprom.c      ****       }
+ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 4
+
+
+ 150:eeprom.c      ****       else if(status != 0xf8)
+ 151:eeprom.c      ****       {
+ 152:eeprom.c      ****         /* error */
+ 153:eeprom.c      ****         retCode = I2C_CODE_ERROR;
+ 154:eeprom.c      ****         break;
+ 155:eeprom.c      ****       }
+ 156:eeprom.c      ****     }
+ 157:eeprom.c      **** #endif
+ 158:eeprom.c      **** 
+ 159:eeprom.c      ****     if(retCode == I2C_CODE_OK)
+ 160:eeprom.c      ****     {
+ 161:eeprom.c      ****       /* Wait until data transmitted */
+ 162:eeprom.c      ****       while(1)
+ 163:eeprom.c      ****       {
+ 164:eeprom.c      ****         /* Get new status */
+ 165:eeprom.c      ****         status = i2cCheckStatus();
+ 166:eeprom.c      **** 
+ 167:eeprom.c      ****         if( (status == 0x18) || (status == 0x28) )
+ 168:eeprom.c      ****         {
+ 169:eeprom.c      ****           /* Data transmitted and ACK received */
+ 170:eeprom.c      **** 
+ 171:eeprom.c      **** 
+ 172:eeprom.c      ****           /* Write data */
+ 173:eeprom.c      ****           retCode = i2cPutChar( (tU8)(address & 0xff) );
+ 174:eeprom.c      ****           while( retCode == I2C_CODE_BUSY )
+ 175:eeprom.c      ****           {
+ 176:eeprom.c      ****             retCode = i2cPutChar( (tU8)(address & 0xff) );
+ 177:eeprom.c      ****           }
+ 178:eeprom.c      **** 
+ 179:eeprom.c      ****           break;
+ 180:eeprom.c      ****         }
+ 181:eeprom.c      ****         else if( status != 0xf8 )
+ 182:eeprom.c      ****         {
+ 183:eeprom.c      ****           /*  error */
+ 184:eeprom.c      ****           retCode = I2C_CODE_ERROR;
+ 185:eeprom.c      ****           break;
+ 186:eeprom.c      ****         }
+ 187:eeprom.c      ****       }
+ 188:eeprom.c      ****     }
+ 189:eeprom.c      ****   }
+ 190:eeprom.c      **** 
+ 191:eeprom.c      ****   /* Wait until data transmitted */
+ 192:eeprom.c      ****   while(1)
+ 193:eeprom.c      ****   {
+ 194:eeprom.c      ****     /* Get new status */
+ 195:eeprom.c      ****     status = i2cCheckStatus();
+ 196:eeprom.c      **** 
+ 197:eeprom.c      ****     if(status == 0x28)
+ 198:eeprom.c      ****     {
+ 199:eeprom.c      ****       /* Data transmitted and ACK received */
+ 200:eeprom.c      ****       break;
+ 201:eeprom.c      ****     }
+ 202:eeprom.c      ****     else if( status != 0xf8 )
+ 203:eeprom.c      ****     {
+ 204:eeprom.c      ****       /* error */
+ 205:eeprom.c      ****       retCode = I2C_CODE_ERROR;
+ 206:eeprom.c      ****       break;
+ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 5
+
+
+ 207:eeprom.c      ****     }
+ 208:eeprom.c      ****   }
+ 209:eeprom.c      **** 
+ 210:eeprom.c      ****   /* Generate Start condition */
+ 211:eeprom.c      ****   retCode = i2cRepeatStart();
+ 212:eeprom.c      **** 
+ 213:eeprom.c      ****   /* Transmit device address */
+ 214:eeprom.c      ****   if( retCode == I2C_CODE_OK)
+ 215:eeprom.c      ****   {
+ 216:eeprom.c      ****     /* Write SLA+R */
+ 217:eeprom.c      ****     retCode = i2cPutChar( devAddr + 0x01 );
+ 218:eeprom.c      ****     while( retCode == I2C_CODE_BUSY )
+ 219:eeprom.c      ****     {
+ 220:eeprom.c      ****       retCode = i2cPutChar( devAddr + 0x01 );
+ 221:eeprom.c      ****     }
+ 222:eeprom.c      ****   }
+ 223:eeprom.c      **** 
+ 224:eeprom.c      ****   /* Wait until SLA+R transmitted */
+ 225:eeprom.c      ****   while(1)
+ 226:eeprom.c      ****   {
+ 227:eeprom.c      ****     /* Get new status */
+ 228:eeprom.c      ****     status = i2cCheckStatus();
+ 229:eeprom.c      **** 
+ 230:eeprom.c      ****     if(status == 0x40)
+ 231:eeprom.c      ****     {
+ 232:eeprom.c      ****       /* Data transmitted and ACK received */
+ 233:eeprom.c      ****       break;
+ 234:eeprom.c      ****     }
+ 235:eeprom.c      ****     else if(status != 0xf8)
+ 236:eeprom.c      ****     {
+ 237:eeprom.c      ****       /* error */
+ 238:eeprom.c      ****       retCode = I2C_CODE_ERROR;
+ 239:eeprom.c      ****       break;
+ 240:eeprom.c      ****     }
+ 241:eeprom.c      ****   }
+ 242:eeprom.c      **** 
+ 243:eeprom.c      ****   // Do not generate a stop bit
+ 244:eeprom.c      **** 
+ 245:eeprom.c      ****   return retCode;
+ 246:eeprom.c      **** }
+ 247:eeprom.c      **** 
+ 248:eeprom.c      **** //-------------------------------------------------------------
+ 249:eeprom.c      **** // Random Read followed by sequential read
+ 250:eeprom.c      **** //-------------------------------------------------------------
+ 251:eeprom.c      **** // Receive buffer:
+ 252:eeprom.c      **** // Byte 00: DeviceAddress R/Wn=0 (WRITE)
+ 253:eeprom.c      **** ////////// Byte 01: EEPROM Address MSB   (A14..A08)
+ 254:eeprom.c      **** // Byte 02: EEPROM Address LSB   (A07..A00)
+ 255:eeprom.c      **** // Byte 03: DeviceAddress R/Wn=1 (READ)
+ 256:eeprom.c      **** // Byte 04 to 67: Buffer for data read from EEPROM
+ 257:eeprom.c      **** //-------------------------------------------------------------
+ 258:eeprom.c      **** //  Parameters:
+ 259:eeprom.c      **** //      pRxData     A pointer to the receive buffer
+ 260:eeprom.c      **** //      Length      The number of data bytes to receive
+ 261:eeprom.c      **** //
+ 262:eeprom.c      **** //  Returns:
+ 263:eeprom.c      **** //      MA_OK or I2C status code
+ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 6
+
+
+ 264:eeprom.c      **** //
+ 265:eeprom.c      **** //-------------------------------------------------------------
+ 266:eeprom.c      **** tS8 
+ 267:eeprom.c      **** eepromPageRead(tU16 address, 
+ 268:eeprom.c      ****                tU8* pBuf, 
+ 269:eeprom.c      ****                tU16 len) 
+ 270:eeprom.c      **** {
+ 271:eeprom.c      ****   tS8  retCode = 0;
+ 272:eeprom.c      ****   tU8  status  = 0;
+ 273:eeprom.c      ****   tU16 i       = 0;
+ 274:eeprom.c      **** 
+ 275:eeprom.c      ****   /* Write 4 bytes, see 24C256 Random Read */
+ 276:eeprom.c      ****   retCode = eepromStartRead(I2C_EEPROM_ADDR, address);
+ 277:eeprom.c      **** 
+ 278:eeprom.c      **** 
+ 279:eeprom.c      ****   if( retCode == I2C_CODE_OK )
+ 280:eeprom.c      ****   {
+ 281:eeprom.c      ****     /* wait until address transmitted and receive data */
+ 282:eeprom.c      ****     for(i = 1; i <= len; i++ )
+ 283:eeprom.c      ****     {
+ 284:eeprom.c      ****       /* wait until data transmitted */
+ 285:eeprom.c      ****       while(1)
+ 286:eeprom.c      ****       {
+ 287:eeprom.c      ****         /* Get new status */
+ 288:eeprom.c      ****         status = i2cCheckStatus();
+ 289:eeprom.c      **** 
+ 290:eeprom.c      ****         if(( status == 0x40 ) || ( status == 0x48 ) || ( status == 0x50 ))
+ 291:eeprom.c      ****         {
+ 292:eeprom.c      ****           /* Data received */
+ 293:eeprom.c      **** 
+ 294:eeprom.c      ****           if(i == len )
+ 295:eeprom.c      ****           {
+ 296:eeprom.c      ****             /* Set generate NACK */
+ 297:eeprom.c      ****             retCode = i2cGetChar( I2C_MODE_ACK1, pBuf );
+ 298:eeprom.c      ****           }
+ 299:eeprom.c      ****           else
+ 300:eeprom.c      ****           {
+ 301:eeprom.c      ****             retCode = i2cGetChar( I2C_MODE_ACK0, pBuf );
+ 302:eeprom.c      ****           }
+ 303:eeprom.c      **** 
+ 304:eeprom.c      ****           /* Read data */
+ 305:eeprom.c      ****           retCode = i2cGetChar( I2C_MODE_READ, pBuf );
+ 306:eeprom.c      ****           while( retCode == I2C_CODE_EMPTY )
+ 307:eeprom.c      ****           {
+ 308:eeprom.c      ****             retCode = i2cGetChar( I2C_MODE_READ, pBuf );
+ 309:eeprom.c      ****           }
+ 310:eeprom.c      ****           pBuf++;
+ 311:eeprom.c      **** 
+ 312:eeprom.c      ****           break;
+ 313:eeprom.c      ****         }
+ 314:eeprom.c      ****         else if( status != 0xf8 )
+ 315:eeprom.c      ****         {
+ 316:eeprom.c      ****           /* ERROR */
+ 317:eeprom.c      ****           i = len;
+ 318:eeprom.c      ****           retCode = I2C_CODE_ERROR;
+ 319:eeprom.c      ****           break;
+ 320:eeprom.c      ****         }
+ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 7
+
+
+ 321:eeprom.c      ****       }
+ 322:eeprom.c      ****     }
+ 323:eeprom.c      ****   }
+ 324:eeprom.c      **** 
+ 325:eeprom.c      ****   /* Generate Stop condition */
+ 326:eeprom.c      ****   i2cStop();
+ 327:eeprom.c      **** 
+ 328:eeprom.c      ****   return retCode;
+ 329:eeprom.c      **** 
+ 330:eeprom.c      **** }
+ 331:eeprom.c      **** 
+ 332:eeprom.c      **** 
+ 333:eeprom.c      **** tS8
+ 334:eeprom.c      **** eepromWrite(tU16 addr,
+ 335:eeprom.c      ****             tU8* pData,
+ 336:eeprom.c      ****             tU16 len)
+ 337:eeprom.c      **** {
+  19              		.loc 1 337 0
+  20 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+  21              	.LCFI0:
+  22              	.LVL0:
+  23              		.loc 1 337 0
+  24 0002 0004     		lsl	r0, r0, #16
+  25              	.LVL1:
+  26 0004 1204     		lsl	r2, r2, #16
+  27              	.LVL2:
+  28 0006 0F1C     		mov	r7, r1
+  29 0008 050C     		lsr	r5, r0, #16
+  30              	.LVL3:
+  31 000a 160C     		lsr	r6, r2, #16
+  32              	.LVL4:
+ 338:eeprom.c      ****   tS8 retCode = 0;
+ 339:eeprom.c      ****   tU8 status  = 0;
+ 340:eeprom.c      ****   tU8 i       = 0;
+ 341:eeprom.c      **** 
+ 342:eeprom.c      ****   do
+ 343:eeprom.c      ****   {
+ 344:eeprom.c      **** 
+ 345:eeprom.c      ****     /* generate Start condition */
+ 346:eeprom.c      ****     retCode = i2cStart();
+  33              		.loc 1 346 0
+  34 000c FFF7FEFF 		bl	i2cStart
+  35              	.LVL5:
+  36 0010 0006     		lsl	r0, r0, #24
+ 347:eeprom.c      ****     if(retCode != I2C_CODE_OK)
+  37              		.loc 1 347 0
+  38 0012 040E     		lsr	r4, r0, #24
+  39              	.LVL6:
+  40 0014 0016     		asr	r0, r0, #24
+  41 0016 0128     		cmp	r0, #1
+  42 0018 20D1     		bne	.L2
+ 348:eeprom.c      ****       break;
+ 349:eeprom.c      **** 
+ 350:eeprom.c      **** 
+ 351:eeprom.c      ****     /* write EEPROM I2C address */
+ 352:eeprom.c      ****     retCode = i2cWriteWithWait(I2C_EEPROM_ADDR);
+  43              		.loc 1 352 0
+ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 8
+
+
+  44 001a A020     		mov	r0, #160
+  45 001c FFF7FEFF 		bl	i2cWriteWithWait
+  46 0020 0006     		lsl	r0, r0, #24
+ 353:eeprom.c      ****     if(retCode != I2C_CODE_OK)
+  47              		.loc 1 353 0
+  48 0022 040E     		lsr	r4, r0, #24
+  49 0024 0016     		asr	r0, r0, #24
+  50 0026 0128     		cmp	r0, #1
+  51 0028 18D1     		bne	.L2
+ 354:eeprom.c      ****       break;
+ 355:eeprom.c      **** 
+ 356:eeprom.c      **** #if 0
+ 357:eeprom.c      ****     /* write offset high in EEPROM space  */
+ 358:eeprom.c      ****     retCode = i2cWriteWithWait( (tU8)(addr >> 8));
+ 359:eeprom.c      ****     if(retCode != I2C_CODE_OK)
+ 360:eeprom.c      ****       break;
+ 361:eeprom.c      **** #endif
+ 362:eeprom.c      **** 
+ 363:eeprom.c      ****     /* write offset low in EEPROM space  */
+ 364:eeprom.c      ****     retCode = i2cWriteWithWait( (tU8)(addr & 0xFF));
+  52              		.loc 1 364 0
+  53 002a 2806     		lsl	r0, r5, #24
+  54 002c 000E     		lsr	r0, r0, #24
+  55 002e FFF7FEFF 		bl	i2cWriteWithWait
+  56 0032 0006     		lsl	r0, r0, #24
+ 365:eeprom.c      ****     if(retCode != I2C_CODE_OK)
+  57              		.loc 1 365 0
+  58 0034 040E     		lsr	r4, r0, #24
+  59 0036 0016     		asr	r0, r0, #24
+  60 0038 0128     		cmp	r0, #1
+  61 003a 0FD1     		bne	.L2
+ 366:eeprom.c      ****       break;
+  62              		.loc 1 366 0
+  63 003c 0025     		mov	r5, #0
+  64              	.LVL7:
+  65 003e 09E0     		b	.L6
+  66              	.L7:
+ 367:eeprom.c      **** 
+ 368:eeprom.c      **** 
+ 369:eeprom.c      ****     /* write data */
+ 370:eeprom.c      ****     for(i = 0; i <len; i++)
+ 371:eeprom.c      ****     {
+ 372:eeprom.c      ****       retCode = i2cWriteWithWait(*pData);
+  67              		.loc 1 372 0
+  68 0040 E85D     		ldrb	r0, [r5, r7]
+  69 0042 FFF7FEFF 		bl	i2cWriteWithWait
+ 373:eeprom.c      ****       if(retCode != I2C_CODE_OK)
+  70              		.loc 1 373 0
+  71 0046 0006     		lsl	r0, r0, #24
+  72 0048 0316     		asr	r3, r0, #24
+  73              		.loc 1 372 0
+  74 004a 0135     		add	r5, r5, #1
+  75              		.loc 1 373 0
+  76 004c 012B     		cmp	r3, #1
+  77 004e 01D0     		beq	.L6
+  78 0050 040E     		lsr	r4, r0, #24
+  79 0052 03E0     		b	.L2
+ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 9
+
+
+  80              	.L6:
+  81              		.loc 1 370 0
+  82 0054 2B06     		lsl	r3, r5, #24
+  83 0056 1B0E     		lsr	r3, r3, #24
+  84 0058 B342     		cmp	r3, r6
+  85 005a F1D3     		bcc	.L7
+  86              	.LVL8:
+  87              	.L2:
+ 374:eeprom.c      ****         break;
+ 375:eeprom.c      **** 
+ 376:eeprom.c      ****       pData++;
+ 377:eeprom.c      ****     }
+ 378:eeprom.c      **** 
+ 379:eeprom.c      ****   } while(0);
+ 380:eeprom.c      **** 
+ 381:eeprom.c      ****   /* generate Stop condition */
+ 382:eeprom.c      ****   i2cStop();
+  88              		.loc 1 382 0
+  89 005c FFF7FEFF 		bl	i2cStop
+  90 0060 2006     		lsl	r0, r4, #24
+  91 0062 0016     		asr	r0, r0, #24
+ 383:eeprom.c      **** 
+ 384:eeprom.c      **** 
+ 385:eeprom.c      ****   return retCode;
+ 386:eeprom.c      **** }
+  92              		.loc 1 386 0
+  93              		@ sp needed for prologue
+  94              	.LVL9:
+  95              	.LVL10:
+  96              	.LVL11:
+  97              	.LVL12:
+  98 0064 F0BC     		pop	{r4, r5, r6, r7}
+  99 0066 02BC     		pop	{r1}
+ 100 0068 0847     		bx	r1
+ 101              	.LFE5:
+ 102              		.size	eepromWrite, .-eepromWrite
+ 103 006a 0000     		.align	2
+ 104              		.global	eepromPoll
+ 105              		.code 16
+ 106              		.thumb_func
+ 107              		.type	eepromPoll, %function
+ 108              	eepromPoll:
+ 109              	.LFB2:
+ 110              		.loc 1 38 0
+ 111 006c 10B5     		push	{r4, lr}
+ 112              	.LCFI1:
+ 113              	.LVL13:
+ 114              	.L13:
+ 115              		.loc 1 46 0
+ 116 006e FFF7FEFF 		bl	i2cStart
+ 117              		.loc 1 49 0
+ 118 0072 0006     		lsl	r0, r0, #24
+ 119 0074 0016     		asr	r0, r0, #24
+ 120 0076 0128     		cmp	r0, #1
+ 121 0078 12D1     		bne	.L14
+ 122              	.L17:
+ 123              		.loc 1 55 0
+ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 10
+
+
+ 124 007a A020     		mov	r0, #160
+ 125 007c FFF7FEFF 		bl	i2cPutChar
+ 126 0080 0006     		lsl	r0, r0, #24
+ 127 0082 040E     		lsr	r4, r0, #24
+ 128              		.loc 1 53 0
+ 129 0084 2306     		lsl	r3, r4, #24
+ 130 0086 1B16     		asr	r3, r3, #24
+ 131 0088 1A1D     		add	r2, r3, #4
+ 132 008a F6D0     		beq	.L17
+ 133              		.loc 1 59 0
+ 134 008c 012B     		cmp	r3, #1
+ 135 008e 07D1     		bne	.L14
+ 136              		.loc 1 63 0
+ 137 0090 FFF7FEFF 		bl	i2cCheckStatus
+ 138              		.loc 1 65 0
+ 139 0094 1828     		cmp	r0, #24
+ 140 0096 07D0     		beq	.L20
+ 141              		.loc 1 70 0
+ 142 0098 2028     		cmp	r0, #32
+ 143 009a 01D0     		beq	.L14
+ 144              		.loc 1 76 0
+ 145 009c F828     		cmp	r0, #248
+ 146 009e 02D1     		bne	.L23
+ 147              	.L14:
+ 148              		.loc 1 85 0
+ 149 00a0 FFF7FEFF 		bl	i2cStop
+ 150 00a4 E3E7     		b	.L13
+ 151              	.L23:
+ 152              		.loc 1 43 0
+ 153 00a6 FF24     		mov	r4, #255
+ 154              	.L20:
+ 155              		.loc 1 85 0
+ 156 00a8 FFF7FEFF 		bl	i2cStop
+ 157 00ac 2006     		lsl	r0, r4, #24
+ 158 00ae 0016     		asr	r0, r0, #24
+ 159              		.loc 1 92 0
+ 160              		@ sp needed for prologue
+ 161              	.LVL14:
+ 162 00b0 10BC     		pop	{r4}
+ 163 00b2 02BC     		pop	{r1}
+ 164 00b4 0847     		bx	r1
+ 165              	.LFE2:
+ 166              		.size	eepromPoll, .-eepromPoll
+ 167 00b6 0000     		.align	2
+ 168              		.global	eepromStartRead
+ 169              		.code 16
+ 170              		.thumb_func
+ 171              		.type	eepromStartRead, %function
+ 172              	eepromStartRead:
+ 173              	.LFB3:
+ 174              		.loc 1 110 0
+ 175 00b8 30B5     		push	{r4, r5, lr}
+ 176              	.LCFI2:
+ 177              	.LVL15:
+ 178              		.loc 1 110 0
+ 179 00ba 0006     		lsl	r0, r0, #24
+ 180              	.LVL16:
+ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 11
+
+
+ 181 00bc 0904     		lsl	r1, r1, #16
+ 182              	.LVL17:
+ 183 00be 050E     		lsr	r5, r0, #24
+ 184              	.LVL18:
+ 185 00c0 0C0C     		lsr	r4, r1, #16
+ 186              	.LVL19:
+ 187              		.loc 1 115 0
+ 188 00c2 FFF7FEFF 		bl	i2cStart
+ 189              		.loc 1 118 0
+ 190 00c6 0006     		lsl	r0, r0, #24
+ 191 00c8 0016     		asr	r0, r0, #24
+ 192 00ca 0128     		cmp	r0, #1
+ 193 00cc 1CD1     		bne	.L48
+ 194              	.L29:
+ 195              		.loc 1 124 0
+ 196 00ce 281C     		mov	r0, r5
+ 197 00d0 FFF7FEFF 		bl	i2cPutChar
+ 198 00d4 0006     		lsl	r0, r0, #24
+ 199 00d6 000E     		lsr	r0, r0, #24
+ 200              	.LVL20:
+ 201              		.loc 1 122 0
+ 202 00d8 0306     		lsl	r3, r0, #24
+ 203 00da 1816     		asr	r0, r3, #24
+ 204              	.LVL21:
+ 205 00dc 031D     		add	r3, r0, #4
+ 206 00de F6D0     		beq	.L29
+ 207              		.loc 1 128 0
+ 208 00e0 0128     		cmp	r0, #1
+ 209 00e2 11D1     		bne	.L48
+ 210              	.LVL22:
+ 211              	.L47:
+ 212              		.loc 1 165 0
+ 213 00e4 FFF7FEFF 		bl	i2cCheckStatus
+ 214              	.LVL23:
+ 215              	.LVL24:
+ 216              		.loc 1 167 0
+ 217 00e8 1828     		cmp	r0, #24
+ 218 00ea 01D0     		beq	.L32
+ 219 00ec 2828     		cmp	r0, #40
+ 220 00ee 09D1     		bne	.L34
+ 221              	.L32:
+ 222              		.loc 1 173 0
+ 223 00f0 2306     		lsl	r3, r4, #24
+ 224 00f2 1C0E     		lsr	r4, r3, #24
+ 225              	.LVL25:
+ 226              	.L36:
+ 227              		.loc 1 176 0
+ 228 00f4 201C     		mov	r0, r4
+ 229              	.LVL26:
+ 230 00f6 FFF7FEFF 		bl	i2cPutChar
+ 231 00fa 0006     		lsl	r0, r0, #24
+ 232 00fc 000E     		lsr	r0, r0, #24
+ 233              	.LVL27:
+ 234              		.loc 1 174 0
+ 235 00fe FC28     		cmp	r0, #252
+ 236 0100 F8D0     		beq	.L36
+ 237 0102 01E0     		b	.L48
+ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 12
+
+
+ 238              	.LVL28:
+ 239              	.L34:
+ 240              		.loc 1 181 0
+ 241 0104 F828     		cmp	r0, #248
+ 242 0106 EDD0     		beq	.L47
+ 243              	.LVL29:
+ 244              	.L48:
+ 245              		.loc 1 195 0
+ 246 0108 FFF7FEFF 		bl	i2cCheckStatus
+ 247              	.LVL30:
+ 248              		.loc 1 197 0
+ 249 010c 2828     		cmp	r0, #40
+ 250 010e 01D0     		beq	.L37
+ 251              		.loc 1 202 0
+ 252 0110 F828     		cmp	r0, #248
+ 253 0112 F9D0     		beq	.L48
+ 254              	.L37:
+ 255              		.loc 1 211 0
+ 256 0114 FFF7FEFF 		bl	i2cRepeatStart
+ 257 0118 0006     		lsl	r0, r0, #24
+ 258              		.loc 1 214 0
+ 259 011a 040E     		lsr	r4, r0, #24
+ 260              	.LVL31:
+ 261 011c 0016     		asr	r0, r0, #24
+ 262 011e 0128     		cmp	r0, #1
+ 263 0120 09D1     		bne	.L49
+ 264              		.loc 1 217 0
+ 265 0122 6B1C     		add	r3, r5, #1
+ 266 0124 1B06     		lsl	r3, r3, #24
+ 267 0126 1D0E     		lsr	r5, r3, #24
+ 268              	.LVL32:
+ 269              	.L42:
+ 270              		.loc 1 220 0
+ 271 0128 281C     		mov	r0, r5
+ 272 012a FFF7FEFF 		bl	i2cPutChar
+ 273 012e 0006     		lsl	r0, r0, #24
+ 274 0130 040E     		lsr	r4, r0, #24
+ 275              		.loc 1 218 0
+ 276 0132 FC2C     		cmp	r4, #252
+ 277 0134 F8D0     		beq	.L42
+ 278              	.LVL33:
+ 279              	.L49:
+ 280              		.loc 1 228 0
+ 281 0136 FFF7FEFF 		bl	i2cCheckStatus
+ 282              		.loc 1 230 0
+ 283 013a 4028     		cmp	r0, #64
+ 284 013c 02D0     		beq	.L43
+ 285              		.loc 1 235 0
+ 286 013e F828     		cmp	r0, #248
+ 287 0140 F9D0     		beq	.L49
+ 288 0142 FF24     		mov	r4, #255
+ 289              	.L43:
+ 290 0144 2006     		lsl	r0, r4, #24
+ 291 0146 0016     		asr	r0, r0, #24
+ 292              		.loc 1 246 0
+ 293              		@ sp needed for prologue
+ 294              	.LVL34:
+ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 13
+
+
+ 295              	.LVL35:
+ 296 0148 30BC     		pop	{r4, r5}
+ 297 014a 02BC     		pop	{r1}
+ 298 014c 0847     		bx	r1
+ 299              	.LFE3:
+ 300              		.size	eepromStartRead, .-eepromStartRead
+ 301 014e 0000     		.align	2
+ 302              		.global	eepromPageRead
+ 303              		.code 16
+ 304              		.thumb_func
+ 305              		.type	eepromPageRead, %function
+ 306              	eepromPageRead:
+ 307              	.LFB4:
+ 308              		.loc 1 270 0
+ 309 0150 F0B5     		push	{r4, r5, r6, r7, lr}
+ 310              	.LCFI3:
+ 311              	.LVL36:
+ 312              		.loc 1 270 0
+ 313 0152 0304     		lsl	r3, r0, #16
+ 314 0154 1B0C     		lsr	r3, r3, #16
+ 315 0156 1204     		lsl	r2, r2, #16
+ 316              	.LVL37:
+ 317 0158 0D1C     		mov	r5, r1
+ 318              		.loc 1 276 0
+ 319 015a A020     		mov	r0, #160
+ 320              	.LVL38:
+ 321 015c 191C     		mov	r1, r3
+ 322              	.LVL39:
+ 323              		.loc 1 270 0
+ 324 015e 160C     		lsr	r6, r2, #16
+ 325              	.LVL40:
+ 326              		.loc 1 276 0
+ 327 0160 FFF7FEFF 		bl	eepromStartRead
+ 328              	.LVL41:
+ 329 0164 0006     		lsl	r0, r0, #24
+ 330              		.loc 1 279 0
+ 331 0166 040E     		lsr	r4, r0, #24
+ 332              	.LVL42:
+ 333 0168 0016     		asr	r0, r0, #24
+ 334 016a 0128     		cmp	r0, #1
+ 335 016c 24D1     		bne	.L55
+ 336 016e 0127     		mov	r7, #1
+ 337              	.LVL43:
+ 338 0170 20E0     		b	.L57
+ 339              	.LVL44:
+ 340              	.L72:
+ 341              		.loc 1 288 0
+ 342 0172 FFF7FEFF 		bl	i2cCheckStatus
+ 343              	.LVL45:
+ 344              	.LVL46:
+ 345              		.loc 1 290 0
+ 346 0176 4028     		cmp	r0, #64
+ 347 0178 03D0     		beq	.L59
+ 348 017a 4828     		cmp	r0, #72
+ 349 017c 01D0     		beq	.L59
+ 350 017e 5028     		cmp	r0, #80
+ 351 0180 11D1     		bne	.L62
+ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 14
+
+
+ 352              	.L59:
+ 353              		.loc 1 294 0
+ 354 0182 B742     		cmp	r7, r6
+ 355 0184 01D1     		bne	.L63
+ 356              		.loc 1 297 0
+ 357 0186 0120     		mov	r0, #1
+ 358              	.LVL47:
+ 359 0188 00E0     		b	.L75
+ 360              	.LVL48:
+ 361              	.L63:
+ 362              		.loc 1 301 0
+ 363 018a 0020     		mov	r0, #0
+ 364              	.LVL49:
+ 365              	.L75:
+ 366 018c 291C     		mov	r1, r5
+ 367 018e FFF7FEFF 		bl	i2cGetChar
+ 368              	.L67:
+ 369              		.loc 1 308 0
+ 370 0192 0220     		mov	r0, #2
+ 371 0194 291C     		mov	r1, r5
+ 372 0196 FFF7FEFF 		bl	i2cGetChar
+ 373 019a 0006     		lsl	r0, r0, #24
+ 374 019c 040E     		lsr	r4, r0, #24
+ 375              		.loc 1 306 0
+ 376 019e FD2C     		cmp	r4, #253
+ 377 01a0 F7D0     		beq	.L67
+ 378              		.loc 1 310 0
+ 379 01a2 0135     		add	r5, r5, #1
+ 380 01a4 03E0     		b	.L69
+ 381              	.LVL50:
+ 382              	.L62:
+ 383              		.loc 1 314 0
+ 384 01a6 F828     		cmp	r0, #248
+ 385 01a8 E3D0     		beq	.L72
+ 386 01aa 371C     		mov	r7, r6
+ 387 01ac FF24     		mov	r4, #255
+ 388              	.L69:
+ 389              		.loc 1 282 0
+ 390 01ae 7B1C     		add	r3, r7, #1
+ 391 01b0 1B04     		lsl	r3, r3, #16
+ 392 01b2 1F0C     		lsr	r7, r3, #16
+ 393              	.L57:
+ 394 01b4 B742     		cmp	r7, r6
+ 395 01b6 DCD9     		bls	.L72
+ 396              	.L55:
+ 397              		.loc 1 326 0
+ 398 01b8 FFF7FEFF 		bl	i2cStop
+ 399              	.LVL51:
+ 400 01bc 2006     		lsl	r0, r4, #24
+ 401 01be 0016     		asr	r0, r0, #24
+ 402              		.loc 1 330 0
+ 403              		@ sp needed for prologue
+ 404              	.LVL52:
+ 405              	.LVL53:
+ 406              	.LVL54:
+ 407              	.LVL55:
+ 408 01c0 F0BC     		pop	{r4, r5, r6, r7}
+ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 15
+
+
+ 409 01c2 02BC     		pop	{r1}
+ 410 01c4 0847     		bx	r1
+ 411              	.LFE4:
+ 412              		.size	eepromPageRead, .-eepromPageRead
+ 413              		.section	.debug_frame,"",%progbits
+ 414              	.Lframe0:
+ 415 0000 0C000000 		.4byte	.LECIE0-.LSCIE0
+ 416              	.LSCIE0:
+ 417 0004 FFFFFFFF 		.4byte	0xffffffff
+ 418 0008 01       		.byte	0x1
+ 419 0009 00       		.ascii	"\000"
+ 420 000a 01       		.uleb128 0x1
+ 421 000b 7C       		.sleb128 -4
+ 422 000c 0E       		.byte	0xe
+ 423 000d 0C       		.byte	0xc
+ 424 000e 0D       		.uleb128 0xd
+ 425 000f 00       		.uleb128 0x0
+ 426              		.align	2
+ 427              	.LECIE0:
+ 428              	.LSFDE0:
+ 429 0010 1C000000 		.4byte	.LEFDE0-.LASFDE0
+ 430              	.LASFDE0:
+ 431 0014 00000000 		.4byte	.Lframe0
+ 432 0018 00000000 		.4byte	.LFB5
+ 433 001c 6A000000 		.4byte	.LFE5-.LFB5
+ 434 0020 42       		.byte	0x4
+ 435              		.4byte	.LCFI0-.LFB5
+ 436 0021 0E       		.byte	0xe
+ 437 0022 14       		.uleb128 0x14
+ 438 0023 84       		.byte	0x84
+ 439 0024 05       		.uleb128 0x5
+ 440 0025 85       		.byte	0x85
+ 441 0026 04       		.uleb128 0x4
+ 442 0027 86       		.byte	0x86
+ 443 0028 03       		.uleb128 0x3
+ 444 0029 87       		.byte	0x87
+ 445 002a 02       		.uleb128 0x2
+ 446 002b 8E       		.byte	0x8e
+ 447 002c 01       		.uleb128 0x1
+ 448 002d 000000   		.align	2
+ 449              	.LEFDE0:
+ 450              	.LSFDE2:
+ 451 0030 14000000 		.4byte	.LEFDE2-.LASFDE2
+ 452              	.LASFDE2:
+ 453 0034 00000000 		.4byte	.Lframe0
+ 454 0038 6C000000 		.4byte	.LFB2
+ 455 003c 4A000000 		.4byte	.LFE2-.LFB2
+ 456 0040 42       		.byte	0x4
+ 457              		.4byte	.LCFI1-.LFB2
+ 458 0041 0E       		.byte	0xe
+ 459 0042 08       		.uleb128 0x8
+ 460 0043 84       		.byte	0x84
+ 461 0044 02       		.uleb128 0x2
+ 462 0045 8E       		.byte	0x8e
+ 463 0046 01       		.uleb128 0x1
+ 464 0047 00       		.align	2
+ 465              	.LEFDE2:
+ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 16
+
+
+ 466              	.LSFDE4:
+ 467 0048 18000000 		.4byte	.LEFDE4-.LASFDE4
+ 468              	.LASFDE4:
+ 469 004c 00000000 		.4byte	.Lframe0
+ 470 0050 B8000000 		.4byte	.LFB3
+ 471 0054 96000000 		.4byte	.LFE3-.LFB3
+ 472 0058 42       		.byte	0x4
+ 473              		.4byte	.LCFI2-.LFB3
+ 474 0059 0E       		.byte	0xe
+ 475 005a 0C       		.uleb128 0xc
+ 476 005b 84       		.byte	0x84
+ 477 005c 03       		.uleb128 0x3
+ 478 005d 85       		.byte	0x85
+ 479 005e 02       		.uleb128 0x2
+ 480 005f 8E       		.byte	0x8e
+ 481 0060 01       		.uleb128 0x1
+ 482 0061 000000   		.align	2
+ 483              	.LEFDE4:
+ 484              	.LSFDE6:
+ 485 0064 1C000000 		.4byte	.LEFDE6-.LASFDE6
+ 486              	.LASFDE6:
+ 487 0068 00000000 		.4byte	.Lframe0
+ 488 006c 50010000 		.4byte	.LFB4
+ 489 0070 76000000 		.4byte	.LFE4-.LFB4
+ 490 0074 42       		.byte	0x4
+ 491              		.4byte	.LCFI3-.LFB4
+ 492 0075 0E       		.byte	0xe
+ 493 0076 14       		.uleb128 0x14
+ 494 0077 84       		.byte	0x84
+ 495 0078 05       		.uleb128 0x5
+ 496 0079 85       		.byte	0x85
+ 497 007a 04       		.uleb128 0x4
+ 498 007b 86       		.byte	0x86
+ 499 007c 03       		.uleb128 0x3
+ 500 007d 87       		.byte	0x87
+ 501 007e 02       		.uleb128 0x2
+ 502 007f 8E       		.byte	0x8e
+ 503 0080 01       		.uleb128 0x1
+ 504 0081 000000   		.align	2
+ 505              	.LEFDE6:
+ 506              		.file 2 "./startup/../pre_emptive_os/api/general.h"
+ 507              		.text
+ 508              	.Letext0:
+ 509 01c6 C046     		.section	.debug_loc,"",%progbits
+ 510              	.Ldebug_loc0:
+ 511              	.LLST0:
+ 512 0000 00000000 		.4byte	.LFB5-.Ltext0
+ 513 0004 02000000 		.4byte	.LCFI0-.Ltext0
+ 514 0008 0100     		.2byte	0x1
+ 515 000a 5D       		.byte	0x5d
+ 516 000b 02000000 		.4byte	.LCFI0-.Ltext0
+ 517 000f 6A000000 		.4byte	.LFE5-.Ltext0
+ 518 0013 0200     		.2byte	0x2
+ 519 0015 7D       		.byte	0x7d
+ 520 0016 14       		.sleb128 20
+ 521 0017 00000000 		.4byte	0x0
+ 522 001b 00000000 		.4byte	0x0
+ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 17
+
+
+ 523              	.LLST1:
+ 524 001f 02000000 		.4byte	.LVL0-.Ltext0
+ 525 0023 04000000 		.4byte	.LVL1-.Ltext0
+ 526 0027 0100     		.2byte	0x1
+ 527 0029 50       		.byte	0x50
+ 528 002a 0A000000 		.4byte	.LVL3-.Ltext0
+ 529 002e 3E000000 		.4byte	.LVL7-.Ltext0
+ 530 0032 0100     		.2byte	0x1
+ 531 0034 55       		.byte	0x55
+ 532 0035 5C000000 		.4byte	.LVL8-.Ltext0
+ 533 0039 64000000 		.4byte	.LVL10-.Ltext0
+ 534 003d 0100     		.2byte	0x1
+ 535 003f 55       		.byte	0x55
+ 536 0040 00000000 		.4byte	0x0
+ 537 0044 00000000 		.4byte	0x0
+ 538              	.LLST2:
+ 539 0048 02000000 		.4byte	.LVL0-.Ltext0
+ 540 004c 10000000 		.4byte	.LVL5-.Ltext0
+ 541 0050 0100     		.2byte	0x1
+ 542 0052 51       		.byte	0x51
+ 543 0053 10000000 		.4byte	.LVL5-.Ltext0
+ 544 0057 64000000 		.4byte	.LVL12-.Ltext0
+ 545 005b 0100     		.2byte	0x1
+ 546 005d 57       		.byte	0x57
+ 547 005e 00000000 		.4byte	0x0
+ 548 0062 00000000 		.4byte	0x0
+ 549              	.LLST3:
+ 550 0066 02000000 		.4byte	.LVL0-.Ltext0
+ 551 006a 06000000 		.4byte	.LVL2-.Ltext0
+ 552 006e 0100     		.2byte	0x1
+ 553 0070 52       		.byte	0x52
+ 554 0071 0C000000 		.4byte	.LVL4-.Ltext0
+ 555 0075 64000000 		.4byte	.LVL11-.Ltext0
+ 556 0079 0100     		.2byte	0x1
+ 557 007b 56       		.byte	0x56
+ 558 007c 00000000 		.4byte	0x0
+ 559 0080 00000000 		.4byte	0x0
+ 560              	.LLST4:
+ 561 0084 14000000 		.4byte	.LVL6-.Ltext0
+ 562 0088 64000000 		.4byte	.LVL9-.Ltext0
+ 563 008c 0100     		.2byte	0x1
+ 564 008e 54       		.byte	0x54
+ 565 008f 00000000 		.4byte	0x0
+ 566 0093 00000000 		.4byte	0x0
+ 567              	.LLST5:
+ 568 0097 6C000000 		.4byte	.LFB2-.Ltext0
+ 569 009b 6E000000 		.4byte	.LCFI1-.Ltext0
+ 570 009f 0100     		.2byte	0x1
+ 571 00a1 5D       		.byte	0x5d
+ 572 00a2 6E000000 		.4byte	.LCFI1-.Ltext0
+ 573 00a6 B6000000 		.4byte	.LFE2-.Ltext0
+ 574 00aa 0200     		.2byte	0x2
+ 575 00ac 7D       		.byte	0x7d
+ 576 00ad 08       		.sleb128 8
+ 577 00ae 00000000 		.4byte	0x0
+ 578 00b2 00000000 		.4byte	0x0
+ 579              	.LLST6:
+ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 18
+
+
+ 580 00b6 6E000000 		.4byte	.LVL13-.Ltext0
+ 581 00ba B0000000 		.4byte	.LVL14-.Ltext0
+ 582 00be 0100     		.2byte	0x1
+ 583 00c0 54       		.byte	0x54
+ 584 00c1 00000000 		.4byte	0x0
+ 585 00c5 00000000 		.4byte	0x0
+ 586              	.LLST7:
+ 587 00c9 B8000000 		.4byte	.LFB3-.Ltext0
+ 588 00cd BA000000 		.4byte	.LCFI2-.Ltext0
+ 589 00d1 0100     		.2byte	0x1
+ 590 00d3 5D       		.byte	0x5d
+ 591 00d4 BA000000 		.4byte	.LCFI2-.Ltext0
+ 592 00d8 4E010000 		.4byte	.LFE3-.Ltext0
+ 593 00dc 0200     		.2byte	0x2
+ 594 00de 7D       		.byte	0x7d
+ 595 00df 0C       		.sleb128 12
+ 596 00e0 00000000 		.4byte	0x0
+ 597 00e4 00000000 		.4byte	0x0
+ 598              	.LLST8:
+ 599 00e8 BA000000 		.4byte	.LVL15-.Ltext0
+ 600 00ec BC000000 		.4byte	.LVL16-.Ltext0
+ 601 00f0 0100     		.2byte	0x1
+ 602 00f2 50       		.byte	0x50
+ 603 00f3 C0000000 		.4byte	.LVL18-.Ltext0
+ 604 00f7 28010000 		.4byte	.LVL32-.Ltext0
+ 605 00fb 0100     		.2byte	0x1
+ 606 00fd 55       		.byte	0x55
+ 607 00fe 36010000 		.4byte	.LVL33-.Ltext0
+ 608 0102 48010000 		.4byte	.LVL35-.Ltext0
+ 609 0106 0100     		.2byte	0x1
+ 610 0108 55       		.byte	0x55
+ 611 0109 00000000 		.4byte	0x0
+ 612 010d 00000000 		.4byte	0x0
+ 613              	.LLST9:
+ 614 0111 BA000000 		.4byte	.LVL15-.Ltext0
+ 615 0115 BE000000 		.4byte	.LVL17-.Ltext0
+ 616 0119 0100     		.2byte	0x1
+ 617 011b 51       		.byte	0x51
+ 618 011c C2000000 		.4byte	.LVL19-.Ltext0
+ 619 0120 F4000000 		.4byte	.LVL25-.Ltext0
+ 620 0124 0100     		.2byte	0x1
+ 621 0126 54       		.byte	0x54
+ 622 0127 04010000 		.4byte	.LVL28-.Ltext0
+ 623 012b 1C010000 		.4byte	.LVL31-.Ltext0
+ 624 012f 0100     		.2byte	0x1
+ 625 0131 54       		.byte	0x54
+ 626 0132 00000000 		.4byte	0x0
+ 627 0136 00000000 		.4byte	0x0
+ 628              	.LLST10:
+ 629 013a D8000000 		.4byte	.LVL20-.Ltext0
+ 630 013e DC000000 		.4byte	.LVL21-.Ltext0
+ 631 0142 0100     		.2byte	0x1
+ 632 0144 50       		.byte	0x50
+ 633 0145 FE000000 		.4byte	.LVL27-.Ltext0
+ 634 0149 04010000 		.4byte	.LVL28-.Ltext0
+ 635 014d 0100     		.2byte	0x1
+ 636 014f 50       		.byte	0x50
+ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 19
+
+
+ 637 0150 08010000 		.4byte	.LVL29-.Ltext0
+ 638 0154 0C010000 		.4byte	.LVL30-.Ltext0
+ 639 0158 0100     		.2byte	0x1
+ 640 015a 50       		.byte	0x50
+ 641 015b 1C010000 		.4byte	.LVL31-.Ltext0
+ 642 015f 48010000 		.4byte	.LVL34-.Ltext0
+ 643 0163 0100     		.2byte	0x1
+ 644 0165 54       		.byte	0x54
+ 645 0166 00000000 		.4byte	0x0
+ 646 016a 00000000 		.4byte	0x0
+ 647              	.LLST11:
+ 648 016e E4000000 		.4byte	.LVL22-.Ltext0
+ 649 0172 E8000000 		.4byte	.LVL23-.Ltext0
+ 650 0176 0100     		.2byte	0x1
+ 651 0178 50       		.byte	0x50
+ 652 0179 E8000000 		.4byte	.LVL24-.Ltext0
+ 653 017d F6000000 		.4byte	.LVL26-.Ltext0
+ 654 0181 0100     		.2byte	0x1
+ 655 0183 50       		.byte	0x50
+ 656 0184 04010000 		.4byte	.LVL28-.Ltext0
+ 657 0188 0C010000 		.4byte	.LVL30-.Ltext0
+ 658 018c 0100     		.2byte	0x1
+ 659 018e 50       		.byte	0x50
+ 660 018f 00000000 		.4byte	0x0
+ 661 0193 00000000 		.4byte	0x0
+ 662              	.LLST12:
+ 663 0197 50010000 		.4byte	.LFB4-.Ltext0
+ 664 019b 52010000 		.4byte	.LCFI3-.Ltext0
+ 665 019f 0100     		.2byte	0x1
+ 666 01a1 5D       		.byte	0x5d
+ 667 01a2 52010000 		.4byte	.LCFI3-.Ltext0
+ 668 01a6 C6010000 		.4byte	.LFE4-.Ltext0
+ 669 01aa 0200     		.2byte	0x2
+ 670 01ac 7D       		.byte	0x7d
+ 671 01ad 14       		.sleb128 20
+ 672 01ae 00000000 		.4byte	0x0
+ 673 01b2 00000000 		.4byte	0x0
+ 674              	.LLST13:
+ 675 01b6 52010000 		.4byte	.LVL36-.Ltext0
+ 676 01ba 5C010000 		.4byte	.LVL38-.Ltext0
+ 677 01be 0100     		.2byte	0x1
+ 678 01c0 50       		.byte	0x50
+ 679 01c1 5C010000 		.4byte	.LVL38-.Ltext0
+ 680 01c5 64010000 		.4byte	.LVL41-.Ltext0
+ 681 01c9 0100     		.2byte	0x1
+ 682 01cb 53       		.byte	0x53
+ 683 01cc 00000000 		.4byte	0x0
+ 684 01d0 00000000 		.4byte	0x0
+ 685              	.LLST14:
+ 686 01d4 52010000 		.4byte	.LVL36-.Ltext0
+ 687 01d8 5E010000 		.4byte	.LVL39-.Ltext0
+ 688 01dc 0100     		.2byte	0x1
+ 689 01de 51       		.byte	0x51
+ 690 01df 5E010000 		.4byte	.LVL39-.Ltext0
+ 691 01e3 C0010000 		.4byte	.LVL53-.Ltext0
+ 692 01e7 0100     		.2byte	0x1
+ 693 01e9 55       		.byte	0x55
+ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 20
+
+
+ 694 01ea 00000000 		.4byte	0x0
+ 695 01ee 00000000 		.4byte	0x0
+ 696              	.LLST15:
+ 697 01f2 52010000 		.4byte	.LVL36-.Ltext0
+ 698 01f6 58010000 		.4byte	.LVL37-.Ltext0
+ 699 01fa 0100     		.2byte	0x1
+ 700 01fc 52       		.byte	0x52
+ 701 01fd 60010000 		.4byte	.LVL40-.Ltext0
+ 702 0201 C0010000 		.4byte	.LVL54-.Ltext0
+ 703 0205 0100     		.2byte	0x1
+ 704 0207 56       		.byte	0x56
+ 705 0208 00000000 		.4byte	0x0
+ 706 020c 00000000 		.4byte	0x0
+ 707              	.LLST16:
+ 708 0210 68010000 		.4byte	.LVL42-.Ltext0
+ 709 0214 C0010000 		.4byte	.LVL52-.Ltext0
+ 710 0218 0100     		.2byte	0x1
+ 711 021a 54       		.byte	0x54
+ 712 021b 00000000 		.4byte	0x0
+ 713 021f 00000000 		.4byte	0x0
+ 714              	.LLST17:
+ 715 0223 72010000 		.4byte	.LVL44-.Ltext0
+ 716 0227 76010000 		.4byte	.LVL45-.Ltext0
+ 717 022b 0100     		.2byte	0x1
+ 718 022d 50       		.byte	0x50
+ 719 022e 76010000 		.4byte	.LVL46-.Ltext0
+ 720 0232 88010000 		.4byte	.LVL47-.Ltext0
+ 721 0236 0100     		.2byte	0x1
+ 722 0238 50       		.byte	0x50
+ 723 0239 8A010000 		.4byte	.LVL48-.Ltext0
+ 724 023d 8C010000 		.4byte	.LVL49-.Ltext0
+ 725 0241 0100     		.2byte	0x1
+ 726 0243 50       		.byte	0x50
+ 727 0244 A6010000 		.4byte	.LVL50-.Ltext0
+ 728 0248 BC010000 		.4byte	.LVL51-.Ltext0
+ 729 024c 0100     		.2byte	0x1
+ 730 024e 50       		.byte	0x50
+ 731 024f 00000000 		.4byte	0x0
+ 732 0253 00000000 		.4byte	0x0
+ 733              	.LLST18:
+ 734 0257 70010000 		.4byte	.LVL43-.Ltext0
+ 735 025b C0010000 		.4byte	.LVL55-.Ltext0
+ 736 025f 0100     		.2byte	0x1
+ 737 0261 57       		.byte	0x57
+ 738 0262 00000000 		.4byte	0x0
+ 739 0266 00000000 		.4byte	0x0
+ 740              		.section	.debug_info
+ 741 0000 09020000 		.4byte	0x209
+ 742 0004 0200     		.2byte	0x2
+ 743 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 744 000a 04       		.byte	0x4
+ 745 000b 01       		.uleb128 0x1
+ 746 000c 00000000 		.4byte	.Ldebug_line0
+ 747 0010 C6010000 		.4byte	.Letext0
+ 748 0014 00000000 		.4byte	.Ltext0
+ 749 0018 69000000 		.4byte	.LASF18
+ 750 001c 01       		.byte	0x1
+ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 21
+
+
+ 751 001d 60000000 		.4byte	.LASF19
+ 752 0021 CB000000 		.4byte	.LASF20
+ 753 0025 02       		.uleb128 0x2
+ 754 0026 74553800 		.ascii	"tU8\000"
+ 755 002a 02       		.byte	0x2
+ 756 002b 47       		.byte	0x47
+ 757 002c 30000000 		.4byte	0x30
+ 758 0030 03       		.uleb128 0x3
+ 759 0031 42000000 		.4byte	.LASF1
+ 760 0035 01       		.byte	0x1
+ 761 0036 08       		.byte	0x8
+ 762 0037 04       		.uleb128 0x4
+ 763 0038 AE000000 		.4byte	.LASF0
+ 764 003c 02       		.byte	0x2
+ 765 003d 48       		.byte	0x48
+ 766 003e 42000000 		.4byte	0x42
+ 767 0042 03       		.uleb128 0x3
+ 768 0043 84000000 		.4byte	.LASF2
+ 769 0047 02       		.byte	0x2
+ 770 0048 07       		.byte	0x7
+ 771 0049 03       		.uleb128 0x3
+ 772 004a 00000000 		.4byte	.LASF3
+ 773 004e 04       		.byte	0x4
+ 774 004f 07       		.byte	0x7
+ 775 0050 02       		.uleb128 0x2
+ 776 0051 74533800 		.ascii	"tS8\000"
+ 777 0055 02       		.byte	0x2
+ 778 0056 4A       		.byte	0x4a
+ 779 0057 5B000000 		.4byte	0x5b
+ 780 005b 03       		.uleb128 0x3
+ 781 005c 97000000 		.4byte	.LASF4
+ 782 0060 01       		.byte	0x1
+ 783 0061 06       		.byte	0x6
+ 784 0062 03       		.uleb128 0x3
+ 785 0063 C1000000 		.4byte	.LASF5
+ 786 0067 02       		.byte	0x2
+ 787 0068 05       		.byte	0x5
+ 788 0069 05       		.uleb128 0x5
+ 789 006a 696E7400 		.ascii	"int\000"
+ 790 006e 04       		.byte	0x4
+ 791 006f 05       		.byte	0x5
+ 792 0070 04       		.uleb128 0x4
+ 793 0071 BB000000 		.4byte	.LASF6
+ 794 0075 02       		.byte	0x2
+ 795 0076 4D       		.byte	0x4d
+ 796 0077 30000000 		.4byte	0x30
+ 797 007b 06       		.uleb128 0x6
+ 798 007c F0000000 		.4byte	0xf0
+ 799 0080 01       		.byte	0x1
+ 800 0081 0D000000 		.4byte	.LASF11
+ 801 0085 01       		.byte	0x1
+ 802 0086 5101     		.2byte	0x151
+ 803 0088 01       		.byte	0x1
+ 804 0089 50000000 		.4byte	0x50
+ 805 008d 00000000 		.4byte	.LFB5
+ 806 0091 6A000000 		.4byte	.LFE5
+ 807 0095 00000000 		.4byte	.LLST0
+ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 22
+
+
+ 808 0099 07       		.uleb128 0x7
+ 809 009a 38000000 		.4byte	.LASF7
+ 810 009e 01       		.byte	0x1
+ 811 009f 4E01     		.2byte	0x14e
+ 812 00a1 37000000 		.4byte	0x37
+ 813 00a5 1F000000 		.4byte	.LLST1
+ 814 00a9 07       		.uleb128 0x7
+ 815 00aa F2000000 		.4byte	.LASF8
+ 816 00ae 01       		.byte	0x1
+ 817 00af 4F01     		.2byte	0x14f
+ 818 00b1 F0000000 		.4byte	0xf0
+ 819 00b5 48000000 		.4byte	.LLST2
+ 820 00b9 08       		.uleb128 0x8
+ 821 00ba 6C656E00 		.ascii	"len\000"
+ 822 00be 01       		.byte	0x1
+ 823 00bf 5001     		.2byte	0x150
+ 824 00c1 37000000 		.4byte	0x37
+ 825 00c5 66000000 		.4byte	.LLST3
+ 826 00c9 09       		.uleb128 0x9
+ 827 00ca 19000000 		.4byte	.LASF9
+ 828 00ce 01       		.byte	0x1
+ 829 00cf 5201     		.2byte	0x152
+ 830 00d1 50000000 		.4byte	0x50
+ 831 00d5 84000000 		.4byte	.LLST4
+ 832 00d9 0A       		.uleb128 0xa
+ 833 00da 21000000 		.4byte	.LASF10
+ 834 00de 01       		.byte	0x1
+ 835 00df 5301     		.2byte	0x153
+ 836 00e1 25000000 		.4byte	0x25
+ 837 00e5 0B       		.uleb128 0xb
+ 838 00e6 6900     		.ascii	"i\000"
+ 839 00e8 01       		.byte	0x1
+ 840 00e9 5401     		.2byte	0x154
+ 841 00eb 25000000 		.4byte	0x25
+ 842 00ef 00       		.byte	0x0
+ 843 00f0 0C       		.uleb128 0xc
+ 844 00f1 04       		.byte	0x4
+ 845 00f2 25000000 		.4byte	0x25
+ 846 00f6 0D       		.uleb128 0xd
+ 847 00f7 39010000 		.4byte	0x139
+ 848 00fb 01       		.byte	0x1
+ 849 00fc A3000000 		.4byte	.LASF12
+ 850 0100 01       		.byte	0x1
+ 851 0101 26       		.byte	0x26
+ 852 0102 01       		.byte	0x1
+ 853 0103 50000000 		.4byte	0x50
+ 854 0107 6C000000 		.4byte	.LFB2
+ 855 010b B6000000 		.4byte	.LFE2
+ 856 010f 97000000 		.4byte	.LLST5
+ 857 0113 0E       		.uleb128 0xe
+ 858 0114 19000000 		.4byte	.LASF9
+ 859 0118 01       		.byte	0x1
+ 860 0119 27       		.byte	0x27
+ 861 011a 50000000 		.4byte	0x50
+ 862 011e B6000000 		.4byte	.LLST6
+ 863 0122 0F       		.uleb128 0xf
+ 864 0123 21000000 		.4byte	.LASF10
+ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 23
+
+
+ 865 0127 01       		.byte	0x1
+ 866 0128 28       		.byte	0x28
+ 867 0129 25000000 		.4byte	0x25
+ 868 012d 0F       		.uleb128 0xf
+ 869 012e B3000000 		.4byte	.LASF13
+ 870 0132 01       		.byte	0x1
+ 871 0133 29       		.byte	0x29
+ 872 0134 70000000 		.4byte	0x70
+ 873 0138 00       		.byte	0x0
+ 874 0139 0D       		.uleb128 0xd
+ 875 013a 93010000 		.4byte	0x193
+ 876 013e 01       		.byte	0x1
+ 877 013f 50000000 		.4byte	.LASF14
+ 878 0143 01       		.byte	0x1
+ 879 0144 6E       		.byte	0x6e
+ 880 0145 01       		.byte	0x1
+ 881 0146 50000000 		.4byte	0x50
+ 882 014a B8000000 		.4byte	.LFB3
+ 883 014e 4E010000 		.4byte	.LFE3
+ 884 0152 C9000000 		.4byte	.LLST7
+ 885 0156 10       		.uleb128 0x10
+ 886 0157 30000000 		.4byte	.LASF15
+ 887 015b 01       		.byte	0x1
+ 888 015c 6C       		.byte	0x6c
+ 889 015d 25000000 		.4byte	0x25
+ 890 0161 E8000000 		.4byte	.LLST8
+ 891 0165 10       		.uleb128 0x10
+ 892 0166 28000000 		.4byte	.LASF16
+ 893 016a 01       		.byte	0x1
+ 894 016b 6D       		.byte	0x6d
+ 895 016c 37000000 		.4byte	0x37
+ 896 0170 11010000 		.4byte	.LLST9
+ 897 0174 0E       		.uleb128 0xe
+ 898 0175 19000000 		.4byte	.LASF9
+ 899 0179 01       		.byte	0x1
+ 900 017a 6F       		.byte	0x6f
+ 901 017b 50000000 		.4byte	0x50
+ 902 017f 3A010000 		.4byte	.LLST10
+ 903 0183 0E       		.uleb128 0xe
+ 904 0184 21000000 		.4byte	.LASF10
+ 905 0188 01       		.byte	0x1
+ 906 0189 70       		.byte	0x70
+ 907 018a 25000000 		.4byte	0x25
+ 908 018e 6E010000 		.4byte	.LLST11
+ 909 0192 00       		.byte	0x0
+ 910 0193 11       		.uleb128 0x11
+ 911 0194 01       		.byte	0x1
+ 912 0195 75000000 		.4byte	.LASF21
+ 913 0199 01       		.byte	0x1
+ 914 019a 0E01     		.2byte	0x10e
+ 915 019c 01       		.byte	0x1
+ 916 019d 50000000 		.4byte	0x50
+ 917 01a1 50010000 		.4byte	.LFB4
+ 918 01a5 C6010000 		.4byte	.LFE4
+ 919 01a9 97010000 		.4byte	.LLST12
+ 920 01ad 07       		.uleb128 0x7
+ 921 01ae 28000000 		.4byte	.LASF16
+ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 24
+
+
+ 922 01b2 01       		.byte	0x1
+ 923 01b3 0B01     		.2byte	0x10b
+ 924 01b5 37000000 		.4byte	0x37
+ 925 01b9 B6010000 		.4byte	.LLST13
+ 926 01bd 07       		.uleb128 0x7
+ 927 01be 3D000000 		.4byte	.LASF17
+ 928 01c2 01       		.byte	0x1
+ 929 01c3 0C01     		.2byte	0x10c
+ 930 01c5 F0000000 		.4byte	0xf0
+ 931 01c9 D4010000 		.4byte	.LLST14
+ 932 01cd 08       		.uleb128 0x8
+ 933 01ce 6C656E00 		.ascii	"len\000"
+ 934 01d2 01       		.byte	0x1
+ 935 01d3 0D01     		.2byte	0x10d
+ 936 01d5 37000000 		.4byte	0x37
+ 937 01d9 F2010000 		.4byte	.LLST15
+ 938 01dd 09       		.uleb128 0x9
+ 939 01de 19000000 		.4byte	.LASF9
+ 940 01e2 01       		.byte	0x1
+ 941 01e3 0F01     		.2byte	0x10f
+ 942 01e5 50000000 		.4byte	0x50
+ 943 01e9 10020000 		.4byte	.LLST16
+ 944 01ed 09       		.uleb128 0x9
+ 945 01ee 21000000 		.4byte	.LASF10
+ 946 01f2 01       		.byte	0x1
+ 947 01f3 1001     		.2byte	0x110
+ 948 01f5 25000000 		.4byte	0x25
+ 949 01f9 23020000 		.4byte	.LLST17
+ 950 01fd 12       		.uleb128 0x12
+ 951 01fe 6900     		.ascii	"i\000"
+ 952 0200 01       		.byte	0x1
+ 953 0201 1101     		.2byte	0x111
+ 954 0203 37000000 		.4byte	0x37
+ 955 0207 57020000 		.4byte	.LLST18
+ 956 020b 00       		.byte	0x0
+ 957 020c 00       		.byte	0x0
+ 958              		.section	.debug_abbrev
+ 959 0000 01       		.uleb128 0x1
+ 960 0001 11       		.uleb128 0x11
+ 961 0002 01       		.byte	0x1
+ 962 0003 10       		.uleb128 0x10
+ 963 0004 06       		.uleb128 0x6
+ 964 0005 12       		.uleb128 0x12
+ 965 0006 01       		.uleb128 0x1
+ 966 0007 11       		.uleb128 0x11
+ 967 0008 01       		.uleb128 0x1
+ 968 0009 25       		.uleb128 0x25
+ 969 000a 0E       		.uleb128 0xe
+ 970 000b 13       		.uleb128 0x13
+ 971 000c 0B       		.uleb128 0xb
+ 972 000d 03       		.uleb128 0x3
+ 973 000e 0E       		.uleb128 0xe
+ 974 000f 1B       		.uleb128 0x1b
+ 975 0010 0E       		.uleb128 0xe
+ 976 0011 00       		.byte	0x0
+ 977 0012 00       		.byte	0x0
+ 978 0013 02       		.uleb128 0x2
+ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 25
+
+
+ 979 0014 16       		.uleb128 0x16
+ 980 0015 00       		.byte	0x0
+ 981 0016 03       		.uleb128 0x3
+ 982 0017 08       		.uleb128 0x8
+ 983 0018 3A       		.uleb128 0x3a
+ 984 0019 0B       		.uleb128 0xb
+ 985 001a 3B       		.uleb128 0x3b
+ 986 001b 0B       		.uleb128 0xb
+ 987 001c 49       		.uleb128 0x49
+ 988 001d 13       		.uleb128 0x13
+ 989 001e 00       		.byte	0x0
+ 990 001f 00       		.byte	0x0
+ 991 0020 03       		.uleb128 0x3
+ 992 0021 24       		.uleb128 0x24
+ 993 0022 00       		.byte	0x0
+ 994 0023 03       		.uleb128 0x3
+ 995 0024 0E       		.uleb128 0xe
+ 996 0025 0B       		.uleb128 0xb
+ 997 0026 0B       		.uleb128 0xb
+ 998 0027 3E       		.uleb128 0x3e
+ 999 0028 0B       		.uleb128 0xb
+ 1000 0029 00       		.byte	0x0
+ 1001 002a 00       		.byte	0x0
+ 1002 002b 04       		.uleb128 0x4
+ 1003 002c 16       		.uleb128 0x16
+ 1004 002d 00       		.byte	0x0
+ 1005 002e 03       		.uleb128 0x3
+ 1006 002f 0E       		.uleb128 0xe
+ 1007 0030 3A       		.uleb128 0x3a
+ 1008 0031 0B       		.uleb128 0xb
+ 1009 0032 3B       		.uleb128 0x3b
+ 1010 0033 0B       		.uleb128 0xb
+ 1011 0034 49       		.uleb128 0x49
+ 1012 0035 13       		.uleb128 0x13
+ 1013 0036 00       		.byte	0x0
+ 1014 0037 00       		.byte	0x0
+ 1015 0038 05       		.uleb128 0x5
+ 1016 0039 24       		.uleb128 0x24
+ 1017 003a 00       		.byte	0x0
+ 1018 003b 03       		.uleb128 0x3
+ 1019 003c 08       		.uleb128 0x8
+ 1020 003d 0B       		.uleb128 0xb
+ 1021 003e 0B       		.uleb128 0xb
+ 1022 003f 3E       		.uleb128 0x3e
+ 1023 0040 0B       		.uleb128 0xb
+ 1024 0041 00       		.byte	0x0
+ 1025 0042 00       		.byte	0x0
+ 1026 0043 06       		.uleb128 0x6
+ 1027 0044 2E       		.uleb128 0x2e
+ 1028 0045 01       		.byte	0x1
+ 1029 0046 01       		.uleb128 0x1
+ 1030 0047 13       		.uleb128 0x13
+ 1031 0048 3F       		.uleb128 0x3f
+ 1032 0049 0C       		.uleb128 0xc
+ 1033 004a 03       		.uleb128 0x3
+ 1034 004b 0E       		.uleb128 0xe
+ 1035 004c 3A       		.uleb128 0x3a
+ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 26
+
+
+ 1036 004d 0B       		.uleb128 0xb
+ 1037 004e 3B       		.uleb128 0x3b
+ 1038 004f 05       		.uleb128 0x5
+ 1039 0050 27       		.uleb128 0x27
+ 1040 0051 0C       		.uleb128 0xc
+ 1041 0052 49       		.uleb128 0x49
+ 1042 0053 13       		.uleb128 0x13
+ 1043 0054 11       		.uleb128 0x11
+ 1044 0055 01       		.uleb128 0x1
+ 1045 0056 12       		.uleb128 0x12
+ 1046 0057 01       		.uleb128 0x1
+ 1047 0058 40       		.uleb128 0x40
+ 1048 0059 06       		.uleb128 0x6
+ 1049 005a 00       		.byte	0x0
+ 1050 005b 00       		.byte	0x0
+ 1051 005c 07       		.uleb128 0x7
+ 1052 005d 05       		.uleb128 0x5
+ 1053 005e 00       		.byte	0x0
+ 1054 005f 03       		.uleb128 0x3
+ 1055 0060 0E       		.uleb128 0xe
+ 1056 0061 3A       		.uleb128 0x3a
+ 1057 0062 0B       		.uleb128 0xb
+ 1058 0063 3B       		.uleb128 0x3b
+ 1059 0064 05       		.uleb128 0x5
+ 1060 0065 49       		.uleb128 0x49
+ 1061 0066 13       		.uleb128 0x13
+ 1062 0067 02       		.uleb128 0x2
+ 1063 0068 06       		.uleb128 0x6
+ 1064 0069 00       		.byte	0x0
+ 1065 006a 00       		.byte	0x0
+ 1066 006b 08       		.uleb128 0x8
+ 1067 006c 05       		.uleb128 0x5
+ 1068 006d 00       		.byte	0x0
+ 1069 006e 03       		.uleb128 0x3
+ 1070 006f 08       		.uleb128 0x8
+ 1071 0070 3A       		.uleb128 0x3a
+ 1072 0071 0B       		.uleb128 0xb
+ 1073 0072 3B       		.uleb128 0x3b
+ 1074 0073 05       		.uleb128 0x5
+ 1075 0074 49       		.uleb128 0x49
+ 1076 0075 13       		.uleb128 0x13
+ 1077 0076 02       		.uleb128 0x2
+ 1078 0077 06       		.uleb128 0x6
+ 1079 0078 00       		.byte	0x0
+ 1080 0079 00       		.byte	0x0
+ 1081 007a 09       		.uleb128 0x9
+ 1082 007b 34       		.uleb128 0x34
+ 1083 007c 00       		.byte	0x0
+ 1084 007d 03       		.uleb128 0x3
+ 1085 007e 0E       		.uleb128 0xe
+ 1086 007f 3A       		.uleb128 0x3a
+ 1087 0080 0B       		.uleb128 0xb
+ 1088 0081 3B       		.uleb128 0x3b
+ 1089 0082 05       		.uleb128 0x5
+ 1090 0083 49       		.uleb128 0x49
+ 1091 0084 13       		.uleb128 0x13
+ 1092 0085 02       		.uleb128 0x2
+ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 27
+
+
+ 1093 0086 06       		.uleb128 0x6
+ 1094 0087 00       		.byte	0x0
+ 1095 0088 00       		.byte	0x0
+ 1096 0089 0A       		.uleb128 0xa
+ 1097 008a 34       		.uleb128 0x34
+ 1098 008b 00       		.byte	0x0
+ 1099 008c 03       		.uleb128 0x3
+ 1100 008d 0E       		.uleb128 0xe
+ 1101 008e 3A       		.uleb128 0x3a
+ 1102 008f 0B       		.uleb128 0xb
+ 1103 0090 3B       		.uleb128 0x3b
+ 1104 0091 05       		.uleb128 0x5
+ 1105 0092 49       		.uleb128 0x49
+ 1106 0093 13       		.uleb128 0x13
+ 1107 0094 00       		.byte	0x0
+ 1108 0095 00       		.byte	0x0
+ 1109 0096 0B       		.uleb128 0xb
+ 1110 0097 34       		.uleb128 0x34
+ 1111 0098 00       		.byte	0x0
+ 1112 0099 03       		.uleb128 0x3
+ 1113 009a 08       		.uleb128 0x8
+ 1114 009b 3A       		.uleb128 0x3a
+ 1115 009c 0B       		.uleb128 0xb
+ 1116 009d 3B       		.uleb128 0x3b
+ 1117 009e 05       		.uleb128 0x5
+ 1118 009f 49       		.uleb128 0x49
+ 1119 00a0 13       		.uleb128 0x13
+ 1120 00a1 00       		.byte	0x0
+ 1121 00a2 00       		.byte	0x0
+ 1122 00a3 0C       		.uleb128 0xc
+ 1123 00a4 0F       		.uleb128 0xf
+ 1124 00a5 00       		.byte	0x0
+ 1125 00a6 0B       		.uleb128 0xb
+ 1126 00a7 0B       		.uleb128 0xb
+ 1127 00a8 49       		.uleb128 0x49
+ 1128 00a9 13       		.uleb128 0x13
+ 1129 00aa 00       		.byte	0x0
+ 1130 00ab 00       		.byte	0x0
+ 1131 00ac 0D       		.uleb128 0xd
+ 1132 00ad 2E       		.uleb128 0x2e
+ 1133 00ae 01       		.byte	0x1
+ 1134 00af 01       		.uleb128 0x1
+ 1135 00b0 13       		.uleb128 0x13
+ 1136 00b1 3F       		.uleb128 0x3f
+ 1137 00b2 0C       		.uleb128 0xc
+ 1138 00b3 03       		.uleb128 0x3
+ 1139 00b4 0E       		.uleb128 0xe
+ 1140 00b5 3A       		.uleb128 0x3a
+ 1141 00b6 0B       		.uleb128 0xb
+ 1142 00b7 3B       		.uleb128 0x3b
+ 1143 00b8 0B       		.uleb128 0xb
+ 1144 00b9 27       		.uleb128 0x27
+ 1145 00ba 0C       		.uleb128 0xc
+ 1146 00bb 49       		.uleb128 0x49
+ 1147 00bc 13       		.uleb128 0x13
+ 1148 00bd 11       		.uleb128 0x11
+ 1149 00be 01       		.uleb128 0x1
+ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 28
+
+
+ 1150 00bf 12       		.uleb128 0x12
+ 1151 00c0 01       		.uleb128 0x1
+ 1152 00c1 40       		.uleb128 0x40
+ 1153 00c2 06       		.uleb128 0x6
+ 1154 00c3 00       		.byte	0x0
+ 1155 00c4 00       		.byte	0x0
+ 1156 00c5 0E       		.uleb128 0xe
+ 1157 00c6 34       		.uleb128 0x34
+ 1158 00c7 00       		.byte	0x0
+ 1159 00c8 03       		.uleb128 0x3
+ 1160 00c9 0E       		.uleb128 0xe
+ 1161 00ca 3A       		.uleb128 0x3a
+ 1162 00cb 0B       		.uleb128 0xb
+ 1163 00cc 3B       		.uleb128 0x3b
+ 1164 00cd 0B       		.uleb128 0xb
+ 1165 00ce 49       		.uleb128 0x49
+ 1166 00cf 13       		.uleb128 0x13
+ 1167 00d0 02       		.uleb128 0x2
+ 1168 00d1 06       		.uleb128 0x6
+ 1169 00d2 00       		.byte	0x0
+ 1170 00d3 00       		.byte	0x0
+ 1171 00d4 0F       		.uleb128 0xf
+ 1172 00d5 34       		.uleb128 0x34
+ 1173 00d6 00       		.byte	0x0
+ 1174 00d7 03       		.uleb128 0x3
+ 1175 00d8 0E       		.uleb128 0xe
+ 1176 00d9 3A       		.uleb128 0x3a
+ 1177 00da 0B       		.uleb128 0xb
+ 1178 00db 3B       		.uleb128 0x3b
+ 1179 00dc 0B       		.uleb128 0xb
+ 1180 00dd 49       		.uleb128 0x49
+ 1181 00de 13       		.uleb128 0x13
+ 1182 00df 00       		.byte	0x0
+ 1183 00e0 00       		.byte	0x0
+ 1184 00e1 10       		.uleb128 0x10
+ 1185 00e2 05       		.uleb128 0x5
+ 1186 00e3 00       		.byte	0x0
+ 1187 00e4 03       		.uleb128 0x3
+ 1188 00e5 0E       		.uleb128 0xe
+ 1189 00e6 3A       		.uleb128 0x3a
+ 1190 00e7 0B       		.uleb128 0xb
+ 1191 00e8 3B       		.uleb128 0x3b
+ 1192 00e9 0B       		.uleb128 0xb
+ 1193 00ea 49       		.uleb128 0x49
+ 1194 00eb 13       		.uleb128 0x13
+ 1195 00ec 02       		.uleb128 0x2
+ 1196 00ed 06       		.uleb128 0x6
+ 1197 00ee 00       		.byte	0x0
+ 1198 00ef 00       		.byte	0x0
+ 1199 00f0 11       		.uleb128 0x11
+ 1200 00f1 2E       		.uleb128 0x2e
+ 1201 00f2 01       		.byte	0x1
+ 1202 00f3 3F       		.uleb128 0x3f
+ 1203 00f4 0C       		.uleb128 0xc
+ 1204 00f5 03       		.uleb128 0x3
+ 1205 00f6 0E       		.uleb128 0xe
+ 1206 00f7 3A       		.uleb128 0x3a
+ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 29
+
+
+ 1207 00f8 0B       		.uleb128 0xb
+ 1208 00f9 3B       		.uleb128 0x3b
+ 1209 00fa 05       		.uleb128 0x5
+ 1210 00fb 27       		.uleb128 0x27
+ 1211 00fc 0C       		.uleb128 0xc
+ 1212 00fd 49       		.uleb128 0x49
+ 1213 00fe 13       		.uleb128 0x13
+ 1214 00ff 11       		.uleb128 0x11
+ 1215 0100 01       		.uleb128 0x1
+ 1216 0101 12       		.uleb128 0x12
+ 1217 0102 01       		.uleb128 0x1
+ 1218 0103 40       		.uleb128 0x40
+ 1219 0104 06       		.uleb128 0x6
+ 1220 0105 00       		.byte	0x0
+ 1221 0106 00       		.byte	0x0
+ 1222 0107 12       		.uleb128 0x12
+ 1223 0108 34       		.uleb128 0x34
+ 1224 0109 00       		.byte	0x0
+ 1225 010a 03       		.uleb128 0x3
+ 1226 010b 08       		.uleb128 0x8
+ 1227 010c 3A       		.uleb128 0x3a
+ 1228 010d 0B       		.uleb128 0xb
+ 1229 010e 3B       		.uleb128 0x3b
+ 1230 010f 05       		.uleb128 0x5
+ 1231 0110 49       		.uleb128 0x49
+ 1232 0111 13       		.uleb128 0x13
+ 1233 0112 02       		.uleb128 0x2
+ 1234 0113 06       		.uleb128 0x6
+ 1235 0114 00       		.byte	0x0
+ 1236 0115 00       		.byte	0x0
+ 1237 0116 00       		.byte	0x0
+ 1238              		.section	.debug_pubnames,"",%progbits
+ 1239 0000 54000000 		.4byte	0x54
+ 1240 0004 0200     		.2byte	0x2
+ 1241 0006 00000000 		.4byte	.Ldebug_info0
+ 1242 000a 0D020000 		.4byte	0x20d
+ 1243 000e 7B000000 		.4byte	0x7b
+ 1244 0012 65657072 		.ascii	"eepromWrite\000"
+ 1244      6F6D5772 
+ 1244      69746500 
+ 1245 001e F6000000 		.4byte	0xf6
+ 1246 0022 65657072 		.ascii	"eepromPoll\000"
+ 1246      6F6D506F 
+ 1246      6C6C00
+ 1247 002d 39010000 		.4byte	0x139
+ 1248 0031 65657072 		.ascii	"eepromStartRead\000"
+ 1248      6F6D5374 
+ 1248      61727452 
+ 1248      65616400 
+ 1249 0041 93010000 		.4byte	0x193
+ 1250 0045 65657072 		.ascii	"eepromPageRead\000"
+ 1250      6F6D5061 
+ 1250      67655265 
+ 1250      616400
+ 1251 0054 00000000 		.4byte	0x0
+ 1252              		.section	.debug_aranges,"",%progbits
+ 1253 0000 1C000000 		.4byte	0x1c
+ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 30
+
+
+ 1254 0004 0200     		.2byte	0x2
+ 1255 0006 00000000 		.4byte	.Ldebug_info0
+ 1256 000a 04       		.byte	0x4
+ 1257 000b 00       		.byte	0x0
+ 1258 000c 0000     		.2byte	0x0
+ 1259 000e 0000     		.2byte	0x0
+ 1260 0010 00000000 		.4byte	.Ltext0
+ 1261 0014 C6010000 		.4byte	.Letext0-.Ltext0
+ 1262 0018 00000000 		.4byte	0x0
+ 1263 001c 00000000 		.4byte	0x0
+ 1264              		.section	.debug_str,"MS",%progbits,1
+ 1265              	.LASF3:
+ 1266 0000 756E7369 		.ascii	"unsigned int\000"
+ 1266      676E6564 
+ 1266      20696E74 
+ 1266      00
+ 1267              	.LASF11:
+ 1268 000d 65657072 		.ascii	"eepromWrite\000"
+ 1268      6F6D5772 
+ 1268      69746500 
+ 1269              	.LASF9:
+ 1270 0019 72657443 		.ascii	"retCode\000"
+ 1270      6F646500 
+ 1271              	.LASF10:
+ 1272 0021 73746174 		.ascii	"status\000"
+ 1272      757300
+ 1273              	.LASF16:
+ 1274 0028 61646472 		.ascii	"address\000"
+ 1274      65737300 
+ 1275              	.LASF15:
+ 1276 0030 64657641 		.ascii	"devAddr\000"
+ 1276      64647200 
+ 1277              	.LASF7:
+ 1278 0038 61646472 		.ascii	"addr\000"
+ 1278      00
+ 1279              	.LASF17:
+ 1280 003d 70427566 		.ascii	"pBuf\000"
+ 1280      00
+ 1281              	.LASF1:
+ 1282 0042 756E7369 		.ascii	"unsigned char\000"
+ 1282      676E6564 
+ 1282      20636861 
+ 1282      7200
+ 1283              	.LASF14:
+ 1284 0050 65657072 		.ascii	"eepromStartRead\000"
+ 1284      6F6D5374 
+ 1284      61727452 
+ 1284      65616400 
+ 1285              	.LASF19:
+ 1286 0060 65657072 		.ascii	"eeprom.c\000"
+ 1286      6F6D2E63 
+ 1286      00
+ 1287              	.LASF18:
+ 1288 0069 474E5520 		.ascii	"GNU C 4.1.1\000"
+ 1288      4320342E 
+ 1288      312E3100 
+ 1289              	.LASF21:
+ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 31
+
+
+ 1290 0075 65657072 		.ascii	"eepromPageRead\000"
+ 1290      6F6D5061 
+ 1290      67655265 
+ 1290      616400
+ 1291              	.LASF2:
+ 1292 0084 73686F72 		.ascii	"short unsigned int\000"
+ 1292      7420756E 
+ 1292      7369676E 
+ 1292      65642069 
+ 1292      6E7400
+ 1293              	.LASF4:
+ 1294 0097 7369676E 		.ascii	"signed char\000"
+ 1294      65642063 
+ 1294      68617200 
+ 1295              	.LASF12:
+ 1296 00a3 65657072 		.ascii	"eepromPoll\000"
+ 1296      6F6D506F 
+ 1296      6C6C00
+ 1297              	.LASF0:
+ 1298 00ae 74553136 		.ascii	"tU16\000"
+ 1298      00
+ 1299              	.LASF13:
+ 1300 00b3 6275726E 		.ascii	"burnEnd\000"
+ 1300      456E6400 
+ 1301              	.LASF6:
+ 1302 00bb 74426F6F 		.ascii	"tBool\000"
+ 1302      6C00
+ 1303              	.LASF5:
+ 1304 00c1 73686F72 		.ascii	"short int\000"
+ 1304      7420696E 
+ 1304      7400
+ 1305              	.LASF20:
+ 1306 00cb 2F637967 		.ascii	"/cygdrive/c/Embedded/eclipse/Demo/2138\000"
+ 1306      64726976 
+ 1306      652F632F 
+ 1306      456D6265 
+ 1306      64646564 
+ 1307              	.LASF8:
+ 1308 00f2 70446174 		.ascii	"pData\000"
+ 1308      6100
+ 1309              		.ident	"GCC: (GNU) 4.1.1"
+ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s 			page 32
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 eeprom.c
+/cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s:1      .text:00000000 $t
+/cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s:16     .text:00000000 eepromWrite
+/cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s:108    .text:0000006c eepromPoll
+/cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s:172    .text:000000b8 eepromStartRead
+/cygdrive/c/Users/embedded/AppData/Local/Temp/ccUBGriY.s:306    .text:00000150 eepromPageRead
+
+UNDEFINED SYMBOLS
+i2cStart
+i2cWriteWithWait
+i2cStop
+i2cPutChar
+i2cCheckStatus
+i2cRepeatStart
+i2cGetChar

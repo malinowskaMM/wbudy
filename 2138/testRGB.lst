@@ -1,0 +1,541 @@
+ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccjYwtNk.s 			page 1
+
+
+   1              		.code	16
+   2              		.file	"testRGB.c"
+   3              		.section	.debug_abbrev,"",%progbits
+   4              	.Ldebug_abbrev0:
+   5              		.section	.debug_info,"",%progbits
+   6              	.Ldebug_info0:
+   7              		.section	.debug_line,"",%progbits
+   8              	.Ldebug_line0:
+   9 0000 92000000 		.text
+   9      02005400 
+   9      00000201 
+   9      FB0E0D00 
+   9      01010101 
+  10              	.Ltext0:
+  11              		.align	2
+  12              		.global	testRGB
+  13              		.code 16
+  14              		.thumb_func
+  15              		.type	testRGB, %function
+  16              	testRGB:
+  17              	.LFB2:
+  18              		.file 1 "testRGB.c"
+   1:testRGB.c     **** 
+   2:testRGB.c     **** 
+   3:testRGB.c     **** /******************************************************************************
+   4:testRGB.c     ****  *
+   5:testRGB.c     ****  * Copyright:
+   6:testRGB.c     ****  *    (C) 2000 - 2005 Embedded Artists AB
+   7:testRGB.c     ****  *
+   8:testRGB.c     ****  *****************************************************************************/
+   9:testRGB.c     **** 
+  10:testRGB.c     **** 
+  11:testRGB.c     **** #include "../pre_emptive_os/api/osapi.h"
+  12:testRGB.c     **** #include "../pre_emptive_os/api/general.h"
+  13:testRGB.c     **** #include <printf_P.h>
+  14:testRGB.c     **** #include <lpc2xxx.h>
+  15:testRGB.c     **** 
+  16:testRGB.c     **** /*****************************************************************************
+  17:testRGB.c     ****  *
+  18:testRGB.c     ****  * Description:
+  19:testRGB.c     ****  *    A process entry function.
+  20:testRGB.c     ****  *
+  21:testRGB.c     ****  ****************************************************************************/
+  22:testRGB.c     **** void testRGB(tU8 red, tU8 green, tU8 blue)
+  23:testRGB.c     **** {
+  19              		.loc 1 23 0
+  20 0000 30B5     		push	{r4, r5, lr}
+  21              	.LCFI0:
+  22              	.LVL0:
+  24:testRGB.c     ****     PINSEL0 &= 0xfff03fff;  //Enable PWM2 on P0.7, PWM4 on P0.8, and PWM6 on P0.9
+  23              		.loc 1 24 0
+  24 0002 194D     		ldr	r5, .L3
+  25 0004 194C     		ldr	r4, .L3+4
+  26 0006 2B68     		ldr	r3, [r5]
+  27 0008 2340     		and	r3, r3, r4
+  28 000a 2B60     		str	r3, [r5]
+  25:testRGB.c     ****     PINSEL0 |= 0x000a8000;  //Enable PWM2 on P0.7, PWM4 on P0.8, and PWM6 on P0.9
+ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccjYwtNk.s 			page 2
+
+
+  29              		.loc 1 25 0
+  30 000c A823     		mov	r3, #168
+  31 000e 2C68     		ldr	r4, [r5]
+  32 0010 1B03     		lsl	r3, r3, #12
+  33 0012 1C43     		orr	r4, r4, r3
+  26:testRGB.c     **** 
+  27:testRGB.c     ****     //PULSE WIDTH MODULATION INIT*********************************************
+  28:testRGB.c     ****     PWM_PR  = 0x00;    // Prescale Register
+  34              		.loc 1 28 0
+  35 0014 164B     		ldr	r3, .L3+8
+  36              		.loc 1 25 0
+  37 0016 2C60     		str	r4, [r5]
+  38              		.loc 1 28 0
+  39 0018 0024     		mov	r4, #0
+  40 001a 1C60     		str	r4, [r3]
+  29:testRGB.c     ****     PWM_MCR = 0x02;    // Match Control Register
+  41              		.loc 1 29 0
+  42 001c 0224     		mov	r4, #2
+  43 001e 0833     		add	r3, r3, #8
+  44 0020 1C60     		str	r4, [r3]
+  45              		.loc 1 23 0
+  46 0022 0006     		lsl	r0, r0, #24
+  47              	.LVL1:
+  30:testRGB.c     ****     PWM_MR0 = 0x1000;    // TOTAL PERIODTID   T
+  48              		.loc 1 30 0
+  49 0024 134C     		ldr	r4, .L3+12
+  50 0026 8023     		mov	r3, #128
+  51              		.loc 1 23 0
+  52 0028 000E     		lsr	r0, r0, #24
+  53              	.LVL2:
+  54              		.loc 1 30 0
+  55 002a 5B01     		lsl	r3, r3, #5
+  56 002c 2360     		str	r3, [r4]
+  31:testRGB.c     ****     PWM_MR2 = red * 3;    // H�G SIGNAL        t
+  57              		.loc 1 31 0
+  58 002e 4300     		lsl	r3, r0, #1
+  59 0030 1B18     		add	r3, r3, r0
+  60              		.loc 1 23 0
+  61 0032 1206     		lsl	r2, r2, #24
+  62              	.LVL3:
+  63              		.loc 1 31 0
+  64 0034 1048     		ldr	r0, .L3+16
+  65              	.LVL4:
+  66              		.loc 1 23 0
+  67 0036 120E     		lsr	r2, r2, #24
+  68              	.LVL5:
+  69              		.loc 1 31 0
+  70 0038 0360     		str	r3, [r0]
+  32:testRGB.c     ****     PWM_MR4 = blue * 3;    // H�G SIGNAL        t
+  71              		.loc 1 32 0
+  72 003a 5300     		lsl	r3, r2, #1
+  73 003c 9B18     		add	r3, r3, r2
+  74              		.loc 1 23 0
+  75 003e 0906     		lsl	r1, r1, #24
+  76              	.LVL6:
+  77              		.loc 1 32 0
+  78 0040 0E4A     		ldr	r2, .L3+20
+ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccjYwtNk.s 			page 3
+
+
+  79              	.LVL7:
+  80              		.loc 1 23 0
+  81 0042 090E     		lsr	r1, r1, #24
+  82              	.LVL8:
+  83              		.loc 1 32 0
+  84 0044 1360     		str	r3, [r2]
+  33:testRGB.c     ****     PWM_MR6 = green * 3;    // H�G SIGNAL        t
+  85              		.loc 1 33 0
+  86 0046 4B00     		lsl	r3, r1, #1
+  87 0048 5B18     		add	r3, r3, r1
+  88 004a 0832     		add	r2, r2, #8
+  89 004c 1360     		str	r3, [r2]
+  34:testRGB.c     ****     PWM_LER = 0x55;    // Latch Enable Register
+  90              		.loc 1 34 0
+  91 004e 0C4B     		ldr	r3, .L3+24
+  92 0050 5522     		mov	r2, #85
+  93 0052 1A60     		str	r2, [r3]
+  35:testRGB.c     ****     PWM_PCR = 0x5400;  // Prescale Counter Register PWMENA2, PWMENA4, PWMENA6
+  94              		.loc 1 35 0
+  95 0054 0B4A     		ldr	r2, .L3+28
+  96 0056 A823     		mov	r3, #168
+  97 0058 DB01     		lsl	r3, r3, #7
+  98 005a 1360     		str	r3, [r2]
+  36:testRGB.c     ****     PWM_TCR = 0x09;    // Counter Enable och PWM Enable
+  99              		.loc 1 36 0
+ 100 005c 0A4B     		ldr	r3, .L3+32
+ 101 005e 0922     		mov	r2, #9
+ 102 0060 1A60     		str	r2, [r3]
+  37:testRGB.c     ****     //************************************************************************
+  38:testRGB.c     **** }
+ 103              		.loc 1 38 0
+ 104              		@ sp needed for prologue
+ 105 0062 30BC     		pop	{r4, r5}
+ 106 0064 01BC     		pop	{r0}
+ 107 0066 0047     		bx	r0
+ 108              	.L4:
+ 109              		.align	2
+ 110              	.L3:
+ 111 0068 00C002E0 		.word	-536690688
+ 112 006c FF3FF0FF 		.word	-1032193
+ 113 0070 0C4001E0 		.word	-536788980
+ 114 0074 184001E0 		.word	-536788968
+ 115 0078 204001E0 		.word	-536788960
+ 116 007c 404001E0 		.word	-536788928
+ 117 0080 504001E0 		.word	-536788912
+ 118 0084 4C4001E0 		.word	-536788916
+ 119 0088 044001E0 		.word	-536788988
+ 120              	.LFE2:
+ 121              		.size	testRGB, .-testRGB
+ 122              		.section	.debug_frame,"",%progbits
+ 123              	.Lframe0:
+ 124 0000 0C000000 		.4byte	.LECIE0-.LSCIE0
+ 125              	.LSCIE0:
+ 126 0004 FFFFFFFF 		.4byte	0xffffffff
+ 127 0008 01       		.byte	0x1
+ 128 0009 00       		.ascii	"\000"
+ 129 000a 01       		.uleb128 0x1
+ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccjYwtNk.s 			page 4
+
+
+ 130 000b 7C       		.sleb128 -4
+ 131 000c 0E       		.byte	0xe
+ 132 000d 0C       		.byte	0xc
+ 133 000e 0D       		.uleb128 0xd
+ 134 000f 00       		.uleb128 0x0
+ 135              		.align	2
+ 136              	.LECIE0:
+ 137              	.LSFDE0:
+ 138 0010 18000000 		.4byte	.LEFDE0-.LASFDE0
+ 139              	.LASFDE0:
+ 140 0014 00000000 		.4byte	.Lframe0
+ 141 0018 00000000 		.4byte	.LFB2
+ 142 001c 8C000000 		.4byte	.LFE2-.LFB2
+ 143 0020 42       		.byte	0x4
+ 144              		.4byte	.LCFI0-.LFB2
+ 145 0021 0E       		.byte	0xe
+ 146 0022 0C       		.uleb128 0xc
+ 147 0023 84       		.byte	0x84
+ 148 0024 03       		.uleb128 0x3
+ 149 0025 85       		.byte	0x85
+ 150 0026 02       		.uleb128 0x2
+ 151 0027 8E       		.byte	0x8e
+ 152 0028 01       		.uleb128 0x1
+ 153 0029 000000   		.align	2
+ 154              	.LEFDE0:
+ 155              		.file 2 "./startup/../pre_emptive_os/api/../api/general.h"
+ 156              		.text
+ 157              	.Letext0:
+ 158              		.section	.debug_loc,"",%progbits
+ 159              	.Ldebug_loc0:
+ 160              	.LLST0:
+ 161 0000 00000000 		.4byte	.LFB2-.Ltext0
+ 162 0004 02000000 		.4byte	.LCFI0-.Ltext0
+ 163 0008 0100     		.2byte	0x1
+ 164 000a 5D       		.byte	0x5d
+ 165 000b 02000000 		.4byte	.LCFI0-.Ltext0
+ 166 000f 8C000000 		.4byte	.LFE2-.Ltext0
+ 167 0013 0200     		.2byte	0x2
+ 168 0015 7D       		.byte	0x7d
+ 169 0016 0C       		.sleb128 12
+ 170 0017 00000000 		.4byte	0x0
+ 171 001b 00000000 		.4byte	0x0
+ 172              	.LLST1:
+ 173 001f 02000000 		.4byte	.LVL0-.Ltext0
+ 174 0023 24000000 		.4byte	.LVL1-.Ltext0
+ 175 0027 0100     		.2byte	0x1
+ 176 0029 50       		.byte	0x50
+ 177 002a 2A000000 		.4byte	.LVL2-.Ltext0
+ 178 002e 36000000 		.4byte	.LVL4-.Ltext0
+ 179 0032 0100     		.2byte	0x1
+ 180 0034 50       		.byte	0x50
+ 181 0035 00000000 		.4byte	0x0
+ 182 0039 00000000 		.4byte	0x0
+ 183              	.LLST2:
+ 184 003d 02000000 		.4byte	.LVL0-.Ltext0
+ 185 0041 40000000 		.4byte	.LVL6-.Ltext0
+ 186 0045 0100     		.2byte	0x1
+ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccjYwtNk.s 			page 5
+
+
+ 187 0047 51       		.byte	0x51
+ 188 0048 44000000 		.4byte	.LVL8-.Ltext0
+ 189 004c 8C000000 		.4byte	.LFE2-.Ltext0
+ 190 0050 0100     		.2byte	0x1
+ 191 0052 51       		.byte	0x51
+ 192 0053 00000000 		.4byte	0x0
+ 193 0057 00000000 		.4byte	0x0
+ 194              	.LLST3:
+ 195 005b 02000000 		.4byte	.LVL0-.Ltext0
+ 196 005f 34000000 		.4byte	.LVL3-.Ltext0
+ 197 0063 0100     		.2byte	0x1
+ 198 0065 52       		.byte	0x52
+ 199 0066 38000000 		.4byte	.LVL5-.Ltext0
+ 200 006a 42000000 		.4byte	.LVL7-.Ltext0
+ 201 006e 0100     		.2byte	0x1
+ 202 0070 52       		.byte	0x52
+ 203 0071 00000000 		.4byte	0x0
+ 204 0075 00000000 		.4byte	0x0
+ 205              		.section	.debug_info
+ 206 0000 A1000000 		.4byte	0xa1
+ 207 0004 0200     		.2byte	0x2
+ 208 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 209 000a 04       		.byte	0x4
+ 210 000b 01       		.uleb128 0x1
+ 211 000c 00000000 		.4byte	.Ldebug_line0
+ 212 0010 8C000000 		.4byte	.Letext0
+ 213 0014 00000000 		.4byte	.Ltext0
+ 214 0018 53000000 		.4byte	.LASF8
+ 215 001c 01       		.byte	0x1
+ 216 001d 9C000000 		.4byte	.LASF9
+ 217 0021 69000000 		.4byte	.LASF10
+ 218 0025 02       		.uleb128 0x2
+ 219 0026 74553800 		.ascii	"tU8\000"
+ 220 002a 02       		.byte	0x2
+ 221 002b 47       		.byte	0x47
+ 222 002c 30000000 		.4byte	0x30
+ 223 0030 03       		.uleb128 0x3
+ 224 0031 0B000000 		.4byte	.LASF0
+ 225 0035 01       		.byte	0x1
+ 226 0036 08       		.byte	0x8
+ 227 0037 03       		.uleb128 0x3
+ 228 0038 2B000000 		.4byte	.LASF1
+ 229 003c 02       		.byte	0x2
+ 230 003d 07       		.byte	0x7
+ 231 003e 03       		.uleb128 0x3
+ 232 003f 46000000 		.4byte	.LASF2
+ 233 0043 04       		.byte	0x4
+ 234 0044 07       		.byte	0x7
+ 235 0045 03       		.uleb128 0x3
+ 236 0046 90000000 		.4byte	.LASF3
+ 237 004a 01       		.byte	0x1
+ 238 004b 06       		.byte	0x6
+ 239 004c 03       		.uleb128 0x3
+ 240 004d 5F000000 		.4byte	.LASF4
+ 241 0051 02       		.byte	0x2
+ 242 0052 05       		.byte	0x5
+ 243 0053 04       		.uleb128 0x4
+ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccjYwtNk.s 			page 6
+
+
+ 244 0054 696E7400 		.ascii	"int\000"
+ 245 0058 04       		.byte	0x4
+ 246 0059 05       		.byte	0x5
+ 247 005a 03       		.uleb128 0x3
+ 248 005b 19000000 		.4byte	.LASF5
+ 249 005f 04       		.byte	0x4
+ 250 0060 07       		.byte	0x7
+ 251 0061 05       		.uleb128 0x5
+ 252 0062 01       		.byte	0x1
+ 253 0063 3E000000 		.4byte	.LASF11
+ 254 0067 01       		.byte	0x1
+ 255 0068 17       		.byte	0x17
+ 256 0069 01       		.byte	0x1
+ 257 006a 00000000 		.4byte	.LFB2
+ 258 006e 8C000000 		.4byte	.LFE2
+ 259 0072 00000000 		.4byte	.LLST0
+ 260 0076 06       		.uleb128 0x6
+ 261 0077 72656400 		.ascii	"red\000"
+ 262 007b 01       		.byte	0x1
+ 263 007c 16       		.byte	0x16
+ 264 007d 25000000 		.4byte	0x25
+ 265 0081 1F000000 		.4byte	.LLST1
+ 266 0085 07       		.uleb128 0x7
+ 267 0086 00000000 		.4byte	.LASF6
+ 268 008a 01       		.byte	0x1
+ 269 008b 16       		.byte	0x16
+ 270 008c 25000000 		.4byte	0x25
+ 271 0090 3D000000 		.4byte	.LLST2
+ 272 0094 07       		.uleb128 0x7
+ 273 0095 06000000 		.4byte	.LASF7
+ 274 0099 01       		.byte	0x1
+ 275 009a 16       		.byte	0x16
+ 276 009b 25000000 		.4byte	0x25
+ 277 009f 5B000000 		.4byte	.LLST3
+ 278 00a3 00       		.byte	0x0
+ 279 00a4 00       		.byte	0x0
+ 280              		.section	.debug_abbrev
+ 281 0000 01       		.uleb128 0x1
+ 282 0001 11       		.uleb128 0x11
+ 283 0002 01       		.byte	0x1
+ 284 0003 10       		.uleb128 0x10
+ 285 0004 06       		.uleb128 0x6
+ 286 0005 12       		.uleb128 0x12
+ 287 0006 01       		.uleb128 0x1
+ 288 0007 11       		.uleb128 0x11
+ 289 0008 01       		.uleb128 0x1
+ 290 0009 25       		.uleb128 0x25
+ 291 000a 0E       		.uleb128 0xe
+ 292 000b 13       		.uleb128 0x13
+ 293 000c 0B       		.uleb128 0xb
+ 294 000d 03       		.uleb128 0x3
+ 295 000e 0E       		.uleb128 0xe
+ 296 000f 1B       		.uleb128 0x1b
+ 297 0010 0E       		.uleb128 0xe
+ 298 0011 00       		.byte	0x0
+ 299 0012 00       		.byte	0x0
+ 300 0013 02       		.uleb128 0x2
+ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccjYwtNk.s 			page 7
+
+
+ 301 0014 16       		.uleb128 0x16
+ 302 0015 00       		.byte	0x0
+ 303 0016 03       		.uleb128 0x3
+ 304 0017 08       		.uleb128 0x8
+ 305 0018 3A       		.uleb128 0x3a
+ 306 0019 0B       		.uleb128 0xb
+ 307 001a 3B       		.uleb128 0x3b
+ 308 001b 0B       		.uleb128 0xb
+ 309 001c 49       		.uleb128 0x49
+ 310 001d 13       		.uleb128 0x13
+ 311 001e 00       		.byte	0x0
+ 312 001f 00       		.byte	0x0
+ 313 0020 03       		.uleb128 0x3
+ 314 0021 24       		.uleb128 0x24
+ 315 0022 00       		.byte	0x0
+ 316 0023 03       		.uleb128 0x3
+ 317 0024 0E       		.uleb128 0xe
+ 318 0025 0B       		.uleb128 0xb
+ 319 0026 0B       		.uleb128 0xb
+ 320 0027 3E       		.uleb128 0x3e
+ 321 0028 0B       		.uleb128 0xb
+ 322 0029 00       		.byte	0x0
+ 323 002a 00       		.byte	0x0
+ 324 002b 04       		.uleb128 0x4
+ 325 002c 24       		.uleb128 0x24
+ 326 002d 00       		.byte	0x0
+ 327 002e 03       		.uleb128 0x3
+ 328 002f 08       		.uleb128 0x8
+ 329 0030 0B       		.uleb128 0xb
+ 330 0031 0B       		.uleb128 0xb
+ 331 0032 3E       		.uleb128 0x3e
+ 332 0033 0B       		.uleb128 0xb
+ 333 0034 00       		.byte	0x0
+ 334 0035 00       		.byte	0x0
+ 335 0036 05       		.uleb128 0x5
+ 336 0037 2E       		.uleb128 0x2e
+ 337 0038 01       		.byte	0x1
+ 338 0039 3F       		.uleb128 0x3f
+ 339 003a 0C       		.uleb128 0xc
+ 340 003b 03       		.uleb128 0x3
+ 341 003c 0E       		.uleb128 0xe
+ 342 003d 3A       		.uleb128 0x3a
+ 343 003e 0B       		.uleb128 0xb
+ 344 003f 3B       		.uleb128 0x3b
+ 345 0040 0B       		.uleb128 0xb
+ 346 0041 27       		.uleb128 0x27
+ 347 0042 0C       		.uleb128 0xc
+ 348 0043 11       		.uleb128 0x11
+ 349 0044 01       		.uleb128 0x1
+ 350 0045 12       		.uleb128 0x12
+ 351 0046 01       		.uleb128 0x1
+ 352 0047 40       		.uleb128 0x40
+ 353 0048 06       		.uleb128 0x6
+ 354 0049 00       		.byte	0x0
+ 355 004a 00       		.byte	0x0
+ 356 004b 06       		.uleb128 0x6
+ 357 004c 05       		.uleb128 0x5
+ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccjYwtNk.s 			page 8
+
+
+ 358 004d 00       		.byte	0x0
+ 359 004e 03       		.uleb128 0x3
+ 360 004f 08       		.uleb128 0x8
+ 361 0050 3A       		.uleb128 0x3a
+ 362 0051 0B       		.uleb128 0xb
+ 363 0052 3B       		.uleb128 0x3b
+ 364 0053 0B       		.uleb128 0xb
+ 365 0054 49       		.uleb128 0x49
+ 366 0055 13       		.uleb128 0x13
+ 367 0056 02       		.uleb128 0x2
+ 368 0057 06       		.uleb128 0x6
+ 369 0058 00       		.byte	0x0
+ 370 0059 00       		.byte	0x0
+ 371 005a 07       		.uleb128 0x7
+ 372 005b 05       		.uleb128 0x5
+ 373 005c 00       		.byte	0x0
+ 374 005d 03       		.uleb128 0x3
+ 375 005e 0E       		.uleb128 0xe
+ 376 005f 3A       		.uleb128 0x3a
+ 377 0060 0B       		.uleb128 0xb
+ 378 0061 3B       		.uleb128 0x3b
+ 379 0062 0B       		.uleb128 0xb
+ 380 0063 49       		.uleb128 0x49
+ 381 0064 13       		.uleb128 0x13
+ 382 0065 02       		.uleb128 0x2
+ 383 0066 06       		.uleb128 0x6
+ 384 0067 00       		.byte	0x0
+ 385 0068 00       		.byte	0x0
+ 386 0069 00       		.byte	0x0
+ 387              		.section	.debug_pubnames,"",%progbits
+ 388 0000 1A000000 		.4byte	0x1a
+ 389 0004 0200     		.2byte	0x2
+ 390 0006 00000000 		.4byte	.Ldebug_info0
+ 391 000a A5000000 		.4byte	0xa5
+ 392 000e 61000000 		.4byte	0x61
+ 393 0012 74657374 		.ascii	"testRGB\000"
+ 393      52474200 
+ 394 001a 00000000 		.4byte	0x0
+ 395              		.section	.debug_aranges,"",%progbits
+ 396 0000 1C000000 		.4byte	0x1c
+ 397 0004 0200     		.2byte	0x2
+ 398 0006 00000000 		.4byte	.Ldebug_info0
+ 399 000a 04       		.byte	0x4
+ 400 000b 00       		.byte	0x0
+ 401 000c 0000     		.2byte	0x0
+ 402 000e 0000     		.2byte	0x0
+ 403 0010 00000000 		.4byte	.Ltext0
+ 404 0014 8C000000 		.4byte	.Letext0-.Ltext0
+ 405 0018 00000000 		.4byte	0x0
+ 406 001c 00000000 		.4byte	0x0
+ 407              		.section	.debug_str,"MS",%progbits,1
+ 408              	.LASF6:
+ 409 0000 67726565 		.ascii	"green\000"
+ 409      6E00
+ 410              	.LASF7:
+ 411 0006 626C7565 		.ascii	"blue\000"
+ 411      00
+ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccjYwtNk.s 			page 9
+
+
+ 412              	.LASF0:
+ 413 000b 756E7369 		.ascii	"unsigned char\000"
+ 413      676E6564 
+ 413      20636861 
+ 413      7200
+ 414              	.LASF5:
+ 415 0019 6C6F6E67 		.ascii	"long unsigned int\000"
+ 415      20756E73 
+ 415      69676E65 
+ 415      6420696E 
+ 415      7400
+ 416              	.LASF1:
+ 417 002b 73686F72 		.ascii	"short unsigned int\000"
+ 417      7420756E 
+ 417      7369676E 
+ 417      65642069 
+ 417      6E7400
+ 418              	.LASF11:
+ 419 003e 74657374 		.ascii	"testRGB\000"
+ 419      52474200 
+ 420              	.LASF2:
+ 421 0046 756E7369 		.ascii	"unsigned int\000"
+ 421      676E6564 
+ 421      20696E74 
+ 421      00
+ 422              	.LASF8:
+ 423 0053 474E5520 		.ascii	"GNU C 4.1.1\000"
+ 423      4320342E 
+ 423      312E3100 
+ 424              	.LASF4:
+ 425 005f 73686F72 		.ascii	"short int\000"
+ 425      7420696E 
+ 425      7400
+ 426              	.LASF10:
+ 427 0069 2F637967 		.ascii	"/cygdrive/c/Embedded/eclipse/Demo/2138\000"
+ 427      64726976 
+ 427      652F632F 
+ 427      456D6265 
+ 427      64646564 
+ 428              	.LASF3:
+ 429 0090 7369676E 		.ascii	"signed char\000"
+ 429      65642063 
+ 429      68617200 
+ 430              	.LASF9:
+ 431 009c 74657374 		.ascii	"testRGB.c\000"
+ 431      5247422E 
+ 431      6300
+ 432              		.ident	"GCC: (GNU) 4.1.1"
+ARM GAS  /cygdrive/c/Users/embedded/AppData/Local/Temp/ccjYwtNk.s 			page 10
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 testRGB.c
+/cygdrive/c/Users/embedded/AppData/Local/Temp/ccjYwtNk.s:1      .text:00000000 $t
+/cygdrive/c/Users/embedded/AppData/Local/Temp/ccjYwtNk.s:16     .text:00000000 testRGB
+/cygdrive/c/Users/embedded/AppData/Local/Temp/ccjYwtNk.s:111    .text:00000068 $d
+
+NO UNDEFINED SYMBOLS

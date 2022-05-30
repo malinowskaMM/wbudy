@@ -1,0 +1,34 @@
+main.o: main.c pre_emptive_os/api/osapi.h \
+  pre_emptive_os/api/../api/general.h pre_emptive_os/api/general.h \
+  startup/printf_P.h startup/config.h startup/consol.h startup/ea_init.h \
+  startup/lpc2xxx.h startup/consol.h
+eeprom.o: eeprom.c startup/../pre_emptive_os/api/general.h i2c.h
+i2c.o: i2c.c startup/../pre_emptive_os/api/general.h i2c.h \
+  startup/lpc2xxx.h
+testLedMatrix.o: testLedMatrix.c startup/../pre_emptive_os/api/osapi.h \
+  startup/../pre_emptive_os/api/../api/general.h \
+  startup/../pre_emptive_os/api/general.h startup/printf_P.h \
+  startup/config.h startup/consol.h startup/lpc2xxx.h startup/consol.h \
+  startup/config.h
+testLcd.o: testLcd.c startup/../pre_emptive_os/api/osapi.h \
+  startup/../pre_emptive_os/api/../api/general.h \
+  startup/../pre_emptive_os/api/general.h startup/printf_P.h \
+  startup/config.h startup/consol.h startup/lpc2xxx.h startup/consol.h
+testMotor.o: testMotor.c startup/../pre_emptive_os/api/osapi.h \
+  startup/../pre_emptive_os/api/../api/general.h \
+  startup/../pre_emptive_os/api/general.h startup/printf_P.h \
+  startup/config.h startup/consol.h startup/lpc2xxx.h
+testRGB.o: testRGB.c startup/../pre_emptive_os/api/osapi.h \
+  startup/../pre_emptive_os/api/../api/general.h \
+  startup/../pre_emptive_os/api/general.h startup/printf_P.h \
+  startup/config.h startup/consol.h startup/lpc2xxx.h
+testI2C.o: testI2C.c startup/../pre_emptive_os/api/osapi.h \
+  startup/../pre_emptive_os/api/../api/general.h \
+  startup/../pre_emptive_os/api/general.h startup/printf_P.h \
+  startup/config.h startup/consol.h startup/lpc2xxx.h startup/consol.h \
+  eeprom.h i2c.h
+testAdc.o: testAdc.c startup/../pre_emptive_os/api/osapi.h \
+  startup/../pre_emptive_os/api/../api/general.h \
+  startup/../pre_emptive_os/api/general.h startup/printf_P.h \
+  startup/config.h startup/consol.h startup/lpc2xxx.h startup/consol.h \
+  startup/../startup/config.h

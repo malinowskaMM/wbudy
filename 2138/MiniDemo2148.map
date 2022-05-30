@@ -1,0 +1,653 @@
+Archive member included to satisfy reference by file (symbol)
+
+startup/libea_startup_thumb.a(consol.o)
+                              main.o (simplePrintf)
+startup/libea_startup_thumb.a(framework.o)
+                              main.o (printf_init)
+startup/libea_startup_thumb.a(startup.o)
+                              (_startup)
+irq/irq_handler.a(irq_handler.o)
+                              main.o (IRQ_Test)
+c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_udivsi3.o)
+                              i2c.o (__aeabi_uidiv)
+c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_dvmd_tls.o)
+                              c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_udivsi3.o) (__aeabi_idiv0)
+c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_aeabi_uldivmod.o)
+                              main.o (__aeabi_uldivmod)
+c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_muldi3.o)
+                              main.o (__aeabi_lmul)
+c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_udivmoddi4.o)
+                              c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_aeabi_uldivmod.o) (__udivmoddi4)
+c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_clzdi2.o)
+                              c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_udivmoddi4.o) (__clzdi2)
+c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_clzsi2.o)
+                              c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_clzdi2.o) (__clzsi2)
+c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-atoi.o)
+                              startup/libea_startup_thumb.a(consol.o) (atoi)
+c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-strlen.o)
+                              startup/libea_startup_thumb.a(consol.o) (strlen)
+c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-strtol.o)
+                              c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-atoi.o) (_strtol_r)
+c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-impure.o)
+                              c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-strtol.o) (_impure_ptr)
+c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-locale.o)
+                              c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-strtol.o) (__locale_ctype_ptr_l)
+c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-mbtowc_r.o)
+                              c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-locale.o) (__ascii_mbtowc)
+c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-strcmp.o)
+                              c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-locale.o) (strcmp)
+c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-wctomb_r.o)
+                              c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-locale.o) (__ascii_wctomb)
+c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-ctype_.o)
+                              c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-locale.o) (_ctype_)
+
+Allocating common symbols
+Common symbol       size              file
+
+pHeapEnd            0x4               startup/libea_startup_thumb.a(framework.o)
+pHeapStart          0x4               startup/libea_startup_thumb.a(framework.o)
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+FLASH            0x00000000         0x00080000         xr
+RAM              0x40000000         0x00008000         rw
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD main.o
+LOAD i2c.o
+LOAD startup/libea_startup_thumb.a
+LOAD irq/irq_handler.a
+LOAD c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libstdc++_nano.a
+LOAD c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libm.a
+START GROUP
+LOAD c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a
+LOAD c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a
+END GROUP
+START GROUP
+LOAD c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a
+LOAD c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a
+LOAD c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libnosys.a
+END GROUP
+START GROUP
+LOAD c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a
+LOAD c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a
+LOAD c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libnosys.a
+END GROUP
+
+.text           0x00000000     0x1da0
+ *startup.o(.text)
+ .text          0x00000000      0x1bc startup/libea_startup_thumb.a(startup.o)
+                0x00000000                _startup
+ *(.text)
+ .text          0x000001bc      0x268 main.o
+                0x00000318                main
+ .text          0x00000424      0x3d8 i2c.o
+                0x00000424                i2cCheckStatus
+                0x00000458                i2cInit
+                0x000004e8                i2cStart
+                0x00000564                i2cStop
+                0x0000059c                i2cPutChar
+                0x000005fc                i2cGetChar
+                0x00000690                i2cRead
+ .text          0x000007fc      0xce8 startup/libea_startup_thumb.a(consol.o)
+                0x00000bb0                consolInit
+                0x00000c48                consolSendChar
+                0x00000c98                consolSendCh
+                0x00000cdc                consolSendString
+                0x00000d28                consolSendNumber
+                0x00000f54                simplePrintf
+                0x00000f94                consolGetCh
+                0x00000fd8                consolGetChar
+                0x00001034                consolGetString
+                0x000010e4                consolGetIntNum
+                0x00001334                consolScanf
+ .text          0x000014e4      0x45c startup/libea_startup_thumb.a(framework.o)
+                0x00001638                exceptionHandlerInit
+                0x000016c8                lowLevelInit
+                0x000018ac                printf_init
+ .text          0x00001940       0x90 irq/irq_handler.a(irq_handler.o)
+                0x00001940                IRQ_Test
+ .text          0x000019d0      0x114 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_udivsi3.o)
+                0x000019d0                __aeabi_uidiv
+                0x000019d0                __udivsi3
+                0x00001ac4                __aeabi_uidivmod
+ .text          0x00001ae4        0x4 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_dvmd_tls.o)
+                0x00001ae4                __aeabi_idiv0
+                0x00001ae4                __aeabi_ldiv0
+ .text          0x00001ae8       0x3c c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_aeabi_uldivmod.o)
+                0x00001ae8                __aeabi_uldivmod
+ .text          0x00001b24       0x3c c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_muldi3.o)
+                0x00001b24                __muldi3
+                0x00001b24                __aeabi_lmul
+ .text          0x00001b60      0x16c c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_udivmoddi4.o)
+                0x00001b60                __udivmoddi4
+ .text          0x00001ccc       0x28 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_clzdi2.o)
+                0x00001ccc                __clzdi2
+ .text          0x00001cf4       0x48 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_clzsi2.o)
+                0x00001cf4                __clzsi2
+ .text          0x00001d3c        0x0 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-atoi.o)
+ .text          0x00001d3c        0xe c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-strlen.o)
+                0x00001d3c                strlen
+ .text          0x00001d4a        0x0 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-strtol.o)
+ .text          0x00001d4a        0x0 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-impure.o)
+ .text          0x00001d4a        0x0 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-locale.o)
+ .text          0x00001d4a        0x0 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-mbtowc_r.o)
+ *fill*         0x00001d4a        0x2 00000000
+ .text          0x00001d4c       0x1c c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-strcmp.o)
+                0x00001d4c                strcmp
+ .text          0x00001d68        0x0 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-wctomb_r.o)
+ .text          0x00001d68        0x0 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-ctype_.o)
+ .text.__stub   0x00001d68       0x34 linker stubs
+ *(.glue_7)
+ .glue_7        0x00001da0        0x0 linker stubs
+ *(.glue_7t)
+ .glue_7t       0x00001da0        0x0 linker stubs
+
+.vfp11_veneer   0x00001da0        0x0
+ .vfp11_veneer  0x00001da0        0x0 linker stubs
+
+.v4_bx          0x00001da0        0x0
+ .v4_bx         0x00001da0        0x0 linker stubs
+
+.iplt           0x00001da0        0x0
+ .iplt          0x00001da0        0x0 main.o
+
+.text.atoi      0x00001da0       0x18
+ .text.atoi     0x00001da0       0x18 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-atoi.o)
+                0x00001da0                atoi
+
+.text._atoi_r   0x00001db8       0x18
+ .text._atoi_r  0x00001db8       0x18 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-atoi.o)
+                0x00001db8                _atoi_r
+
+.text._strtol_l.isra.0
+                0x00001dd0      0x18c
+ .text._strtol_l.isra.0
+                0x00001dd0      0x18c c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-strtol.o)
+
+.text._strtol_r
+                0x00001f5c       0x38
+ .text._strtol_r
+                0x00001f5c       0x38 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-strtol.o)
+                0x00001f5c                _strtol_r
+
+.text.strtol_l  0x00001f94       0x30
+ .text.strtol_l
+                0x00001f94       0x30 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-strtol.o)
+                0x00001f94                strtol_l
+
+.text.strtol    0x00001fc4       0x48
+ .text.strtol   0x00001fc4       0x48 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-strtol.o)
+                0x00001fc4                strtol
+
+.text._setlocale_r
+                0x0000200c       0x64
+ .text._setlocale_r
+                0x0000200c       0x64 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-locale.o)
+                0x0000200c                _setlocale_r
+
+.text.__locale_mb_cur_max
+                0x00002070       0x28
+ .text.__locale_mb_cur_max
+                0x00002070       0x28 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-locale.o)
+                0x00002070                __locale_mb_cur_max
+
+.text.__locale_ctype_ptr_l
+                0x00002098        0x8
+ .text.__locale_ctype_ptr_l
+                0x00002098        0x8 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-locale.o)
+                0x00002098                __locale_ctype_ptr_l
+
+.text.__locale_ctype_ptr
+                0x000020a0       0x28
+ .text.__locale_ctype_ptr
+                0x000020a0       0x28 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-locale.o)
+                0x000020a0                __locale_ctype_ptr
+
+.text.setlocale
+                0x000020c8       0x18
+ .text.setlocale
+                0x000020c8       0x18 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-locale.o)
+                0x000020c8                setlocale
+
+.text._mbtowc_r
+                0x000020e0       0x34
+ .text._mbtowc_r
+                0x000020e0       0x34 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-mbtowc_r.o)
+                0x000020e0                _mbtowc_r
+
+.text.__ascii_mbtowc
+                0x00002114       0x40
+ .text.__ascii_mbtowc
+                0x00002114       0x40 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-mbtowc_r.o)
+                0x00002114                __ascii_mbtowc
+
+.text._wctomb_r
+                0x00002154       0x34
+ .text._wctomb_r
+                0x00002154       0x34 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-wctomb_r.o)
+                0x00002154                _wctomb_r
+
+.text.__ascii_wctomb
+                0x00002188       0x2c
+ .text.__ascii_wctomb
+                0x00002188       0x2c c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-wctomb_r.o)
+                0x00002188                __ascii_wctomb
+                0x000021b4                . = ALIGN (0x4)
+
+.rodata         0x000021b4      0x27f
+ *(.rodata)
+ .rodata        0x000021b4       0xa0 main.o
+ .rodata        0x00002254       0x18 startup/libea_startup_thumb.a(consol.o)
+ .rodata        0x0000226c       0xb6 startup/libea_startup_thumb.a(framework.o)
+ *(.rodata*)
+ *fill*         0x00002322        0x2 
+ .rodata._global_impure_ptr
+                0x00002324        0x4 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-impure.o)
+                0x00002324                _global_impure_ptr
+ .rodata._setlocale_r.str1.1
+                0x00002328        0x8 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-locale.o)
+                                  0x9 (size before relaxing)
+ .rodata.str1.1
+                0x00002330        0x2 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-locale.o)
+ .rodata._ctype_
+                0x00002332      0x101 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-ctype_.o)
+                0x00002332                _ctype_
+
+.ARM.extab      0x00002433        0x0
+ .ARM.extab     0x00002433        0x0 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_udivmoddi4.o)
+
+.ARM.exidx      0x00002434        0x8
+ .ARM.exidx     0x00002434        0x8 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_udivmoddi4.o)
+
+.rel.dyn        0x0000243c        0x0
+ .rel.iplt      0x0000243c        0x0 main.o
+                0x0000243c                . = ALIGN (0x4)
+                0x0000243c                _etext = .
+                [!provide]                PROVIDE (etext = .)
+
+.data           0x40000080       0x10 load address 0x0000243c
+                0x40000080                _data = .
+ *(.data)
+ .data          0x40000080        0x0 main.o
+ .data          0x40000080        0x0 i2c.o
+ .data          0x40000080       0x10 startup/libea_startup_thumb.a(consol.o)
+ .data          0x40000090        0x0 startup/libea_startup_thumb.a(framework.o)
+ .data          0x40000090        0x0 startup/libea_startup_thumb.a(startup.o)
+ .data          0x40000090        0x0 irq/irq_handler.a(irq_handler.o)
+ .data          0x40000090        0x0 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_udivsi3.o)
+ .data          0x40000090        0x0 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_dvmd_tls.o)
+ .data          0x40000090        0x0 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_aeabi_uldivmod.o)
+ .data          0x40000090        0x0 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_muldi3.o)
+ .data          0x40000090        0x0 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_udivmoddi4.o)
+ .data          0x40000090        0x0 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_clzdi2.o)
+ .data          0x40000090        0x0 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_clzsi2.o)
+ .data          0x40000090        0x0 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-atoi.o)
+ .data          0x40000090        0x0 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-strlen.o)
+ .data          0x40000090        0x0 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-strtol.o)
+ .data          0x40000090        0x0 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-impure.o)
+ .data          0x40000090        0x0 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-locale.o)
+ .data          0x40000090        0x0 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-mbtowc_r.o)
+ .data          0x40000090        0x0 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-strcmp.o)
+ .data          0x40000090        0x0 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-wctomb_r.o)
+ .data          0x40000090        0x0 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-ctype_.o)
+
+.igot.plt       0x40000090        0x0 load address 0x0000244c
+ .igot.plt      0x40000090        0x0 main.o
+
+.data._impure_ptr
+                0x40000090        0x4 load address 0x0000244c
+ .data._impure_ptr
+                0x40000090        0x4 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-impure.o)
+                0x40000090                _impure_ptr
+
+.data.impure_data
+                0x40000094       0x60 load address 0x00002450
+ .data.impure_data
+                0x40000094       0x60 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-impure.o)
+
+.data.__global_locale
+                0x400000f4      0x16c load address 0x000024b0
+ .data.__global_locale
+                0x400000f4      0x16c c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-locale.o)
+                0x400000f4                __global_locale
+                0x40000260                . = ALIGN (0x4)
+                0x40000260                _edata = .
+                [!provide]                PROVIDE (edata = .)
+
+.bss            0x40000260        0x8 load address 0x0000261c
+                0x40000260                _bss = .
+                0x40000260                __bss_start = .
+                0x40000260                __bss_start__ = .
+ *(.bss)
+ .bss           0x40000260        0x0 main.o
+ .bss           0x40000260        0x0 i2c.o
+ .bss           0x40000260        0x0 startup/libea_startup_thumb.a(consol.o)
+ .bss           0x40000260        0x0 startup/libea_startup_thumb.a(framework.o)
+ .bss           0x40000260        0x0 startup/libea_startup_thumb.a(startup.o)
+ .bss           0x40000260        0x0 irq/irq_handler.a(irq_handler.o)
+ .bss           0x40000260        0x0 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_udivsi3.o)
+ .bss           0x40000260        0x0 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_dvmd_tls.o)
+ .bss           0x40000260        0x0 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_aeabi_uldivmod.o)
+ .bss           0x40000260        0x0 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_muldi3.o)
+ .bss           0x40000260        0x0 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_udivmoddi4.o)
+ .bss           0x40000260        0x0 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_clzdi2.o)
+ .bss           0x40000260        0x0 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_clzsi2.o)
+ .bss           0x40000260        0x0 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-atoi.o)
+ .bss           0x40000260        0x0 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-strlen.o)
+ .bss           0x40000260        0x0 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-strtol.o)
+ .bss           0x40000260        0x0 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-impure.o)
+ .bss           0x40000260        0x0 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-locale.o)
+ .bss           0x40000260        0x0 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-mbtowc_r.o)
+ .bss           0x40000260        0x0 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-strcmp.o)
+ .bss           0x40000260        0x0 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-wctomb_r.o)
+ .bss           0x40000260        0x0 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-ctype_.o)
+ *(COMMON)
+ COMMON         0x40000260        0x8 startup/libea_startup_thumb.a(framework.o)
+                0x40000260                pHeapEnd
+                0x40000264                pHeapStart
+                0x40000268                . = ALIGN (0x4)
+                0x40000268                . = ALIGN (0x4)
+                0x40000268                __bss_end = .
+                0x40000268                __bss_end__ = .
+                0x40000268                _end = .
+                0x40000268                PROVIDE (end = .)
+
+.bss._PathLocale
+                0x40000268        0x4 load address 0x00002624
+ .bss._PathLocale
+                0x40000268        0x4 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-locale.o)
+                0x40000268                _PathLocale
+
+.stab           0x00000000      0x3b4
+ *(.stab)
+ .stab          0x00000000      0x3b4 startup/libea_startup_thumb.a(startup.o)
+
+.stabstr        0x00000000       0x51
+ *(.stabstr)
+ .stabstr       0x00000000       0x51 startup/libea_startup_thumb.a(startup.o)
+
+.stab.excl
+ *(.stab.excl)
+
+.stab.exclstr
+ *(.stab.exclstr)
+
+.stab.index
+ *(.stab.index)
+
+.stab.indexstr
+ *(.stab.indexstr)
+
+.comment        0x00000000       0x7f
+ *(.comment)
+ .comment       0x00000000       0x7f main.o
+                                 0x80 (size before relaxing)
+ .comment       0x0000007f       0x80 i2c.o
+ .comment       0x0000007f       0x80 startup/libea_startup_thumb.a(consol.o)
+ .comment       0x0000007f       0x80 startup/libea_startup_thumb.a(framework.o)
+ .comment       0x0000007f       0x80 irq/irq_handler.a(irq_handler.o)
+
+.ARM.attributes
+                0x00000000       0x2e
+ .ARM.attributes
+                0x00000000       0x30 main.o
+ .ARM.attributes
+                0x00000030       0x30 i2c.o
+ .ARM.attributes
+                0x00000060       0x30 startup/libea_startup_thumb.a(consol.o)
+ .ARM.attributes
+                0x00000090       0x30 startup/libea_startup_thumb.a(framework.o)
+ .ARM.attributes
+                0x000000c0       0x20 startup/libea_startup_thumb.a(startup.o)
+ .ARM.attributes
+                0x000000e0       0x30 irq/irq_handler.a(irq_handler.o)
+ .ARM.attributes
+                0x00000110       0x18 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_udivsi3.o)
+ .ARM.attributes
+                0x00000128       0x18 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_dvmd_tls.o)
+ .ARM.attributes
+                0x00000140       0x18 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_aeabi_uldivmod.o)
+ .ARM.attributes
+                0x00000158       0x30 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_muldi3.o)
+ .ARM.attributes
+                0x00000188       0x30 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_udivmoddi4.o)
+ .ARM.attributes
+                0x000001b8       0x18 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_clzdi2.o)
+ .ARM.attributes
+                0x000001d0       0x18 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_clzsi2.o)
+ .ARM.attributes
+                0x000001e8       0x30 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-atoi.o)
+ .ARM.attributes
+                0x00000218       0x1c c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-strlen.o)
+ .ARM.attributes
+                0x00000234       0x30 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-strtol.o)
+ .ARM.attributes
+                0x00000264       0x30 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-impure.o)
+ .ARM.attributes
+                0x00000294       0x30 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-locale.o)
+ .ARM.attributes
+                0x000002c4       0x30 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-mbtowc_r.o)
+ .ARM.attributes
+                0x000002f4       0x16 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-strcmp.o)
+ .ARM.attributes
+                0x0000030a       0x30 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-wctomb_r.o)
+ .ARM.attributes
+                0x0000033a       0x30 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-ctype_.o)
+
+.debug
+ *(.debug)
+
+.line
+ *(.line)
+
+.debug_srcinfo
+ *(.debug_srcinfo)
+
+.debug_sfnames
+ *(.debug_sfnames)
+
+.debug_aranges  0x00000000       0xa0
+ *(.debug_aranges)
+ .debug_aranges
+                0x00000000       0x20 main.o
+ .debug_aranges
+                0x00000020       0x20 i2c.o
+ .debug_aranges
+                0x00000040       0x20 startup/libea_startup_thumb.a(consol.o)
+ .debug_aranges
+                0x00000060       0x20 startup/libea_startup_thumb.a(framework.o)
+ .debug_aranges
+                0x00000080       0x20 irq/irq_handler.a(irq_handler.o)
+
+.debug_pubnames
+ *(.debug_pubnames)
+
+.debug_info     0x00000000     0x13c6
+ *(.debug_info .gnu.linkonce.wi.*)
+ .debug_info    0x00000000      0x12b main.o
+ .debug_info    0x0000012b      0x233 i2c.o
+ .debug_info    0x0000035e      0xe27 startup/libea_startup_thumb.a(consol.o)
+ .debug_info    0x00001185      0x1cd startup/libea_startup_thumb.a(framework.o)
+ .debug_info    0x00001352       0x74 irq/irq_handler.a(irq_handler.o)
+
+.debug_abbrev   0x00000000      0x60d
+ *(.debug_abbrev)
+ .debug_abbrev  0x00000000       0xc6 main.o
+ .debug_abbrev  0x000000c6      0x149 i2c.o
+ .debug_abbrev  0x0000020f      0x2df startup/libea_startup_thumb.a(consol.o)
+ .debug_abbrev  0x000004ee       0xdd startup/libea_startup_thumb.a(framework.o)
+ .debug_abbrev  0x000005cb       0x42 irq/irq_handler.a(irq_handler.o)
+
+.debug_line     0x00000000      0x4db
+ *(.debug_line)
+ .debug_line    0x00000000       0x81 main.o
+ .debug_line    0x00000081       0xdc i2c.o
+ .debug_line    0x0000015d      0x279 startup/libea_startup_thumb.a(consol.o)
+ .debug_line    0x000003d6       0xc0 startup/libea_startup_thumb.a(framework.o)
+ .debug_line    0x00000496       0x45 irq/irq_handler.a(irq_handler.o)
+
+.debug_frame    0x00000000      0x7e8
+ *(.debug_frame)
+ .debug_frame   0x00000000       0x78 main.o
+ .debug_frame   0x00000078       0xfc i2c.o
+ .debug_frame   0x00000174      0x254 startup/libea_startup_thumb.a(consol.o)
+ .debug_frame   0x000003c8      0x120 startup/libea_startup_thumb.a(framework.o)
+ .debug_frame   0x000004e8       0x40 irq/irq_handler.a(irq_handler.o)
+ .debug_frame   0x00000528       0x20 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_udivsi3.o)
+ .debug_frame   0x00000548       0x2c c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_aeabi_uldivmod.o)
+ .debug_frame   0x00000574       0x3c c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_muldi3.o)
+ .debug_frame   0x000005b0       0x48 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_udivmoddi4.o)
+ .debug_frame   0x000005f8       0x48 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-atoi.o)
+ .debug_frame   0x00000640       0x9c c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-strtol.o)
+ .debug_frame   0x000006dc       0x6c c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-locale.o)
+ .debug_frame   0x00000748       0x44 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-mbtowc_r.o)
+ .debug_frame   0x0000078c       0x20 c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-strcmp.o)
+ .debug_frame   0x000007ac       0x3c c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-wctomb_r.o)
+
+.debug_str      0x00000000      0x8bd
+ *(.debug_str)
+ .debug_str     0x00000000      0x14c main.o
+                                0x165 (size before relaxing)
+ .debug_str     0x0000014c       0x82 i2c.o
+                                0x193 (size before relaxing)
+ .debug_str     0x000001ce      0x601 startup/libea_startup_thumb.a(consol.o)
+                                0x6c6 (size before relaxing)
+ .debug_str     0x000007cf       0xb5 startup/libea_startup_thumb.a(framework.o)
+                                0x18d (size before relaxing)
+ .debug_str     0x00000884       0x39 irq/irq_handler.a(irq_handler.o)
+                                0x11a (size before relaxing)
+
+.debug_loc      0x00000000      0x7b4
+ *(.debug_loc)
+ .debug_loc     0x00000000       0xa8 main.o
+ .debug_loc     0x000000a8      0x17c i2c.o
+ .debug_loc     0x00000224      0x3a4 startup/libea_startup_thumb.a(consol.o)
+ .debug_loc     0x000005c8      0x1a8 startup/libea_startup_thumb.a(framework.o)
+ .debug_loc     0x00000770       0x44 irq/irq_handler.a(irq_handler.o)
+
+.debug_macinfo
+ *(.debug_macinfo)
+
+.debug_weaknames
+ *(.debug_weaknames)
+
+.debug_funcnames
+ *(.debug_funcnames)
+
+.debug_typenames
+ *(.debug_typenames)
+
+.debug_varnames
+ *(.debug_varnames)
+OUTPUT(MiniDemo2148.elf elf32-littlearm)
+
+Cross Reference Table
+
+Symbol                                            File
+IRQ_Test                                          irq/irq_handler.a(irq_handler.o)
+                                                  main.o
+_PathLocale                                       c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-locale.o)
+__aeabi_idiv0                                     c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_dvmd_tls.o)
+                                                  c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_udivsi3.o)
+__aeabi_ldiv0                                     c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_dvmd_tls.o)
+                                                  c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_aeabi_uldivmod.o)
+__aeabi_lmul                                      c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_muldi3.o)
+                                                  main.o
+__aeabi_uidiv                                     c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_udivsi3.o)
+                                                  startup/libea_startup_thumb.a(consol.o)
+                                                  i2c.o
+__aeabi_uidivmod                                  c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_udivsi3.o)
+                                                  c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-strtol.o)
+                                                  startup/libea_startup_thumb.a(consol.o)
+__aeabi_uldivmod                                  c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_aeabi_uldivmod.o)
+                                                  main.o
+__ascii_mbtowc                                    c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-mbtowc_r.o)
+                                                  c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-locale.o)
+__ascii_wctomb                                    c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-wctomb_r.o)
+                                                  c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-locale.o)
+__bss_end__                                       startup/libea_startup_thumb.a(startup.o)
+__bss_start__                                     startup/libea_startup_thumb.a(startup.o)
+__clzdi2                                          c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_clzdi2.o)
+                                                  c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_udivmoddi4.o)
+__clzsi2                                          c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_clzsi2.o)
+                                                  c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_clzdi2.o)
+__global_locale                                   c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-locale.o)
+                                                  c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-wctomb_r.o)
+                                                  c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-mbtowc_r.o)
+                                                  c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-strtol.o)
+__locale_ctype_ptr                                c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-locale.o)
+__locale_ctype_ptr_l                              c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-locale.o)
+                                                  c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-strtol.o)
+__locale_mb_cur_max                               c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-locale.o)
+__muldi3                                          c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_muldi3.o)
+__sf_fake_stderr                                  c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-impure.o)
+__sf_fake_stdin                                   c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-impure.o)
+__sf_fake_stdout                                  c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-impure.o)
+__udivmoddi4                                      c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_udivmoddi4.o)
+                                                  c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_aeabi_uldivmod.o)
+__udivsi3                                         c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1\libgcc.a(_udivsi3.o)
+_atoi_r                                           c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-atoi.o)
+_ctype_                                           c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-ctype_.o)
+                                                  c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-locale.o)
+_data                                             startup/libea_startup_thumb.a(startup.o)
+_edata                                            startup/libea_startup_thumb.a(startup.o)
+_etext                                            startup/libea_startup_thumb.a(startup.o)
+_global_impure_ptr                                c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-impure.o)
+_impure_ptr                                       c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-impure.o)
+                                                  c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-wctomb_r.o)
+                                                  c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-mbtowc_r.o)
+                                                  c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-locale.o)
+                                                  c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-strtol.o)
+_mbtowc_r                                         c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-mbtowc_r.o)
+_setlocale_r                                      c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-locale.o)
+_startup                                          startup/libea_startup_thumb.a(startup.o)
+_strtol_r                                         c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-strtol.o)
+                                                  c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-atoi.o)
+_wctomb_r                                         c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-wctomb_r.o)
+atoi                                              c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-atoi.o)
+                                                  startup/libea_startup_thumb.a(consol.o)
+consolGetCh                                       startup/libea_startup_thumb.a(consol.o)
+consolGetChar                                     startup/libea_startup_thumb.a(consol.o)
+consolGetIntNum                                   startup/libea_startup_thumb.a(consol.o)
+consolGetString                                   startup/libea_startup_thumb.a(consol.o)
+consolInit                                        startup/libea_startup_thumb.a(consol.o)
+                                                  startup/libea_startup_thumb.a(framework.o)
+consolScanf                                       startup/libea_startup_thumb.a(consol.o)
+consolSendCh                                      startup/libea_startup_thumb.a(consol.o)
+consolSendChar                                    startup/libea_startup_thumb.a(consol.o)
+consolSendNumber                                  startup/libea_startup_thumb.a(consol.o)
+                                                  startup/libea_startup_thumb.a(framework.o)
+consolSendString                                  startup/libea_startup_thumb.a(consol.o)
+                                                  startup/libea_startup_thumb.a(framework.o)
+end                                               startup/libea_startup_thumb.a(framework.o)
+exceptionHandlerInit                              startup/libea_startup_thumb.a(framework.o)
+                                                  startup/libea_startup_thumb.a(startup.o)
+i2cCheckStatus                                    i2c.o
+i2cGetChar                                        i2c.o
+i2cInit                                           i2c.o
+i2cPutChar                                        i2c.o
+i2cRead                                           i2c.o
+i2cStart                                          i2c.o
+i2cStop                                           i2c.o
+lowLevelInit                                      startup/libea_startup_thumb.a(framework.o)
+                                                  startup/libea_startup_thumb.a(startup.o)
+main                                              main.o
+                                                  startup/libea_startup_thumb.a(startup.o)
+pHeapEnd                                          startup/libea_startup_thumb.a(framework.o)
+pHeapStart                                        startup/libea_startup_thumb.a(framework.o)
+printf_init                                       startup/libea_startup_thumb.a(framework.o)
+                                                  main.o
+setlocale                                         c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-locale.o)
+simplePrintf                                      startup/libea_startup_thumb.a(consol.o)
+                                                  main.o
+strcmp                                            c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-strcmp.o)
+                                                  c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-locale.o)
+strlen                                            c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-strlen.o)
+                                                  startup/libea_startup_thumb.a(consol.o)
+strtol                                            c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-strtol.o)
+                                                  c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-atoi.o)
+strtol_l                                          c:/embedded/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc_nano.a(lib_a-strtol.o)
