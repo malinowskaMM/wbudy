@@ -254,7 +254,7 @@ static void newGame(void)
     IODIR &= ~0x001f0000;   //Odczyt z joysticka
 
     //Zgadywanie strzaĹ‚ki przez wybranÄ… iloĹ›Ä‡ rund.
-    int i;
+    tU8 i;
     for(i=0; i<round_amount; i++)
     {
         j_position = time_ticks%4;    //Losowanie strzaĹ‚ki
