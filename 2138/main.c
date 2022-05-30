@@ -678,12 +678,14 @@ void writeInfo(char *console_message, char* lcd_1line, char *lcd_2line)
 char* insertdNumber(char* message, int position, int number)
 {
     //Zabezpiecz przypadek 0
-    message[position--] = '0' + (number % 10);
+    message[position] = '0' + (number % 10);
+    position--;
     number /= 10;
 
     while(number)
     {
-        message[position--] = '0' + (number % 10);
+        message[position] = '0' + (number % 10);
+        position--;
         number /= 10;
     }
     return message;
