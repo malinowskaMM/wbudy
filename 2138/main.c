@@ -8,7 +8,7 @@
  *
  * Description:
  *    Glowny plik zawierajacy logike dzialania gry Refleks.
- *    Pozostale pliki aktywnie uz½ywane w projekcie to testRGB, testMotor, testLedMatrix, testLcd.
+ *    Pozostale pliki aktywnie uzï¿½ywane w projekcie to testRGB, testMotor, testLedMatrix, testLcd.
  *
  *****************************************************************************/
 
@@ -640,9 +640,9 @@ static void livesAmount(void)
 }
 
 /*!
-*  @brief    Wypisuje informacje na konsole¢ i na LCD.
+*  @brief    Wypisuje informacje na konsoleï¿½ i na LCD.
 *  @param console_message
-*             Wiadomosc na konsole¢
+*             Wiadomosc na konsoleï¿½
 *  @param lcd_1line
 *             Wiadomosc do pierwszego wiersza LCD.
 *  @param lcd_2line
@@ -700,11 +700,13 @@ char* insertdNumber(char* message, int position, int number)
 void pause(void)
 {
     IODIR &= ~0x00004000;			//odczytuje P0.14
-    while(1)
+    while(1) {
         if (!(IOPIN & 0x00004000))
         {
             break;
         }
+    }
+
 
 }
 
