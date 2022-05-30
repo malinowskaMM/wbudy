@@ -157,7 +157,7 @@ static void mainFunction(void) {
     testRGB(0,0,0);     //Wyczyszczenie diody RGB.
 
     writeInfo("Zespol Michal Banasiak, Magdalena Malinowska, Michal Andrzejczak zaprasza do zagrania w gre REFLEKS.\n", "Wyproboj swoj", "REFLEKS");
-    printf("LEGENDA ruchu joystickiem:\n1-ruch joystickiem w gore, 2-w lewo,3-w prawo, 4-w dol, 5-srodek\n");
+    (void)printf("LEGENDA ruchu joystickiem:\n1-ruch joystickiem w gore, 2-w lewo,3-w prawo, 4-w dol, 5-srodek\n");
     pause();
 
     static tU8 menu_state = MAIN_MENU;
@@ -232,7 +232,7 @@ static void newGame(void)
     osSleep(200);
     testMotor();
     //Parametry rozgrywki
-    printf("Ilosc rund: %d.\nCzas rundy: %d ms\nIlosc zyc: %d\n", round_amount, round_time, lives);
+    (void)printf("Ilosc rund: %d.\nCzas rundy: %d ms\nIlosc zyc: %d\n", round_amount, round_time, lives);
     char messagev1[] = " Rundy:    ";
     writeInfo("", insertdNumber(messagev1, 9, round_amount), "");
     osSleep(200);
@@ -352,7 +352,7 @@ static void newGame(void)
 
 
             //Informacje dla gracza
-            printf("Odpowiedz byla poprawna, a szybkosc wystarczajaca\nPozostala liczba rund: %d.\nTwoj czas zareagowania: %d ms.\n", round_amount, result);
+            (void)printf("Odpowiedz byla poprawna, a szybkosc wystarczajaca\nPozostala liczba rund: %d.\nTwoj czas zareagowania: %d ms.\n", round_amount, result);
             char message[] = "Czas:     ";
             writeInfo("", "Poprawnie", insertdNumber(message, 9, result));
             osSleep(300);
@@ -415,7 +415,7 @@ static void newGame(void)
 
     writeInfo("","Gratulacje","");
     pause();
-    printf("Najpozniejsza reakcja, najszybsza reakcja: %d, %d\n", max_answer_time, min_answer_time);
+    (void)printf("Najpozniejsza reakcja, najszybsza reakcja: %d, %d\n", max_answer_time, min_answer_time);
     char message3[] = "Najw.:     ", message4[] = "Najm.:     ";
     writeInfo("", insertdNumber(message3, 10, max_answer_time), insertdNumber(message4, 10, min_answer_time));
     osSleep(500);
@@ -482,7 +482,7 @@ static void roundsAmount(void)
         //WyÄąâ€şwietlenie zmiany
         if(change == (tU8) 1)
         {
-            printf("Rundy: %d.\n", round_time);
+            (void)printf("Rundy: %d.\n", round_time);
             char message[] = "   ";
             writeInfo( "", "Rundy:", insertdNumber(message, 2, round_amount));
             change = 0;
@@ -491,7 +491,7 @@ static void roundsAmount(void)
     }
 
     //Informacja o ostatecznej zmianie
-    printf("Rundy: %d.\nNacisnij przycisk.\n", round_amount);
+    (void)printf("Rundy: %d.\nNacisnij przycisk.\n", round_amount);
     char message[] = " Rundy:    ";
     writeInfo("", insertdNumber(message, 9, round_amount), "");
     pause();
@@ -553,7 +553,7 @@ static void roundsTime(void)
         //WyÄąâ€şwietlenie zmiany
         if(change == (tU8) 1)
         {
-            printf("Czas: %d.\n", round_time);
+            (void)printf("Czas: %d.\n", round_time);
             char message[] = "     ";
             writeInfo( "", " Czas:", insertdNumber(message, 4, round_time));
             change = 0;
@@ -562,7 +562,7 @@ static void roundsTime(void)
     }
 
     //Ostateczny stan.
-    printf("Czas: %d.\nNacisnij przycisk.\n", round_time);
+    (void)printf("Czas: %d.\nNacisnij przycisk.\n", round_time);
     char message[] = " Czas:      ";
     writeInfo("", insertdNumber(message, 10, round_time), "");
     pause();
@@ -623,7 +623,7 @@ static void livesAmount(void)
         //WyÄąâ€şwietlenie zmiany
         if(change == (tU8) 1)
         {
-            printf("Zycia: %d.\n", lives);
+            (void)printf("Zycia: %d.\n", lives);
             char message[] = "   ";
             writeInfo( "", "Zycia:", insertdNumber(message, 2, lives));
             change = 0;
@@ -632,7 +632,7 @@ static void livesAmount(void)
     }
 
     //Informacja o ostatecznej zmienie
-    printf("Zycia: %d.\nNacisnij przycisk\n", lives);
+    (void)printf("Zycia: %d.\nNacisnij przycisk\n", lives);
     char message[] = " Zycia:    ";
     writeInfo("", insertdNumber(message, 9, lives), "");
     pause();
@@ -657,7 +657,7 @@ void writeInfo(char *console_message, char* lcd_1line, char *lcd_2line)
     writeStr(lcd_1line);
     newLineLCD();
     writeStr(lcd_2line);
-    printf(console_message);
+    (void)printf(console_message);
 }
 
 /*!
