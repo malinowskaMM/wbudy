@@ -444,7 +444,8 @@ static void roundsAmount(void)
     pause();
     writeInfo("1-Zwieksz o jedna runde, 4 zmniejsz o jedna runde, 2,3,5-wyjdz\n", "1-Zwieksz", "4-Zmniejsz");
     pause();
-    tU8 end = 0, change = 0;
+    tU8 end = 0;
+    tU8 change = 0;
 
     IODIR &= ~0x001f0000;   //Odczyt z joystick'a
     //WybĂłr iloĹ›ci rund
@@ -514,7 +515,8 @@ static void roundsTime(void)
     pause();
     writeInfo("1-Zwieksz o sekunde, 4 zmniejsz o sekunde, 2,3,5-wyjdz\n", "1-Zwieksz", "4-Zmniejsz");
     pause();
-    tU8 end = 0, change = 0;
+    tU8 end = 0;
+    tU8 change = 0;
 
     IODIR &= ~0x001f0000;   //Odczyt z joystick'a
     //PÄ™tla zmiany czasu na reakcjÄ™
@@ -583,7 +585,8 @@ static void livesAmount(void)
     pause();
     writeInfo("1-Zwieksz o sekunde, 4 zmniejsz o sekunde, 2,3,5-wyjdz\n", "1-Zwieksz", "4-Zmniejsz");
     pause();
-    tU8 end = 0, change = 0;
+    tU8 end = 0;
+    tU8 change = 0;
 
     IODIR &= ~0x001f0000;   //Odczyt z joystick'a
     //WybĂłr iloĹ›ci rund
