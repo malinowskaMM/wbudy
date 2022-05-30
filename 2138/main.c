@@ -446,8 +446,8 @@ static void newGame(void)
     pause();
     (void)printf("Najpozniejsza reakcja, najszybsza reakcja: %d, %d\n", max_answer_time, min_answer_time);
     const char* message3 = "Najw.:     ", message4[] = "Najm.:     ";
-    const char* emptyStr = "";
-    writeInfo(emptyStr, insertdNumber(message3, 10, max_answer_time), insertdNumber(message4, 10, min_answer_time));
+    const char* p20 = "";
+    writeInfo(p20, insertdNumber(message3, 10, max_answer_time), insertdNumber(message4, 10, min_answer_time));
     osSleep(500);
 
     clearLCD();
@@ -514,14 +514,14 @@ static void roundsAmount(void)
             end = 1;
         } else
         {}
-        const char* emptyStr = "";
         //Wyswietlenie zmiany
         if(change == (tU8) 1)
         {
             (void)printf("Rundy: %d.\n", round_time);
             const char* message = "   ";
             const char* p7 = "Rundy:";
-            writeInfo( emptyStr, p7, insertdNumber(message, 2, round_amount));
+            const char* p8 = "";
+            writeInfo(p8, p7, insertdNumber(message, 2, round_amount));
             change = 0;
             osSleep(100);
         }
@@ -530,8 +530,8 @@ static void roundsAmount(void)
     //Informacja o ostatecznej zmianie
     (void)printf("Rundy: %d.\nNacisnij przycisk.\n", round_amount);
     const char* message = " Rundy:    ";
-
-    writeInfo(emptyStr, insertdNumber(message, 9, round_amount), emptyStr);
+    const char* p9 = "";
+    writeInfo(p9, insertdNumber(message, 9, round_amount), p9);
     pause();
 
 }
