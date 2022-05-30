@@ -204,24 +204,25 @@ static tU8 mainMenu(void)
     IODIR &= ~0x001f0000;   //Odczyt z joysticka
     while(1)
     {
+        enum MENU_STATE res;
         if (IOPIN & J_UP)
         {
-            return NEW_GAME;
+            res = NEW_GAME;
         }
         else if(~IOPIN & J_LEFT)
         {
-            return ROUND_TIME;
+            res = ROUND_TIME;
         }
         else if(~IOPIN & J_RIGHT)
         {
-            return ROUNDS_AMOUNT;
+            res = ROUNDS_AMOUNT;
         }
         else if(~IOPIN & J_DOWN)
         {
-            return LIVES_AMOUNT;
+            res = LIVES_AMOUNT;
         } else
         {}
-
+        return res;
     }
 }
 
