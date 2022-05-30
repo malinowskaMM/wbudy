@@ -59,9 +59,9 @@ void pause(void);
 
 //Logika rozgrywki
 tU8 mainMenu(void);
-void newGame(void);
-void roundsAmount(void);
-void roundsTime(void);
+static void newGame(void);
+static void roundsAmount(void);
+static void roundsTime(void);
 static void livesAmount(void);
 
 //Funkcje pomocnicze
@@ -228,7 +228,7 @@ tU8 mainMenu(void)
 *  @side effects:
 *            brak
 */
-void newGame(void)
+static void newGame(void)
 {
     //RozpoczÄ™cie gry
     writeInfo("Wybrano nowa gre.\n","Wybrano","Nowa Gra");
@@ -437,7 +437,7 @@ void newGame(void)
 *  @side effects:
 *            brak
 */
-void roundsAmount(void)
+static void roundsAmount(void)
 {
     //Informacjie o interakcji
     writeInfo("Menu wyboru liczby rund.\nSterowanie odbywa sie za pomoca joysticka", "Liczba rund", "Wybor-joystick");
@@ -507,7 +507,7 @@ void roundsAmount(void)
 *  @side effects:
 *            brak
 */
-void roundsTime(void)
+static void roundsTime(void)
 {
     //Informacje o interakcji
     writeInfo("Menu wyboru ilosci  czasu.\nSterowanie odbywa sie za pomoca joysticka", "Ilosc czasu", "Wybor-joystic");
