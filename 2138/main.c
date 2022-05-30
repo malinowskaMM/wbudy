@@ -188,9 +188,15 @@ static void mainFunction(void) {
 static tU8 mainMenu(void)
 {
     //Wypisanie infromacji
-    writeInfo("Glowne menu\n", "Glowne menu", "Wybor-joystick");
+    const char* p1 = "Glowne menu\n";
+    const char* p2 = "Glowne menu";
+    const char* p3 = "Wybor-joystick";
+    writeInfo(p1, p2, p3);
     pause();
-    writeInfo("1-Gra 2-Czas 3-Rundy 4-Zycia\n", "1-Graj 2-Czas", "3-Rundy 4-Zycia");
+    const char* p4 = "1-Gra 2-Czas 3-Rundy 4-Zycia\n";
+    const char* p5 = "1-Graj 2-Czas";
+    const char* p6 = "3-Rundy 4-Zycia";
+    writeInfo(p4, p5, p6);
     testMotor();
     //Wybor opcji za pomoca joystick'a
     IODIR &= ~0x001f0000;   //Odczyt z joysticka
@@ -228,18 +234,21 @@ static void newGame(void)
 {
     tU32 j_position = 0;             /**< Losowanie pozycji joysticka */
     //Rozpoczenie gry
-    writeInfo("Wybrano nowa gre.\n","Wybrano","Nowa Gra");
+    const char* p1 ="Wybrano nowa gre.\n";
+    const char* p2 ="Wybrano";
+    const char* p3 = "Nowa Gra";
+    writeInfo(p1, p2, p3);
     osSleep(200);
     testMotor();
     //Parametry rozgrywki
     (void)printf("Ilosc rund: %d.\nCzas rundy: %d ms\nIlosc zyc: %d\n", round_amount, round_time, lives);
-    char messagev1[] = " Rundy:    ";
+    const char* messagev1 = " Rundy:    ";
     writeInfo("", insertdNumber(messagev1, 9, round_amount), "");
     osSleep(200);
-    char messagev2[] = " Czas:      ";
+    const char* messagev2 = " Czas:      ";
     writeInfo("", insertdNumber(messagev2, 10, round_time), "");
     osSleep(200);
-    char messagev3[] = " Zycia:    ";
+    const char* messagev3 = " Zycia:    ";
     writeInfo("", insertdNumber(messagev3, 9, lives), "");
     osSleep(200);
 
@@ -277,8 +286,10 @@ static void newGame(void)
 
 
         //Infomacje o rundzie
-        char message[] = "Runda:    ";
-        writeInfo("Uzyj joystick w kierunku wskazanym przez strzalke.\n", "Wybor-joystick.", insertdNumber(message, 9, i+1));
+        const char* message = "Runda:    ";
+        const char* p4 = "Uzyj joystick w kierunku wskazanym przez strzalke.\n";
+        const char* p5 = "Wybor-joystick.";
+        writeInfo(p4, p5, insertdNumber(message, 9, i+1));
 
         //Czas rozpoczecia rundy - czas od ktoego liczony jest czas na reakcje
         start_time = time_ticks;
@@ -353,7 +364,7 @@ static void newGame(void)
 
             //Informacje dla gracza
             (void)printf("Odpowiedz byla poprawna, a szybkosc wystarczajaca\nPozostala liczba rund: %d.\nTwoj czas zareagowania: %d ms.\n", round_amount, result);
-            char message[] = "Czas:     ";
+            const char* message = "Czas:     ";
             writeInfo("", "Poprawnie", insertdNumber(message, 9, result));
             osSleep(300);
         }
@@ -364,7 +375,10 @@ static void newGame(void)
             osSleep(50);
             testRGB(0, 0, 0);
             //testMotor();
-            writeInfo("Nie zdazyles w ustalonym czasie. Tracisz zycie.\n", "Brak czasu.", "Straciles zycie.");
+            const char* p6 = "Nie zdazyles w ustalonym czasie. Tracisz zycie.\n";
+            const char* p7 = "Brak czasu.";
+            const char* p8 = "Straciles zycie.";
+            writeInfo(p6, p7, p8);
             tmpLives--;
             osSleep(300);
         }
@@ -375,7 +389,10 @@ static void newGame(void)
             osSleep(50);
             testRGB(0, 0, 0);
             //testMotor();
-            writeInfo("Wybrales zly kierunek.Tracisz zycie\n", "Zly kierunek", "Strata zycia");
+            const char* p9 = "Wybrales zly kierunek.Tracisz zycie\n";
+            const char* p10 = "Zly kierunek";
+            const char* p11 ="Strata zycia";
+            writeInfo(p9, p10, p11);
             tmpLives--;
             osSleep(300);
         }
@@ -384,7 +401,10 @@ static void newGame(void)
         {
             //Gdy skonczyla sie liczba zyc
             testRGB(255, 255, 255);
-            writeInfo("Straciles wszystkie zycia. Przegrales.\n", "Koniec zyc.", "Koniec gry.");
+            const char* p12 = "Straciles wszystkie zycia. Przegrales.\n";
+            const char* p13 = "Koniec zyc.";
+            const char* p14 = "Koniec gry.";
+            writeInfo(p12, p13, p14);
             osSleep(300);
 
             //Wyczyszczenie zmiennych rozgrywki
@@ -408,15 +428,19 @@ static void newGame(void)
     }
 
     //Informacja o interakcji
-    writeInfo("Gra sie zakonczyla.\n", "Koniec Gry", "");
+    const char* p15 ="Gra sie zakonczyla.\n";
+    const char* p16 = "Koniec Gry";
+    const char* p17 = "";
+    writeInfo(p15, p16, p17);
     pause();
 
     //Podsumowanie
-
-    writeInfo("","Gratulacje","");
+    const char* p18 = "";
+    const char* p19 = "Gratulacje";
+    writeInfo(p18, p19, p18);
     pause();
     (void)printf("Najpozniejsza reakcja, najszybsza reakcja: %d, %d\n", max_answer_time, min_answer_time);
-    char message3[] = "Najw.:     ", message4[] = "Najm.:     ";
+    const char* message3 = "Najw.:     ", message4[] = "Najm.:     ";
     writeInfo("", insertdNumber(message3, 10, max_answer_time), insertdNumber(message4, 10, min_answer_time));
     osSleep(500);
 
@@ -437,9 +461,15 @@ static void newGame(void)
 static void roundsAmount(void)
 {
     //Informacjie o interakcji
-    writeInfo("Menu wyboru liczby rund.\nSterowanie odbywa sie za pomoca joysticka", "Liczba rund", "Wybor-joystick");
+	const char* p1 = "Menu wyboru liczby rund.\nSterowanie odbywa sie za pomoca joysticka";
+	const char* p2 = "Liczba rund";
+	const char* p3 = "Wybor-joystick";
+    writeInfo(p1, p2, p3);
     pause();
-    writeInfo("1-Zwieksz o jedna runde, 4 zmniejsz o jedna runde, 2,3,5-wyjdz\n", "1-Zwieksz", "4-Zmniejsz");
+    const char* p4 = "1-Zwieksz o jedna runde, 4 zmniejsz o jedna runde, 2,3,5-wyjdz\n";
+    const char* p5 = "1-Zwieksz";
+    const char* p6 = "4-Zmniejsz";
+    writeInfo(p4, p5, p6);
     pause();
     tU8 end = 0;
     tU8 change = 0;
@@ -483,7 +513,7 @@ static void roundsAmount(void)
         if(change == (tU8) 1)
         {
             (void)printf("Rundy: %d.\n", round_time);
-            char message[] = "   ";
+            const char* message = "   ";
             writeInfo( "", "Rundy:", insertdNumber(message, 2, round_amount));
             change = 0;
             osSleep(100);
@@ -492,7 +522,7 @@ static void roundsAmount(void)
 
     //Informacja o ostatecznej zmianie
     (void)printf("Rundy: %d.\nNacisnij przycisk.\n", round_amount);
-    char message[] = " Rundy:    ";
+    const char* message = " Rundy:    ";
     writeInfo("", insertdNumber(message, 9, round_amount), "");
     pause();
 
@@ -508,9 +538,15 @@ static void roundsAmount(void)
 static void roundsTime(void)
 {
     //Informacje o interakcji
-    writeInfo("Menu wyboru ilosci  czasu.\nSterowanie odbywa sie za pomoca joysticka", "Ilosc czasu", "Wybor-joystic");
+	const char* p1 = "Menu wyboru ilosci  czasu.\nSterowanie odbywa sie za pomoca joysticka";
+	const char* p2 = "Ilosc czasu";
+	const char* p3 = "Wybor-joystic";
+    writeInfo(p1, p2, p3);
     pause();
-    writeInfo("1-Zwieksz o sekunde, 4 zmniejsz o sekunde, 2,3,5-wyjdz\n", "1-Zwieksz", "4-Zmniejsz");
+    const char* p4 = "1-Zwieksz o sekunde, 4 zmniejsz o sekunde, 2,3,5-wyjdz\n";
+    const char* p5 = "1-Zwieksz";
+    const char* p6 = "4-Zmniejsz";
+    writeInfo(p4, p5, p6);
     pause();
     tU8 end = 0;
     tU8 change = 0;
@@ -554,8 +590,10 @@ static void roundsTime(void)
         if(change == (tU8) 1)
         {
             (void)printf("Czas: %d.\n", round_time);
-            char message[] = "     ";
-            writeInfo( "", " Czas:", insertdNumber(message, 4, round_time));
+            const char* message = "     ";
+            const char* p7 = "Czas:";
+            const char* p8 = "";
+            writeInfo(p8, p7, insertdNumber(message, 4, round_time));
             change = 0;
             osSleep(10);
         }
@@ -563,8 +601,9 @@ static void roundsTime(void)
 
     //Ostateczny stan.
     (void)printf("Czas: %d.\nNacisnij przycisk.\n", round_time);
-    char message[] = " Czas:      ";
-    writeInfo("", insertdNumber(message, 10, round_time), "");
+    const char* message = " Czas:      ";
+    const char* p9 = "";
+    writeInfo(p9, insertdNumber(message, 10, round_time), p9);
     pause();
 }
 
@@ -578,9 +617,15 @@ static void roundsTime(void)
 static void livesAmount(void)
 {
     //Informacjie o interakcji
-    writeInfo("Menu wyboru ilosci zyc.\nSterowanie odbywa sie za pomoca joysticka", "Ilosc zyc", "Wybor-joystic");
+	const char* p1 = "Menu wyboru ilosci zyc.\nSterowanie odbywa sie za pomoca joysticka";
+	const char* p2 = "Ilosc zyc";
+	const char* p3 = "Wybor-joystic";
+    writeInfo(p1, p2, p3);
     pause();
-    writeInfo("1-Zwieksz o sekunde, 4 zmniejsz o sekunde, 2,3,5-wyjdz\n", "1-Zwieksz", "4-Zmniejsz");
+    const char* p4 = "1-Zwieksz o sekunde, 4 zmniejsz o sekunde, 2,3,5-wyjdz\n";
+    const char* p5 = "1-Zwieksz";
+    const char* p6 = "4-Zmniejsz";
+    writeInfo(p4, p5, p6);
     pause();
     tU8 end = 0;
     tU8 change = 0;
@@ -624,8 +669,10 @@ static void livesAmount(void)
         if(change == (tU8) 1)
         {
             (void)printf("Zycia: %d.\n", lives);
-            char message[] = "   ";
-            writeInfo( "", "Zycia:", insertdNumber(message, 2, lives));
+            const char* message = "   ";
+            const char* p7 = "";
+            const char* p8 = "Zycia:";
+            writeInfo(p7, p8, insertdNumber(message, 2, lives));
             change = 0;
             osSleep(100);
         }
@@ -633,7 +680,7 @@ static void livesAmount(void)
 
     //Informacja o ostatecznej zmienie
     (void)printf("Zycia: %d.\nNacisnij przycisk\n", lives);
-    char message[] = " Zycia:    ";
+    const char* message = " Zycia:    ";
     writeInfo("", insertdNumber(message, 9, lives), "");
     pause();
 
