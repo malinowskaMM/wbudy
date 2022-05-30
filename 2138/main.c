@@ -62,7 +62,7 @@ tU8 mainMenu(void);
 void newGame(void);
 void roundsAmount(void);
 void roundsTime(void);
-void livesAmount(void);
+static void livesAmount(void);
 
 //Funkcje pomocnicze
 char* insertdNumber(char* message, int position, int number);
@@ -200,7 +200,7 @@ tU8 mainMenu(void)
     IODIR &= ~0x001f0000;   //Odczyt z joysticka
     while(1)
     {
-        if (~IOPIN & J_UP))
+        if (~IOPIN & J_UP)
         {
         	return NEW_GAME;
         }
@@ -576,7 +576,7 @@ void roundsTime(void)
 *  @side effects:
 *            brak
 */
-void livesAmount(void)
+static void livesAmount(void)
 {
     //Informacjie o interakcji
 	writeInfo("Menu wyboru ilosci zyc.\nSterowanie odbywa sie za pomoca joysticka", "Ilosc zyc", "Wybor-joystic");
