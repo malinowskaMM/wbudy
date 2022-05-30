@@ -30,11 +30,6 @@
 //===========================
 //SEKCJA FUNKCJI
 
-//Tworzenie stosu
-static tU8 mainStack[MAIN_STACK_SIZE];
-static tU8 initStack[INIT_STACK_SIZE];
-static tU8 pid1;
-
 //Funkcje poczÄ…tkowe - inicjalizujÄ…ce
 static void mainFunction(void);
 static void initProc(void);
@@ -79,7 +74,6 @@ enum MENU_STATE
     ROUNDS_AMOUNT,
     LIVES_AMOUNT
 };
-static tU8 menu_state = MAIN_MENU;
 
 //Stany joysticka
 #define J_UP 		(1 << 17)			/** Doojstik - pozycja do gory */
@@ -98,11 +92,11 @@ static tU32 round_time = 5000;
 static tU8 round_amount = 4;			/**< Iloďż˝ďż˝ rund */
 
 //Inne zmienne rozgrywki
-static tU32 max_answer_time = 0;		/**< Najdďż˝uďż˝szy czas rekacji gracza */
-static tU32 min_answer_time = 32767;	/**< Najkrďż˝tszy czas rekacji gracza */
-static long int entire_answer_time = 0;	/**< ďż˝redni czas rekacji gracza */
 
-static tU32 j_position = 0;             /**< Losowanie pozycji joysticka */
+
+
+
+
 /*!
  *  @brief    Pierwsza uruchamiana funkcja w programie. Uruchamia system operacyjny
  *  @param   brak
@@ -114,6 +108,7 @@ int main(void)
 {
     tU8 error;
     tU8 pid;
+    tU8 initStack[INIT_STACK_SIZE];
 
     //WyĹ‚Ä…cza brzÄ™czyk (jeĹ›li jest podĹ‚Ä…czony)
     IODIR0 |= 0x00000080;
@@ -137,7 +132,9 @@ int main(void)
 */
 static void initProc(void)
 {
+    tU8 mainStack[MAIN_STACK_SIZE];
     tU8 error;
+    tU8 pid1;
 
     eaInit();     //Inicjalizacja terminala
     testLcd();    //Inicjalizacja wyĹ›wietlacza ???
@@ -165,6 +162,7 @@ static void mainFunction(void) {
     printf("LEGENDA ruchu joystickiem:\n1-ruch joystickiem w gore, 2-w lewo,3-w prawo, 4-w dol, 5-srodek\n");
     pause();
 
+    static tU8 menu_state = MAIN_MENU;
     //PÄ™tla menu
     while (1) {
         menu_state = mainMenu();    //WybĂłr przycisku z menu za pomocÄ… joysticka
@@ -230,6 +228,7 @@ static tU8 mainMenu(void)
 */
 static void newGame(void)
 {
+    tU32 j_position = 0;             /**< Losowanie pozycji joysticka */
     //RozpoczÄ™cie gry
     writeInfo("Wybrano nowa gre.\n","Wybrano","Nowa Gra");
     osSleep(200);
@@ -247,9 +246,9 @@ static void newGame(void)
     osSleep(200);
 
     //Wyczyszczenie zmiennych rundy
-    max_answer_time = 0;		/**< Najdďż˝uďż˝szy czas rekacji gracza */
-    min_answer_time = 30000;	/**< Najkrďż˝tszy czas rekacji gracza */
-    entire_answer_time = 0;		/**< ďż˝redni czas rekacji gracza */
+    static tU32 max_answer_time = 0;		/**< Najdďż˝uďż˝szy czas rekacji gracza */
+    tU32 min_answer_time = 30000;	        /**< Najkrďż˝tszy czas rekacji gracza */
+    long int entire_answer_time = 0;		/**< ďż˝redni czas rekacji gracza */
     tU8 tmpLives=lives;
 
     tU32 start_time;    //Zmienna odpowiadajÄ…ca za czas rozpoczÄ™cia rundy
