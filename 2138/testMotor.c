@@ -55,8 +55,10 @@ void testMotor(void) {
                 PWM_LER = 0x50; // Latch Enable Register
                 continueTest = FALSE;
                 //}
-            } else
+            } else {
                 counter -= 0x0010;
+            }
+
         }
 
         if (forward == 0) {

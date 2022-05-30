@@ -70,10 +70,12 @@ writeLCD(tU8 reg, tU8 data)
 {
     volatile tU8 i;
 
-    if (reg == 0)
+    if (reg == 0) {
         IOCLR1 = LCD_RS;
-    else
+    }
+    else {
         IOSET1 = LCD_RS;
+    }
 
     IOCLR0 = LCD_RW;
     IOCLR1 = LCD_DATA;
@@ -100,10 +102,12 @@ writeLCD(tU8 reg, tU8 data)
  ****************************************************************************/
 static void lcdBacklight(tU8 onOff)
 {
-    if (onOff == TRUE)
+    if (onOff == TRUE) {
         IOSET0 = LCD_BACKLIGHT;
-    else
+    }
+    else {
         IOCLR0 = LCD_BACKLIGHT;
+    }
 }
 
 void clearLCD() {
