@@ -681,7 +681,7 @@ char* insertdNumber(char* message, int position, int number)
     message[positionInFunction] = '0' + (numberInFunction % 10);
     numberInFunction /= 10;
 
-    while(numberInFunction)
+    while(numberInFunction==1)
     {
         positionInFunction = positionInFunction - (int) 1;
         message[positionInFunction] = '0' + (numberInFunction % 10);
