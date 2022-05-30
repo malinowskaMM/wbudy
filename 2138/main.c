@@ -36,8 +36,8 @@ static tU8 initStack[INIT_STACK_SIZE];
 static tU8 pid1;
 
 //Funkcje początkowe - inicjalizujące
-static void mainFunction(void* arg);
-static void initProc(void* arg);
+static void mainFunction(void);
+static void initProc(void);
 
 //Obsługa macierz LED 8x8 i SPI
 void testLedMatrix(void);
@@ -135,7 +135,7 @@ int main(void)
 *  @side effects:
 *            brak
 */
-static void initProc(void* arg)
+static void initProc(void)
 {
   tU8 error;
 
@@ -157,7 +157,7 @@ static void initProc(void* arg)
 *  @side effects:
 *            brak
 */
-static void mainFunction(void* arg) {
+static void mainFunction(void) {
 
 	testRGB(0,0,0);     //Wyczyszczenie diody RGB.
 
@@ -716,5 +716,4 @@ void pause(void)
  *    [in] elapsedTime - The number of elapsed milliseconds since last call.
  *
  ****************************************************************************/
-void appTick(tU32 elapsedTime) {}
 
