@@ -30,27 +30,13 @@ const tU8 directionText[] = {
 	0x18,0x28,0x4F,0x81,0x81,0x4F,0x28,0x18,
 	0x00,0x00,0x00,0x00,0x00,0x00,0x00};
 
-const tU8 eaText[] = {
-	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
-	0x08,0x08,0x08,0x08,0x08,0x08,0x00,0x00,
-	0x26,0x49,0x49,0x32,0x00, //S
-	0x01,0x01,0x7f,0x01,0x01,0x00, //T
-	0x7e,0x09,0x09,0x7e,0x00,  //A
-	0x7f,0x19,0x29,0x46,0x00,  //R
-	0x01,0x01,0x7f,0x01,0x01,0x00, //T
-	0x00,0x00,0x08,0x08,0x08,0x08,0x08,0x08,
-  0x00,0x00,0x00,0x00,0x00,0x00,0x00};
-
-tU8 pattern[8] = {0,0,0,0,0,0,0,0};
-
-void ledMatrix(void);
+extern tU8 pattern[8];
+pattern = {0,0,0,0,0,0,0,0};
 
 
-/*****************************************************************************
- *
- * Description:
- *
- ****************************************************************************/
+/*!
+*  @brief   Funkcja dostarczona przez tworce przykladu.
+*/
 static void
 startTimer1(tU16 delayInMs)
 {
@@ -71,12 +57,9 @@ startTimer1(tU16 delayInMs)
 }
 
 
-/*****************************************************************************
- *
- * Description:
- *    A process entry function 
- *
- ****************************************************************************/
+/*!
+*  @brief   Funkcja dostarczona przez tworce przykladu.
+*/
 void
 testLedMatrix(void)
 {
@@ -87,7 +70,13 @@ testLedMatrix(void)
   startTimer1(2);
 }
 
-
+/*!
+*  @brief    Wypisuje strzalke na macierzy LED
+*  @param direction Kierunek strzalki
+*  @returns  brak
+*  @side effects:
+*            brak
+*/
 void
 testArrow(tU8 direction)
 {
@@ -107,9 +96,11 @@ testArrow(tU8 direction)
 		  cntA = 0;
 	  }else if (direction == 'c'){ //clear
 		  cntA = 32;
-	  }
+	  }else {
+        cntA = 0;
+    }
 
-		pattern[0] = directionText[cntA+0];
+		pattern[0] = directionText[cntA];
 		pattern[1] = directionText[cntA+1];
 		pattern[2] = directionText[cntA+2];
 		pattern[3] = directionText[cntA+3];
