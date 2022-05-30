@@ -21,7 +21,7 @@
  ****************************************************************************/
 void testRGB(tU8 red, tU8 green, tU8 blue)
 {
-    PINSEL0 &= 0xfff03fff;  //Enable PWM2 on P0.7, PWM4 on P0.8, and PWM6 on P0.9
+    PINSEL0 &= 0xfff03fffu;  //Enable PWM2 on P0.7, PWM4 on P0.8, and PWM6 on P0.9
     PINSEL0 |= 0x000a8000;  //Enable PWM2 on P0.7, PWM4 on P0.8, and PWM6 on P0.9
 
     //PULSE WIDTH MODULATION INIT*********************************************
