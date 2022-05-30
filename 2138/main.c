@@ -155,8 +155,10 @@ static void initProc(void)
 static void mainFunction(void) {
 
     testRGB(0,0,0);     //Wyczyszczenie diody RGB.
-
-    writeInfo("Zespol Michal Banasiak, Magdalena Malinowska, Michal Andrzejczak zaprasza do zagrania w gre REFLEKS.\n", "Wyproboj swoj", "REFLEKS");
+    const char* p1 = "Zespol Michal Banasiak, Magdalena Malinowska, Michal Andrzejczak zaprasza do zagrania w gre REFLEKS.\n";
+    const char* p2 = "Wyproboj swoj";
+    const char* p3 ="REFLEKS";
+    writeInfo(p1, p2, p3);
     (void)printf("LEGENDA ruchu joystickiem:\n1-ruch joystickiem w gore, 2-w lewo,3-w prawo, 4-w dol, 5-srodek\n");
     pause();
 
@@ -243,13 +245,14 @@ static void newGame(void)
     //Parametry rozgrywki
     (void)printf("Ilosc rund: %d.\nCzas rundy: %d ms\nIlosc zyc: %d\n", round_amount, round_time, lives);
     const char* messagev1 = " Rundy:    ";
-    writeInfo("", insertdNumber(messagev1, 9, round_amount), "");
+    const char* emptyStr = "";
+    writeInfo(emptyStr, insertdNumber(messagev1, 9, round_amount), emptyStr);
     osSleep(200);
     const char* messagev2 = " Czas:      ";
-    writeInfo("", insertdNumber(messagev2, 10, round_time), "");
+    writeInfo(emptyStr, insertdNumber(messagev2, 10, round_time), emptyStr);
     osSleep(200);
     const char* messagev3 = " Zycia:    ";
-    writeInfo("", insertdNumber(messagev3, 9, lives), "");
+    writeInfo(emptyStr, insertdNumber(messagev3, 9, lives), emptyStr);
     osSleep(200);
 
     //Wyczyszczenie zmiennych rundy
@@ -365,7 +368,9 @@ static void newGame(void)
             //Informacje dla gracza
             (void)printf("Odpowiedz byla poprawna, a szybkosc wystarczajaca\nPozostala liczba rund: %d.\nTwoj czas zareagowania: %d ms.\n", round_amount, result);
             const char* message = "Czas:     ";
-            writeInfo("", "Poprawnie", insertdNumber(message, 9, result));
+            const char* p6 = "";
+            const char* p7 = "Poprawnie";
+            writeInfo(p6, p7, insertdNumber(message, 9, result));
             osSleep(300);
         }
         else if(correct == (tU32) -1)
@@ -441,7 +446,8 @@ static void newGame(void)
     pause();
     (void)printf("Najpozniejsza reakcja, najszybsza reakcja: %d, %d\n", max_answer_time, min_answer_time);
     const char* message3 = "Najw.:     ", message4[] = "Najm.:     ";
-    writeInfo("", insertdNumber(message3, 10, max_answer_time), insertdNumber(message4, 10, min_answer_time));
+    const char* emptyStr = "";
+    writeInfo(emptyStr, insertdNumber(message3, 10, max_answer_time), insertdNumber(message4, 10, min_answer_time));
     osSleep(500);
 
     clearLCD();
@@ -508,13 +514,14 @@ static void roundsAmount(void)
             end = 1;
         } else
         {}
-
+        const char* emptyStr = "";
         //Wyswietlenie zmiany
         if(change == (tU8) 1)
         {
             (void)printf("Rundy: %d.\n", round_time);
             const char* message = "   ";
-            writeInfo( "", "Rundy:", insertdNumber(message, 2, round_amount));
+            const char* p7 = "Rundy:";
+            writeInfo( emptyStr, p7, insertdNumber(message, 2, round_amount));
             change = 0;
             osSleep(100);
         }
@@ -523,7 +530,8 @@ static void roundsAmount(void)
     //Informacja o ostatecznej zmianie
     (void)printf("Rundy: %d.\nNacisnij przycisk.\n", round_amount);
     const char* message = " Rundy:    ";
-    writeInfo("", insertdNumber(message, 9, round_amount), "");
+
+    writeInfo(emptyStr, insertdNumber(message, 9, round_amount), emptyStr);
     pause();
 
 }
@@ -681,7 +689,8 @@ static void livesAmount(void)
     //Informacja o ostatecznej zmienie
     (void)printf("Zycia: %d.\nNacisnij przycisk\n", lives);
     const char* message = " Zycia:    ";
-    writeInfo("", insertdNumber(message, 9, lives), "");
+    const char* emptyStr = "";
+    writeInfo(emptyStr, insertdNumber(message, 9, lives), emptyStr);
     pause();
 
 }
